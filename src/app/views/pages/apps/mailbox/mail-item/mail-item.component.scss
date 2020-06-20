@@ -1,0 +1,43 @@
+
+@import 'src/@theme/scss/components/functions';
+@import 'src/@theme/scss/components/mixins';
+@import 'src/@theme/scss/components/variables';
+
+mail-item {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    .media-body {
+        width: 0;
+        overflow: hidden;
+    }
+    .mail-item-subject {
+        color: $text-muted;
+    }
+    &.selected-mail {
+        border-right: 2px solid #2a56c6;
+        background-color: #f2f3fa;
+    }
+    &.unread-mail {
+        background-color: #e9ecef;
+        .mail-item-info, .mail-item-from-name {
+            font-weight: 600;
+        }
+    }
+    .mail-empty-avatar {
+        height: 32px;
+        width: 32px;
+        font-size: 17px;
+    }
+    .mail-labels {
+        display: none;
+        .badge{ margin-bottom: .5rem; }
+        .badge + .badge {
+            margin-left: .5rem;
+        }
+    }
+}

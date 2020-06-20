@@ -1,0 +1,66 @@
+<subheader title='Bank Payments' [breadcrumb]="['Bank Payments', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-12">
+        <!--<h4 class="card-title">Manage Role</h4>-->
+        <!--<p class="text-muted mb-2">Edit, Delete</p>-->
+      <div class="form-group mb-3 w-100">
+        <div class="input-group-icon input-group-icon-left">
+          <span class="input-icon input-icon-left"><i class="ti-search"></i></span>
+          <input class="form-control" name="search" [(ngModel)]="filterText" (keyup)="filterData(filterText)" type="text" placeholder="Filter">
+        </div>
+      </div>
+        <div class="table-responsive">
+          <table class="table custom-table">
+            <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Product</th>
+              <th>Unit(s)</th>
+              <th>Amount</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let payment of bankPayments | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+              <td scope="row"><strong>{{i + 1}}</strong></td>
+              <td>{{payment?.firstName + ' ' + payment?.lastName}}</td>
+              <td>{{payment?.email}}</td>
+              <td>{{payment?.mobileNo}}</td>
+              <td>{{payment?.productName}}</td>
+              <td>{{payment?.units}}</td>
+              <td>{{payment?.amount}}</td>
+              <td>
+                <div *ngIf="payment.id !== actionId">
+                   <button class="custom-btn" (click)="approveBankTransfer(payment?.id)" ><i class="fa fa-check text-success"></i> Approve</button>
+
+                  <button (click)="deleteBankTransfer(payment)" class="custom-btn"><i class="ti-trash text-danger m-r-10"></i> Decline</button>
+
+                </div>
+                <span  *ngIf="isLoadingAction && (payment.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="custom-table-footer">
+            <div class="page-count">
+              {{totalRecords}} total
+            </div>
+            <div class="page-control">
+              <pagination-controls (pageChange)="getPaginatedData($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- row -->
+
+</card>
+
+

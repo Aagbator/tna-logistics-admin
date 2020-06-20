@@ -1,0 +1,69 @@
+<subheader [title]="'Timepicker'" [breadcrumb]="['Ng-Bootstrap', 'Timepicker']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Timepicker'">
+			<ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+			<hr>
+			<pre>Selected time: {{time | json}}</pre>
+		</card>
+		<card [title]="'Meridian'">
+			<ngb-timepicker [(ngModel)]="time" [meridian]="meridian"></ngb-timepicker>
+			<button class="btn btn-sm btn-outline-{{meridian ? 'success' : 'danger'}}" (click)="toggleMeridian()">
+			    Meridian - {{meridian ? "ON" : "OFF"}}
+			</button>
+			<hr>
+			<pre>Selected time: {{time | json}}</pre>
+		</card>
+		<card [title]="'Seconds'">
+			<ngb-timepicker [(ngModel)]="time3" [seconds]="seconds"></ngb-timepicker>
+			<button class="btn btn-sm btn-outline-{{seconds ? 'success' : 'danger'}}" (click)="toggleSeconds()">
+			    Seconds - {{seconds ? "ON" : "OFF"}}
+			</button>
+			<hr>
+			<pre>Selected time: {{time3 | json}}</pre>
+		</card>	
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Spinners'">
+			<ngb-timepicker [(ngModel)]="time4" [spinners]="spinners"></ngb-timepicker>
+			<hr/>
+			<button class="m-t-1 btn btn-sm btn-outline-{{spinners ? 'success' : 'danger'}}" (click)="toggleSpinners()">
+			    Spinners - {{spinners ? "ON" : "OFF"}}
+			</button>
+		</card>
+		<card [title]="'Custom steps'">
+			<ngb-timepicker [(ngModel)]="time5" [seconds]="true" [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep"></ngb-timepicker>
+			<div class="row">
+			    <div class="col-sm-3">
+			        <label for="changeHourStep">Hour Step</label>
+			        <input id="changeHourStep" type="number" class="form-control form-control-sm" [(ngModel)]="hourStep" />
+			    </div>
+			    <div class="col-sm-3">
+			        <label for="changeMinuteStep">Minute Step</label>
+			        <input id="changeMinuteStep" type="number" class="form-control form-control-sm" [(ngModel)]="minuteStep" />
+			    </div>
+			    <div class="col-sm-3">
+			        <label for="changeSecondStep">Second Step</label>
+			        <input id="changeSecondStep" type="number" class="form-control form-control-sm" [(ngModel)]="secondStep" />
+			    </div>
+			</div>
+			<hr>
+			<pre>Selected time: {{time5 | json}}</pre>
+		</card>
+		<card [title]="'Custom validation'">
+			<p>Illustrates custom validation, you have to select time between 12:00 and 13:59</p>
+			<div class="form-group">
+			  <ngb-timepicker [formControl]="ctrl" required></ngb-timepicker>
+			  <div *ngIf="ctrl.valid" class="small form-text text-success">Great choice</div>
+			  <div class="small form-text text-danger" *ngIf="!ctrl.valid">
+			    <div *ngIf="ctrl.errors['required']">Select some time during lunchtime</div>
+			    <div *ngIf="ctrl.errors['tooLate']">Oh no, it's way too late</div>
+			    <div *ngIf="ctrl.errors['tooEarly']">It's a bit too early</div>
+			  </div>
+			</div>
+			<hr>
+			<pre>Selected time: {{ctrl.value | json}}</pre>
+		</card>
+	</div>		
+</div>

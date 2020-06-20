@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <button type="button" (click)="openKeyFeatureModal(keyFeatureModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="fa fa-plus-circle"></i> Add Key Feature
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-6" *ngIf="keyFeatures.length == 0">
+        <p>No key feature(s) added for this product</p>
+      </div>
+      <div class="col-lg-6"  *ngIf="keyFeatures.length > 0">
+        <table class="table table-bordered custom-table">
+          <tbody>
+          <tr *ngFor="let keyFeature of keyFeatures" >
+            <td>{{keyFeature?.value}}</td>
+            <td>
+              <div *ngIf="keyFeature.id !== actionId">
+                <button  (click)="openKeyFeatureModal(keyFeatureModal, keyFeature)" class="btn btn-light btn-floating btn-sm m-r-10"><i class="ti-pencil"></i></button>
+                <button (click)="deleteKeyFeature(keyFeature?.id)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>
+              </div>
+              <i *ngIf="isLoadingAction && (keyFeature?.id == actionId)" class="fa fa-spinner fa-spin"></i>
+            </td>
+<!--            keyFeature.id !== actionId-->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-12">
+        <ng-template #keyFeatureModal let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title"><strong>{{isEditingKeyFeature? 'Update' : 'Add'}} Key Feature</strong></h4>
+            <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form-horizontal form-material" #keyFeatureFormRef="ngForm" (ngSubmit)="keyFeatureFormRef.form.valid && createKeyFeature(keyFeatureFormRef)" novalidate>
+                    <!--/row-->
+
+                    <div class="row">
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="control-label">Key Feature</label>
+                          <input class="form-control" [(ngModel)]="keyFeatureObj.value" name="value" [class.is-invalid]="valueRef.touched && valueRef?.errors?.required" ngModel #valueRef="ngModel" type="text" placeholder="e.g Best when served chilled" required>
+                          <div *ngIf="valueRef?.touched && valueRef?.errors?.required" class="invalid-feedback">
+                            key feature is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 mt-3">
+                        <button *ngIf="!isEditingKeyFeature" type="submit" class="btn btn-dark ml-2 waves-effect waves-light">Add <i *ngIf="isCreatingKeyFeature" class="fa fa-spin fa-spinner"></i></button>
+                        <button type="button" *ngIf="isEditingKeyFeature" (click)="keyFeatureFormRef.form.valid && updateKeyFeature(keyFeatureFormRef)" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingKeyFeature" class="fa fa-spin fa-spinner"></i></button>
+                      </div>
+                    </div>
+                    <!--/row-->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+

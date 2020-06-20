@@ -1,0 +1,111 @@
+.main-page {
+  .landing-area{
+    background-color: #eff4ff;
+    background-image: url('../../../../../assets/img/auth-bg.jpg');
+    background-size:cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    #myVideo {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      //height: 60vh;
+    }
+
+    .overlay{
+      display: block;
+      background-color: rgba(0,0,0,.6);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top:0;
+      left:0;
+    }
+
+    .navigation-menu{
+      position:relative;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-content: center;
+      padding: 20px 50px;
+      .logo{
+        color: #ffffff;
+      }
+      main{
+        ul{
+          list-style-type: none;
+          display: flex;
+          flex-direction: row;
+          li{
+            a{
+              display: inline-block;
+              color: #ffffff;
+              margin-right: 10px;
+              line-height:30px;
+              padding:5px 20px;
+              &.action-btn{
+                //background-color: black;
+                border-radius: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .main-area{
+      position: relative;
+      z-index:4;
+      color: #ffffff;
+      @media screen and (min-width: 720px) {
+        width: 45%;
+        margin: 50px auto 60px;
+      }
+      width: 90%;
+      margin: 20px auto;
+
+      text-align: center;
+      h1{
+        margin-bottom: 20px;
+      }
+      p{
+        line-height: 30px;
+      }
+      .button-group{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        a{
+
+          display:block;
+          padding: 10px 20px;
+          margin:5px;
+        }
+      }
+    }
+  }
+  
+  .about{
+    padding:50px 10px;
+    h2{
+      text-align: center;
+      margin-bottom:20px;
+    }
+  }
+}
+
+.auth-content {
+  max-width: 400px;
+  flex-basis: 400px;
+  box-shadow: 0 5px 20px #d6dee4;
+}
+
+.home-link {
+  position: absolute;
+  left: 5px;
+  top: 10px;
+}

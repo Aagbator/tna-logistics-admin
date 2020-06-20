@@ -1,0 +1,73 @@
+
+<subheader [title]="'Buttons'" [breadcrumb]="['Ng-Bootstrap', 'Buttons']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Checkbox buttons'">
+			<div class="btn-group btn-group-toggle">
+			  <label class="btn-primary" ngbButtonLabel>
+			    <input type="checkbox" ngbButton [(ngModel)]="model.left"> Left (pre-checked)
+			  </label>
+			  <label class="btn-primary" ngbButtonLabel>
+			    <input type="checkbox" ngbButton [(ngModel)]="model.middle"> Middle
+			  </label>
+			  <label class="btn-primary" ngbButtonLabel>
+			    <input type="checkbox" ngbButton [(ngModel)]="model.right"> Right
+			  </label>
+			</div>
+			<hr>
+			<pre>{{model | json}}</pre>
+		</card>
+		<card [title]="'Checkbox buttons (Reactive Forms)'">
+			<form [formGroup]="checkboxGroupForm">
+			  <div class="btn-group btn-group-toggle">
+			    <label class="btn-primary" ngbButtonLabel>
+			      <input type="checkbox" formControlName="left" ngbButton> Left (pre-checked)
+			    </label>
+			    <label class="btn-success" ngbButtonLabel>
+			      <input type="checkbox" formControlName="middle" ngbButton> Middle
+			    </label>
+			    <label class="btn-danger" ngbButtonLabel>
+			      <input type="checkbox" formControlName="right" ngbButton> Right
+			    </label>
+			  </div>
+			</form>
+			<hr>
+			<pre>{{checkboxGroupForm.value | json}}</pre>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Radio buttons'">
+			<div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="secondModel">
+			  <label ngbButtonLabel class="btn-primary">
+			    <input ngbButton type="radio" [value]="1"> Left (pre-checked)
+			  </label>
+			  <label ngbButtonLabel class="btn-info">
+			    <input ngbButton type="radio" value="middle"> Middle
+			  </label>
+			  <label ngbButtonLabel class="btn-warning">
+			    <input ngbButton type="radio" [value]="false"> Right
+			  </label>
+			</div>
+			<hr>
+			<pre>{{secondModel}}</pre>
+		</card>
+		<card [title]="'Radio buttons (Reactive Forms)'">
+			<form [formGroup]="radioGroupForm">
+			  <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" formControlName="model">
+			    <label ngbButtonLabel class="btn-outline-primary">
+			      <input ngbButton type="radio" [value]="1"> Left (pre-checked)
+			    </label>
+			    <label ngbButtonLabel class="btn-outline-primary">
+			      <input ngbButton type="radio" value="middle"> Middle
+			    </label>
+			    <label ngbButtonLabel class="btn-outline-primary">
+			      <input ngbButton type="radio" [value]="false"> Right
+			    </label>
+			  </div>
+			</form>
+			<hr>
+			<pre>{{radioGroupForm.value['model']}}</pre>
+		</card>
+	</div>
+</div>

@@ -1,0 +1,91 @@
+
+@import '~src/@theme/scss/components/functions';
+@import '~src/@theme/scss/components/mixins';
+@import '~src/@theme/scss/components/variables';
+
+@import '~angular-calendar/scss/angular-calendar.scss';
+
+
+
+.cal-month-view {
+
+    .cal-header {
+
+        .cal-cell {
+            font-weight: 600;
+        }
+    }
+
+    .cal-day-cell {
+
+        @include media-breakpoint-up(xl) {
+            min-height: 150px;
+        }
+
+        &.cal-selected {
+            border: none;
+            //@include mat-elevation(9);
+        }
+    }
+    // open events box
+    .cal-open-day-events {
+        display: flex;
+        flex-direction: column;
+
+        // event item box
+        > div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            padding: 0 12px;
+
+            .cal-event {
+                top: 0;
+                margin: 0;
+            }
+
+            mwl-calendar-event-title {
+                flex: 1;
+
+                .cal-event-title {
+                    display: block;
+                    padding: 12px;
+                    line-height: 1;
+                    text-decoration: none;
+                }
+            }
+
+            mwl-calendar-event-actions {
+
+                .cal-event-actions {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+
+                    .cal-event-action {
+                        display: block;
+                        line-height: 1;
+                        padding: 8px;
+                        color: #fff;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.cal-week-view {
+
+    .cal-header > b, .cal-time {
+        font-weight: 600;
+    }
+}
+
+.cal-day-view {
+
+    .cal-time {
+        font-weight: 600;
+    }
+}

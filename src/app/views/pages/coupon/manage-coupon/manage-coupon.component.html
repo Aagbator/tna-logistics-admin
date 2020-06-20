@@ -1,0 +1,114 @@
+<subheader title='Coupon' [breadcrumb]="['Coupon', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button type="button" (click)="openCouponModal(couponModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="fa fa-plus-circle"></i> Create Coupon
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+       <div class="table-responsive">
+        <table class="table custom-table">
+          <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Coupon Code</th>
+            <th>Discount(%)</th>
+            <th>Date Created</th>
+            <th>Expiry Date</th>
+            <th>Coupon Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let coupon of coupons | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+            <td scope="row"><strong>{{i + 1}}</strong></td>
+            <td>{{coupon?.couponCode}}</td>
+            <td>{{coupon?.discountPercentage}}%</td>
+            <td>{{coupon?.createdDate | date}}</td>
+            <td>{{coupon?.expireDate | date}}</td>
+            <td>
+              <span class="badge badge-danger" *ngIf="coupon?.hasExpired">Expired</span>
+              <span *ngIf="!coupon?.hasExpired" class="badge badge-success">Active</span>
+            </td>
+            <td>
+              <div *ngIf="coupon.id !== actionId">
+                <button  (click)="openCouponModal(couponModal, coupon)" class="btn btn-light btn-floating btn-sm m-r-10"><i class="ti-pencil"></i></button>
+                <button (click)="deleteCoupon(coupon)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>
+              </div>
+              <span  *ngIf="isLoadingAction && (coupon.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="custom-table-footer">
+          <div class="page-count">
+            {{totalRecords}} total
+          </div>
+          <div class="page-control">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <ng-template #couponModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>{{isEditingCoupon? 'Update' : 'Create'}} Coupon</strong></h4>
+          <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <form class="form-horizontal form-material" #couponFormRef="ngForm" novalidate>
+              <!--/row-->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Discount(%)</label>
+                    <input class="form-control" [(ngModel)]="couponObj.discountPercentage" name="discountPercentage"
+                           [class.is-invalid]="couponFormRef.submitted && discountPercentageRef?.errors?.required" ngModel #discountPercentageRef="ngModel" type="text" placeholder="e.g 5%" required>
+                    <div *ngIf="couponFormRef.submitted && discountPercentageRef?.errors?.required" class="invalid-feedback">
+                      discount is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label">Coupon Expiry Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="couponObj.expireDate" name="subscriptionDate"  ngModel #expireDateRef="ngModel" required
+                           [class.is-invalid]="couponFormRef.submitted && expireDateRef?.errors?.required">
+                    <div *ngIf="couponFormRef.submitted && expireDateRef?.errors?.required" class="invalid-feedback">
+                      expiry date is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row text-center">
+                <div class="col-md-12 mt-3">
+                  <button *ngIf="!isEditingCoupon" (click)="couponFormRef.form.valid && createCoupon()" type="submit" class="btn btn-dark ml-2 waves-effect waves-light">Create <i *ngIf="isCreatingCoupon" class="fa fa-spin fa-spinner"></i></button>
+                  <button *ngIf="isEditingCoupon" (click)="couponFormRef.form.valid && updateCoupon()" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingCoupon" class="fa fa-spin fa-spinner"></i></button>
+                </div>
+              </div>
+              <!--/row-->
+            </form>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <!-- row -->
+
+</card>
+
+

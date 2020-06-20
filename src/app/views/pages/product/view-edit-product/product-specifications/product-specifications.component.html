@@ -1,0 +1,91 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <button type="button" (click)="openSpecificationModal(specificationModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="fa fa-plus-circle"></i> Add Specification
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-8" *ngIf="specifications.length == 0">
+        <p>No key feature(s) added for this product</p>
+      </div>
+      <div class="col-lg-8"  *ngIf="specifications.length > 0">
+        <table class="table table-bordered custom-table">
+          <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Value</th>
+            <th width="20%" scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let specification of specifications" >
+            <td>{{specification?.name}}</td>
+            <td>{{specification?.value}}</td>
+            <td>
+              <div *ngIf="specification.id !== actionId">
+                <button  (click)="openSpecificationModal(specificationModal, specification)" class="btn btn-light btn-floating btn-sm m-r-10"><i class="ti-pencil"></i></button>
+                <button (click)="deleteSpecification(specification?.id)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>
+              </div>
+              <i *ngIf="isLoadingAction && (specification?.id == actionId)" class="fa fa-spinner fa-spin"></i>
+            </td>
+<!--            specification.id !== actionId-->
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-md-12">
+        <ng-template #specificationModal let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title"><strong>{{isEditingSpecification? 'Update' : 'Add'}} Key Feature</strong></h4>
+            <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-12">
+                  <form class="form-horizontal form-material" #specificationFormRef="ngForm" (ngSubmit)="specificationFormRef.form.valid && createSpecification(specificationFormRef)" novalidate>
+                    <!--/row-->
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="control-label">Title</label>
+                          <input class="form-control" [(ngModel)]="specificationObj.name" name="name" [class.is-invalid]="valueRef.touched && nameRef?.errors?.required" ngModel #nameRef="ngModel" type="text" placeholder="e.g Weight" required>
+                          <div *ngIf="nameRef?.touched && nameRef?.errors?.required" class="invalid-feedback">
+                            Name is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label class="control-label">Value</label>
+                          <input class="form-control" [(ngModel)]="specificationObj.value" name="value" [class.is-invalid]="valueRef.touched && valueRef?.errors?.required" ngModel #valueRef="ngModel" type="text" placeholder="e.g Best when served chilled" required>
+                          <div *ngIf="valueRef?.touched && valueRef?.errors?.required" class="invalid-feedback">
+                            value is required
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12 mt-3">
+                        <button *ngIf="!isEditingSpecification" type="submit" class="btn btn-dark ml-2 waves-effect waves-light">Add <i *ngIf="isCreatingSpecification" class="fa fa-spin fa-spinner"></i></button>
+                        <button type="button" *ngIf="isEditingSpecification" (click)="specificationFormRef.form.valid && updateSpecification(specificationFormRef)" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingSpecification" class="fa fa-spin fa-spinner"></i></button>
+                      </div>
+                    </div>
+                    <!--/row-->
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+

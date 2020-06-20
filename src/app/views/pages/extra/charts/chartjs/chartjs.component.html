@@ -1,0 +1,277 @@
+<subheader title='Chart.js' [breadcrumb]="['Charts', 'Chart.js']"></subheader>
+
+<div class="alert alert-primary alert-bordered mb-4">
+    <p>ng2-charts: Angular2 directives for Chart.js<br>See more examples in</p>
+    <a href="https://valor-software.com/ng2-charts" class="btn btn-primary" target="_blank">Official Website</a>
+</div>
+
+<card title='Area Chart'>
+    <div>
+        <canvas baseChart height="300"
+            [datasets]="areaChart.data"
+            [labels]="areaChart.labels"
+            [options]="areaChart.options"
+            [colors]="areaChart.colors"
+            [chartType]="areaChart.type">
+            </canvas>
+    </div>
+</card>
+
+<card title='Bar Chart'>
+    <div>
+        <canvas baseChart height="300"
+            [datasets]="barChart.data"
+            [labels]="barChart.labels"
+            [options]="barChart.options"
+            [legend]="barChart.legend"
+            [colors]="barChart.colors"
+            [chartType]="barChart.type"
+            (chartHover)="barChart.chartHovered($event)"
+            (chartClick)="barChart.chartClicked($event)">
+            </canvas>
+    </div>
+</card>
+
+<div class='row'>
+    <div class="col-lg-6">
+        <card title='Line chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="lineChart2.data"
+                    [labels]="lineChart2.labels"
+                    [options]="lineChart2.options"
+                    [colors]="lineChart2.colors"
+                    [chartType]="lineChart2.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Bar Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="barChart2.data"
+                    [labels]="barChart2.labels"
+                    [options]="barChart2.options"
+                    [legend]="barChart2.legend"
+                    [colors]="barChart2.colors"
+                    [chartType]="barChart2.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<card title='Line Chart'>
+    <div>
+        <canvas baseChart height="300"
+            [datasets]="lineChart.data"
+            [labels]="lineChart.labels"
+            [options]="lineChart.options"
+            [colors]="lineChart.colors"
+            [chartType]="lineChart.type">
+            </canvas>
+    </div>
+</card>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Area Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="areaChart2.data"
+                    [labels]="areaChart2.labels"
+                    [options]="areaChart2.options"
+                    [colors]="areaChart2.colors"
+                    [chartType]="areaChart2.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Line Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="lineChart3.data"
+                    [labels]="lineChart3.labels"
+                    [options]="lineChart3.options"
+                    [colors]="lineChart3.colors"
+                    [chartType]="lineChart3.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Line chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="lineChart4.data"
+                    [labels]="lineChart4.labels"
+                    [options]="lineChart4.options"
+                    [colors]="lineChart4.colors"
+                    [chartType]="lineChart4.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Area Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="areaChart3.data"
+                    [labels]="areaChart3.labels"
+                    [options]="areaChart3.options"
+                    [colors]="areaChart3.colors"
+                    [chartType]="areaChart3.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Stacked bars' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="stackedBarChart.data"
+                    [labels]="stackedBarChart.labels"
+                    [options]="stackedBarChart.options"
+                    [colors]="stackedBarChart.colors"
+                    [chartType]="stackedBarChart.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Stacked groups' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="stackedBarChart2.data"
+                    [labels]="stackedBarChart2.labels"
+                    [options]="stackedBarChart2.options"
+                    [colors]="stackedBarChart2.colors"
+                    [chartType]="stackedBarChart2.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Horizonal bars' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="horizonalBarChart.data"
+                    [labels]="horizonalBarChart.labels"
+                    [options]="horizonalBarChart.options"
+                    [colors]="horizonalBarChart.colors"
+                    [chartType]="horizonalBarChart.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Combo bar/line chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="300"
+                    [datasets]="comboChart.data"
+                    [labels]="comboChart.labels"
+                    [options]="comboChart.options"
+                    [colors]="comboChart.colors"
+                    [chartType]="comboChart.type">
+                    </canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Pie Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="250"
+                    [data]="pieChart.data"
+                    [labels]="pieChart.labels"
+                    [legend]="pieChart.legend"
+                    [chartType]="pieChart.type"
+                    [colors]="pieChart.colors"
+                    [options]="pieChart.options"></canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Doughnut Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="250"
+                    [data]="doughnutChart.data"
+                    [labels]="doughnutChart.labels"
+                    [chartType]="doughnutChart.type"
+                    [legend]="doughnutChart.legend"
+                    [colors]="doughnutChart.colors"
+                    [options]="doughnutChart.options"></canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Polar area' fullheight='true'>
+            <div>
+                <canvas baseChart height="250"
+                    [data]="polarAreaChart.data"
+                    [labels]="polarAreaChart.labels"
+                    [legend]="polarAreaChart.legend"
+                    [chartType]="polarAreaChart.type"
+                    [colors]="polarAreaChart.colors"
+                    [options]="polarAreaChart.options"></canvas>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Radar Chart' fullheight='true'>
+            <div>
+                <canvas baseChart height="250"
+                    [datasets]="radarChart.data"
+                    [labels]="radarChart.labels"
+                    [chartType]="radarChart.type"
+                    [legend]="radarChart.legend"
+                    [colors]="radarChart.colors"
+                    [options]="radarChart.options"></canvas>
+            </div>
+        </card>
+    </div>
+</div>
+
+<card title='Scatter Chart - Logarithmic scale'>
+    <div>
+        <canvas baseChart height="400"
+            [datasets]="scatterLogXChart.data"
+            [options]="scatterLogXChart.options"
+            [legend]="scatterLogXChart.legend"
+            [colors]="scatterLogXChart.colors"
+            [chartType]="scatterLogXChart.type">
+            </canvas>
+    </div>
+</card>
+
+<card title='Scatter Chart'>
+    <div>
+        <canvas baseChart height="400"
+            [datasets]="scatterChart.data"
+            [labels]="scatterChart.labels"
+            [options]="scatterChart.options"
+            [legend]="scatterChart.legend"
+            [colors]="scatterChart.colors"
+            [chartType]="scatterChart.type">
+            </canvas>
+    </div>
+</card>
+
+<p>See More examples in <a class="btn btn-primary btn-sm ml-2" href="https://valor-software.com/ng2-charts/" target="_blank">Official Website</a></p>

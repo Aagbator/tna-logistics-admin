@@ -1,0 +1,191 @@
+
+<subheader title='List Group' [breadcrumb]="['UI Kit', 'List Group']"></subheader>
+
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Basic List Group'">
+            <ul class="list-group">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+	    </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'Active Items'">
+            <ul class="list-group">
+                <li class="list-group-item active">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Disabled Items'">
+            <ul class="list-group">
+                <li class="list-group-item disabled">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'Links and Buttons'">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action active" href="javascript:;">Cras justo odio</a>
+                <a class="list-group-item list-group-item-action" href="javascript:;">Dapibus ac facilisis in</a>
+                <a class="list-group-item list-group-item-action" href="javascript:;">Morbi leo risus</a>
+                <a class="list-group-item list-group-item-action" href="javascript:;">Porta ac consectetur ac</a>
+                <a class="list-group-item list-group-item-action disabled" href="javascript:;">Vestibulum at eros</a>
+            </div>
+        </card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Flush'">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item">Porta ac consectetur ac</li>
+                <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'With Badges'">
+            <ul class="list-group">
+                <li class="list-group-item flexbox">Cras justo odio
+                    <span class="badge badge-primary badge-circle">14</span>
+                </li>
+                <li class="list-group-item flexbox">Dapibus ac facilisis in
+                    <span class="badge badge-danger badge-circle">2</span>
+                </li>
+                <li class="list-group-item">Morbi leo risus</li>
+                <li class="list-group-item flexbox">Porta ac consectetur ac
+                    <span class="badge badge-warning badge-pill">NEW</span>
+                </li>
+            </ul>
+        </card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'With Icons'">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center"><i class="ti-comments text-black-50 font-16 mr-3"></i> Cras justo odio</li>
+                <li class="list-group-item d-flex align-items-center"><i class="ti-import text-black-50 font-16 mr-3"></i> Dapibus ac facilisis in</li>
+                <li class="list-group-item d-flex align-items-center"><i class="ti-heart text-black-50 font-16 mr-3"></i> Morbi leo risus</li>
+                <li class="list-group-item d-flex align-items-center"><i class="ti-support text-black-50 font-16 mr-3"></i> Porta ac consectetur ac</li>
+                <li class="list-group-item d-flex align-items-center"><i class="ti-files text-black-50 font-16 mr-3"></i> Vestibulum at eros</li>
+            </ul>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'With Icons'">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action flexbox active" href="javascript:;">Cras justo odio<i class="ti-comments text-black-50x font-16 mr-3"></i></a>
+                <a class="list-group-item list-group-item-action flexbox" href="javascript:;">Dapibus ac facilisis in<i class="ti-import text-black-50 font-16 mr-3"></i></a>
+                <a class="list-group-item list-group-item-action flexbox" href="javascript:;">Morbi leo risus<i class="ti-heart text-black-50 font-16 mr-3"></i></a>
+                <a class="list-group-item list-group-item-action flexbox" href="javascript:;">Porta ac consectetur ac<i class="ti-support text-black-50 font-16 mr-3"></i></a>
+                <a class="list-group-item list-group-item-action flexbox" href="javascript:;">Vestibulum at eros<i class="ti-files text-black-50 font-16 mr-3"></i></a>
+            </div>
+        </card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Custom Content'">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action flex-column align-items-start active" href="javascript:;">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5><small>3 days ago</small></div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small>Donec id elit non mi porta.</small></a>
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                    href="javascript:;">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5><small class="text-muted">3 days ago</small></div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small class="text-muted">Donec id elit non mi porta.</small></a>
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                    href="javascript:;">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">List group item heading</h5><small class="text-muted">3 days ago</small></div>
+                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p><small class="text-muted">Donec id elit non mi porta.</small></a>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'With Media Objects'">
+            <p class="mb-4">See
+                <a href="ui-media-list.html" target="_blank">Media Objects</a>.</p>
+            <ul class="list-group">
+                <li class="list-group-item py-3 active">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+                <li class="list-group-item py-3">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+                <li class="list-group-item py-3">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+            </ul>
+        </card>
+    </div>
+</div>
+<card [title]="'Javascript Behavior'">
+    <div class="row">
+        <div class="col-4">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <p>Velit aute mollit ipsum ad dolor consectetur nulla officia culpa adipisicing exercitation fugiat tempor. Voluptate deserunt sit sunt nisi aliqua fugiat proident ea ut. Mollit voluptate reprehenderit occaecat
+                        nisi ad non minim tempor sunt voluptate consectetur exercitation id ut nulla. Ea et fugiat aliquip nostrud sunt incididunt consectetur culpa aliquip eiusmod dolor. Anim ad Lorem aliqua in cupidatat nisi
+                        enim eu nostrud do aliquip veniam minim.</p>
+                </div>
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                    <p>Cupidatat quis ad sint excepteur laborum in esse qui. Et excepteur consectetur ex nisi eu do cillum ad laborum. Mollit et eu officia dolore sunt Lorem culpa qui commodo velit ex amet id ex. Officia anim incididunt
+                        laboris deserunt anim aute dolor incididunt veniam aute dolore do exercitation. Dolor nisi culpa ex ad irure in elit eu dolore. Ad laboris ipsum reprehenderit irure non commodo enim culpa commodo veniam
+                        incididunt veniam ad.</p>
+                </div>
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+                    <p>Ut ut do pariatur aliquip aliqua aliquip exercitation do nostrud commodo reprehenderit aute ipsum voluptate. Irure Lorem et laboris nostrud amet cupidatat cupidatat anim do ut velit mollit consequat enim tempor.
+                        Consectetur est minim nostrud nostrud consectetur irure labore voluptate irure. Ipsum id Lorem sit sint voluptate est pariatur eu ad cupidatat et deserunt culpa sit eiusmod deserunt. Consectetur et fugiat
+                        anim do eiusmod aliquip nulla laborum elit adipisicing pariatur cillum.</p>
+                </div>
+                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+                    <p>Irure enim occaecat labore sit qui aliquip reprehenderit amet velit. Deserunt ullamco ex elit nostrud ut dolore nisi officia magna sit occaecat laboris sunt dolor. Nisi eu minim cillum occaecat aute est cupidatat
+                        aliqua labore aute occaecat ea aliquip sunt amet. Aute mollit dolor ut exercitation irure commodo non amet consectetur quis amet culpa. Quis ullamco nisi amet qui aute irure eu. Magna labore dolor quis ex
+                        labore id nostrud deserunt dolor eiusmod eu pariatur culpa mollit in irure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</card>

@@ -1,0 +1,47 @@
+<subheader title='Paginator' [breadcrumb]="['Angular Material Datatables', 'Paginator']"></subheader>
+
+<div class="alert alert-primary alert-bordered">
+  <p>Angular Material Datatables: Material Design styled data-table that can be used to display rows of data.<br>See more examples in</p>
+  <a href="https://material.angular.io/components/categories" class="btn btn-primary" target="_blank">Official Website</a>
+</div>
+
+<card title='Paginator'>
+    <p class="mb-4">
+        <code>&lt;mat-paginator&gt;</code> provides navigation for paged information, typically used with a table.
+    </p>
+    <mat-paginator [length]="100"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+</card>
+
+<card title='Configurable paginator'>
+    <mat-form-field>
+      List length:
+      <input matInput [(ngModel)]="length">
+    </mat-form-field>
+
+    <mat-form-field>
+      Page size:
+      <input matInput [(ngModel)]="pageSize">
+    </mat-form-field>
+    <mat-form-field>
+      Page size options:
+      <input matInput
+             [ngModel]="pageSizeOptions"
+             (ngModelChange)="setPageSizeOptions($event)">
+    </mat-form-field>
+
+    <mat-paginator [length]="length"
+                  [pageSize]="pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  (page)="pageEvent = $event">
+    </mat-paginator>
+
+    <div *ngIf="pageEvent">
+      <h5>Page Change Event Properties</h5>
+      <div>List length: {{pageEvent.length}}</div>
+      <div>Page size: {{pageEvent.pageSize}}</div>
+      <div>Page index: {{pageEvent.pageIndex}}</div>
+    </div>
+</card>

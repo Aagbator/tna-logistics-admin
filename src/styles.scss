@@ -1,0 +1,185 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Perfect scrollbar
+@import '~perfect-scrollbar/css/perfect-scrollbar';
+
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+//
+// Icons
+//
+
+@import "~cd-themify-icons/index.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "./assets/vendors/feather-icons/feather.css";
+@import "./assets/vendors/line-awesome/css/line-awesome.min.css";
+
+@import "~material-design-icons/iconfont/material-icons.css";
+
+// Prism.js
+@import '~prismjs/themes/prism.css';
+
+
+// Theme Core Styles (components, layout, ...)
+@import '@theme/scss/core';
+
+
+// Angular Material theming
+@import 'theme';
+
+.ps__rail-y, .ps__rail-x {
+	z-index: 2;
+}
+
+mat-icon{
+font-family: 'Material Icons' !important;
+}
+
+.ql-container {
+	height: 500px;
+}
+
+#editor-container {
+	height: 100%;
+}
+
+#editor {
+	height: 100%;
+}
+
+.mat-checkbox-layout {
+	margin-bottom: 0;
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.cdk-overlay-container {
+	z-index: $zindex-backdrop;
+}
+
+
+.material-modal {
+	width: 600px;
+	.mat-dialog-container {
+		padding: 0;
+		.dialog-content-wrapper {
+		    max-height: 85vh;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.mat-dialog-header {
+			padding: 24px 24px 20px 24px;
+			.mat-dialog-title {margin-bottom: 0}
+		}
+		.mat-dialog-content {
+			margin: 0;
+			padding: 24px;
+		}
+		.mat-dialog-actions {
+		    padding: 8px 24px;
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+
+@-webkit-keyframes zoomIn {
+	0% {
+		-webkit-transform: scale(.5);
+		transform: scale(.5);
+		opacity: 0
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		opacity: 1
+	}
+}
+
+@keyframes zoomIn {
+	0% {
+		-webkit-transform: scale(.5);
+		transform: scale(.5);
+		opacity: 0
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		opacity: 1
+	}
+}
+
+ngb-modal-window {
+	.modal-dialog {
+		animation-name: zoomIn;
+		animation-duration: .15s;
+		animation-timing-function: ease-in-out;
+	}
+}
+
+ngb-accordion .card {
+	margin-bottom: 0;
+}
+
+.nav-pills-solid .nav-link:not(.active) {
+    color: #212529;
+    background-color: #e3e3f2;
+}
+
+
+// Ngx dropzone reset
+
+dropzone.custom-style > .dropzone.dz-wrapper .dz-message {
+	padding: 20px;
+	background-color: #fff;
+	.dz-text {
+		position: static;
+		top: auto;
+		transform: none;
+		padding: 8px 0;
+	}
+}
+
+body {
+  padding-right: 0 !important;
+}
+
+table{
+	tbody{
+		tr{
+			td{
+				font-size:0.9rem !important;
+			}
+		}
+	}
+}
+
+//helper styles
+.m-b-5{
+	margin-bottom: 5px;
+}
+.m-b-10{
+	margin-bottom: 5px;
+}
+.m-r-5{
+	margin-right: 5px;
+}
+
+.m-l-5{
+	margin-left: 5px;
+}
+
+.m-r-10{
+	margin-right: 10px;
+}

@@ -1,0 +1,220 @@
+<subheader title='NGX Charts' [breadcrumb]="['Charts', 'NGX Charts']"></subheader>
+
+<div class="alert alert-primary alert-bordered mb-4">
+  <p>Declarative Charting Framework for Angular.<br>See more examples in <a class="text-underline" href="https://swimlane.github.io/ngx-charts/" target="_blank">demos</a></p>
+  <a href="https://github.com/swimlane/ngx-charts" class="btn btn-primary" target="_blank">Official Website</a>
+</div>
+
+<card title='Area Chart'>
+    <div style="height: 400px">
+        <ngx-charts-area-chart
+          [scheme]="areaChart.colorScheme"
+          [results]="areaChart.data"
+          [gradient]="areaChart.gradient"
+          [xAxis]="areaChart.showXAxis"
+          [yAxis]="areaChart.showYAxis"
+          [legend]="areaChart.showLegend"
+          [showXAxisLabel]="areaChart.showXAxisLabel"
+          [showYAxisLabel]="areaChart.showYAxisLabel"
+          [xAxisLabel]="areaChart.xAxisLabel"
+          [yAxisLabel]="areaChart.yAxisLabel"
+          [autoScale]="areaChart.autoScale"
+          [curve]="areaChart.lineInterpolation">
+        </ngx-charts-area-chart>
+    </div>
+</card>
+
+<card title='Area Chart'>
+    <div style="height: 400px">
+        <ngx-charts-area-chart
+          [scheme]="areaChart2.colorScheme"
+          [results]="areaChart2.data"
+          [gradient]="areaChart2.gradient"
+          [xAxis]="areaChart2.showXAxis"
+          [yAxis]="areaChart2.showYAxis"
+          [legend]="areaChart2.showLegend"
+          [showXAxisLabel]="areaChart2.showXAxisLabel"
+          [showYAxisLabel]="areaChart2.showYAxisLabel"
+          [xAxisLabel]="areaChart2.xAxisLabel"
+          [yAxisLabel]="areaChart2.yAxisLabel"
+          [autoScale]="areaChart2.autoScale">
+        </ngx-charts-area-chart>
+    </div>
+</card>
+
+<card title='Line Chart'>
+    <div style="height: 400px">
+        <ngx-charts-line-chart
+          [scheme]="lineChart.colorScheme"
+          [results]="lineChart.data"
+          [gradient]="lineChart.gradient"
+          [xAxis]="lineChart.showXAxis"
+          [yAxis]="lineChart.showYAxis"
+          [legend]="lineChart.showLegend"
+          [showXAxisLabel]="lineChart.showXAxisLabel"
+          [showYAxisLabel]="lineChart.showYAxisLabel"
+          [xAxisLabel]="lineChart.xAxisLabel"
+          [yAxisLabel]="lineChart.yAxisLabel"
+          [autoScale]="lineChart.autoScale">
+        </ngx-charts-line-chart>
+    </div>
+</card>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Bar Chart' fullheight='true'>
+            <div style="height: 350px">
+                <ngx-charts-bar-vertical
+                  [scheme]="barChart.colorScheme"
+                  [results]="barChart.data"
+                  [gradient]="barChart.gradient"
+                  [xAxis]="barChart.showXAxis"
+                  [yAxis]="barChart.showYAxis"
+                  [legend]="barChart.showLegend"
+                  [showXAxisLabel]="barChart.showXAxisLabel"
+                  [showYAxisLabel]="barChart.showYAxisLabel"
+                  [xAxisLabel]="barChart.xAxisLabel"
+                  [yAxisLabel]="barChart.yAxisLabel"
+                  barPadding="15">
+                </ngx-charts-bar-vertical>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Grouped Bar Chart' fullheight='true'>
+            <div style="height: 350px">
+                <ngx-charts-bar-vertical-2d
+                  [scheme]="barChart_grouped.colorScheme"
+                  [results]="barChart_grouped.data"
+                  [gradient]="barChart_grouped.gradient"
+                  [xAxis]="barChart_grouped.showXAxis"
+                  [yAxis]="barChart_grouped.showYAxis"
+                  [legend]="barChart_grouped.showLegend"
+                  [showXAxisLabel]="barChart_grouped.showXAxisLabel"
+                  [showYAxisLabel]="barChart_grouped.showYAxisLabel"
+                  [xAxisLabel]="barChart_grouped.xAxisLabel"
+                  [yAxisLabel]="barChart_grouped.yAxisLabel">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+        </card>
+    </div>
+</div>
+
+<card title='Grouped Bar Chart'>
+    <div style="height: 350px">
+        <ngx-charts-bar-vertical-2d
+          [scheme]="barChart_grouped2.colorScheme"
+          [results]="barChart_grouped2.data"
+          [gradient]="barChart_grouped2.gradient"
+          [xAxis]="barChart_grouped2.showXAxis"
+          [yAxis]="barChart_grouped2.showYAxis"
+          [legend]="barChart_grouped2.showLegend"
+          [showXAxisLabel]="barChart_grouped2.showXAxisLabel"
+          [showYAxisLabel]="barChart_grouped2.showYAxisLabel"
+          [xAxisLabel]="barChart_grouped2.xAxisLabel"
+          [yAxisLabel]="barChart_grouped2.yAxisLabel">
+        </ngx-charts-bar-vertical-2d>
+    </div>
+</card>
+
+<card title='Horizonal Bar Chart'>
+    <div style="height: 350px">
+        <ngx-charts-bar-horizontal
+          [scheme]="barChart_horizonal.colorScheme"
+          [results]="barChart_horizonal.data"
+          [gradient]="barChart_horizonal.gradient"
+          [xAxis]="barChart_horizonal.showXAxis"
+          [yAxis]="barChart_horizonal.showYAxis"
+          [legend]="barChart_horizonal.showLegend"
+          [showXAxisLabel]="barChart_horizonal.showXAxisLabel"
+          [showYAxisLabel]="barChart_horizonal.showYAxisLabel"
+          [xAxisLabel]="barChart_horizonal.xAxisLabel"
+          [yAxisLabel]="barChart_horizonal.yAxisLabel">
+        </ngx-charts-bar-horizontal>
+    </div>
+</card>
+<card title='Horizonal Bar Chart'>
+    <div style="height: 350px">
+        <ngx-charts-bar-horizontal-2d
+          [scheme]="barChart_grouped_horizontal.colorScheme"
+          [results]="barChart_grouped_horizontal.data"
+          [gradient]="barChart_grouped_horizontal.gradient"
+          [xAxis]="barChart_grouped_horizontal.showXAxis"
+          [yAxis]="barChart_grouped_horizontal.showYAxis"
+          [legend]="barChart_grouped_horizontal.showLegend"
+          [showXAxisLabel]="barChart_grouped_horizontal.showXAxisLabel"
+          [showYAxisLabel]="barChart_grouped_horizontal.showYAxisLabel"
+          [xAxisLabel]="barChart_grouped_horizontal.xAxisLabel"
+          [yAxisLabel]="barChart_grouped_horizontal.yAxisLabel"
+          groupPadding="25">
+        </ngx-charts-bar-horizontal-2d>
+    </div>
+</card>
+
+<card title='Pie Chart'>
+    <div style="height: 350px">
+        <ngx-charts-pie-chart
+          [results]="pieChart.data"
+          [scheme]="pieChart.colorScheme"
+          [gradient]="pieChart.gradient"
+          [legend]="pieChart.showLegend"
+          [labels]="pieChart.showLabels" 
+          [explodeSlices]="pieChart.explodeSlices"
+          [doughnut]="pieChart.doughnut">
+        </ngx-charts-pie-chart>
+    </div>
+</card>
+
+<card title='Advanced Pie Chart'>
+    <div style="height: 350px;">
+        <ngx-charts-advanced-pie-chart
+          [results]="advancedPieChart.data"
+          [scheme]="advancedPieChart.colorScheme"
+          [gradient]="advancedPieChart.gradient">
+        </ngx-charts-advanced-pie-chart>
+    </div>
+</card>
+
+<div class="row">
+    <div class="col-lg-6">
+        <card title='Doughnut option' fullheight='true'>
+            <div style="height: 350px">
+                <ngx-charts-pie-chart
+                  [results]="pieChart2.data"
+                  [scheme]="pieChart2.colorScheme"
+                  [gradient]="pieChart2.gradient"
+                  [legend]="pieChart2.showLegend"
+                  [labels]="pieChart2.showLabels" 
+                  [explodeSlices]="pieChart2.explodeSlices"
+                  [doughnut]="pieChart2.doughnut">
+                </ngx-charts-pie-chart>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+        <card title='Explode Slices option' fullheight='true'>
+            <div style="height: 350px">
+                <ngx-charts-pie-chart
+                  [results]="pieChart3.data"
+                  [scheme]="pieChart3.colorScheme"
+                  [gradient]="pieChart3.gradient"
+                  [legend]="pieChart3.showLegend"
+                  [labels]="pieChart3.showLabels" 
+                  [explodeSlices]="pieChart3.explodeSlices"
+                  [doughnut]="pieChart3.doughnut">
+                </ngx-charts-pie-chart>
+            </div>
+        </card>
+    </div>
+</div>
+
+<card title='Pie Grid'>
+    <div class="mx-auto" style="height: 350px; max-width: 800px">
+        <ngx-charts-pie-grid
+          [results]="pieGrid.data"
+          [scheme]="pieGrid.colorScheme">
+        </ngx-charts-pie-grid>
+    </div>
+</card>
+
+<p>See More examples in <a class="btn btn-primary btn-sm ml-2" href="https://swimlane.github.io/ngx-charts/#/ngx-charts/bar-vertical" target="_blank">Official Website</a></p>

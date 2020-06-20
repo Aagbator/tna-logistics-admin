@@ -1,0 +1,264 @@
+
+<subheader title='Media object' [breadcrumb]="['UI Kit', 'Media object']"></subheader>
+
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Media Object'" [fullheight]="true">
+            <h5 class="mb-4">Basic example</h5>
+            <div class="ex-box">
+                <div class="media">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="54">
+                    <div class="media-body">
+                        <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</div>
+                </div>
+            </div>
+            <hr class="my-5">
+            <h5>Nesting</h5>
+            <p class="mb-4">Media objects can be infinitely nested, though we suggest you stop at some point. Place nested <code>.media</code> within the <code>.media-body</code> of a parent media object.</p>
+            <div class="ex-box">
+                <div class="media">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                    <div class="media-body">
+                        <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.
+                        <div class="media mt-3">
+                            <a class="pr-3" href="javascript:;">
+                                <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in gravida.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5">
+            <h5>Alignment</h5>
+            <p class="mb-4">Media in a media object can be aligned with flexbox utilities to the top (default), middle, or end of your <code>.media-body</code> content.</p>
+            <div class="media">
+                <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                <div class="media-body">
+                    <h5 class="mt-0">Top-aligned media</h5>
+                    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="media">
+                <img class="align-self-center mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                <div class="media-body">
+                    <h5 class="mt-0">Center-aligned media</h5>
+                    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="media">
+                <img class="align-self-end mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                <div class="media-body">
+                    <h5 class="mt-0">Bottom-aligned media</h5>
+                    <p class="mb-0">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+            </div>
+            <hr class="my-5">
+            <h5>Order</h5>
+            <p class="mb-4">Change the order of content in media objects by modifying the HTML itself, or by adding some custom flexbox CSS to set the <code>order</code> property (to an integer of your choosing).</p>
+            <div class="ex-box">
+                <div class="media">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">Media object</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</div>
+                    <img class="ml-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                </div>
+            </div>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'Media List'" [fullheight]="true">
+            <h5 class="mb-4">Basic list</h5>
+            <ul class="list-unstyled">
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+            </ul>
+            <hr class="my-4">
+            <ul class="list-unstyled">
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                    <div class="media-body flexbox">
+                        <div>
+                            <h6 class="mt-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6> Cras sit amet nibh libero, in gravida nulla</div>
+                        <button class="btn btn-outline-secondary btn-sm btn-rounded">Follow</button>
+                    </div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                    <div class="media-body flexbox">
+                        <div>
+                            <h6 class="mt-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6> Cras sit amet nibh libero, in gravida nulla</div>
+                        <button class="btn btn-light btn-sm btn-rounded">Unfollow</button>
+                    </div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                    <div class="media-body flexbox">
+                        <div>
+                            <h6 class="mt-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6> Cras sit amet nibh libero, in gravida nulla</div>
+                        <button class="btn btn-outline-secondary btn-sm btn-rounded">Follow</button>
+                    </div>
+                </li>
+            </ul>
+            <hr class="my-5">
+            <h5 class="mb-4">With divider</h5>
+            <ul class="list-unstyled media-list-divider">
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                    <div class="media-body">
+                        <div class="flexbox">
+                            <h6 class="mt-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6>
+                            <a class="text-primary" href="javascript:;" data-toggle="tooltip" title="Like"><i class="ti-heart"></i></a>
+                        </div> Cras sit amet nibh libero, in gravida nulla</div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                    <div class="media-body">
+                        <div class="flexbox">
+                            <h6 class="mt-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6>
+                            <a class="text-danger" href="javascript:;" data-toggle="tooltip" title="Like"><i class="ti-heart"></i></a>
+                        </div> Cras sit amet nibh libero, in gravida nulla</div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                    <div class="media-body">
+                        <div class="flexbox">
+                            <h6 class="m-0 mb-1">
+                                <a href="javascript:;">John Due</a>
+                            </h6>
+                            <a class="text-success" href="javascript:;" data-toggle="tooltip" title="Like"><i class="ti-heart"></i></a>
+                        </div> Cras sit amet nibh libero, in gravida nulla</div>
+                </li>
+            </ul>
+            <hr class="my-5">
+            <h5 class="mb-4">Nested list</h5>
+            <ul class="list-unstyled">
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                    <div class="media-body">
+                        <div class="flexbox">
+                            <div class="d-flex">
+                                <h6>
+                                    <a href="javascript:;">John Due</a>
+                                </h6><small class="text-muted ml-2">2 days ago</small></div>
+                            <a class="text-muted" href="javascript:;" data-toggle="tooltip" title="Reply"><i class="fas fa-reply"></i></a>
+                        </div> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+                <li class="media py-3">
+                    <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                    <div class="media-body">
+                        <div class="flexbox">
+                            <div class="d-flex">
+                                <h6>
+                                    <a href="javascript:;">John Due</a>
+                                </h6><small class="text-muted ml-2">2 days ago</small></div>
+                            <a class="text-muted" href="javascript:;" data-toggle="tooltip" title="Reply"><i class="fas fa-reply"></i></a>
+                        </div> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.
+                        <div class="media mt-4">
+                            <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div class="d-flex">
+                                        <h6>
+                                            <a href="javascript:;">John Due</a>
+                                        </h6><small class="text-muted ml-2">2 days ago</small></div>
+                                    <a class="text-muted" href="javascript:;" data-toggle="tooltip" title="Reply"><i class="fas fa-reply"></i></a>
+                                </div> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <hr class="my-5">
+            <h5 class="mb-4">In list group</h5>
+            <ul class="list-group">
+                <li class="list-group-item media py-3 active">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+                <li class="list-group-item media py-3">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+                <li class="list-group-item media py-3">
+                    <div class="media">
+                        <img class="mr-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    </div>
+                </li>
+            </ul>
+        </card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+    	<card [title]="'Right Aligned'" [fullheight]="true">
+            <ul class="list-unstyled">
+                <li class="media py-3">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    <img class="ml-3 rounded-circle" src="./assets/img/users/u1.jpg" width="45">
+                </li>
+                <li class="media py-3">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    <img class="ml-3 rounded-circle" src="./assets/img/users/u2.jpg" width="45">
+                </li>
+                <li class="media py-3">
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                    <img class="ml-3 rounded-circle" src="./assets/img/users/u3.jpg" width="45">
+                </li>
+            </ul>
+        </card>
+    </div>
+    <div class="col-lg-6">
+    	<card [title]="'With Icons'" [fullheight]="true">
+            <ul class="list-unstyled">
+                <li class="media py-3"><i class="ti-comments text-primary font-26 mr-4"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+                <li class="media py-3"><i class="ti-desktop text-danger font-26 mr-4"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+                <li class="media py-3"><i class="ti-shopping-cart text-info font-26 mr-4"></i>
+                    <div class="media-body">
+                        <h6 class="mt-0 mb-1">List-based media object</h6> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </li>
+            </ul>
+        </card>
+    </div>
+</div>

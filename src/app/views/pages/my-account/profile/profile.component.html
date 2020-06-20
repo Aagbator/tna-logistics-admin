@@ -1,0 +1,71 @@
+<div class="card">
+  <div class="card-body"  *ngIf="!isEditing">
+    <div class="d-flex justify-content-between mb-4">
+      <h5 class="box-title mb-0">Profile Information</h5><a  *ngIf="!isEditing" (click)="editProfile()" ><i class="ti-pencil"></i> Edit</a>
+    </div>
+    <div class="row mb-3">
+      <div class="col-3 text-muted">Full Name:</div>
+      <div class="col-9">{{loggedInUser?.fullName}}</div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-3 text-muted">Email:</div>
+      <div class="col-9">{{loggedInUser?.email}}</div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-3 text-muted">Mobile Number:</div>
+      <div class="col-9">{{loggedInUser.mobileNo}}</div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-3 text-muted">Role:</div>
+      <div class="col-9">{{loggedInUser?.role?.name}}</div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-3 text-muted">Last login date:</div>
+      <div class="col-9">{{loggedInUser.lastLogin | date}}</div>
+    </div>
+  </div>
+
+  <div class="card-body" *ngIf="isEditing">
+    <form class="form-horizontal form-material" [formGroup]="userProfileForm" novalidate>
+      <div class="form-group">
+        <label class="control-label">First Name</label>
+        <input class="form-control" [class.is-invalid]="userProfileForm.get('firstName').touched && !userProfileForm.get('firstName').valid" formControlName="firstName" id="firstName" type="text" placeholder="" required>
+        <div *ngIf="userProfileForm.get('firstName').touched && userProfileForm.get('firstName').hasError('required')" class="invalid-feedback">
+          First Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Last Name</label>
+        <input class="form-control" [class.is-invalid]="userProfileForm.get('lastName').touched && !userProfileForm.get('lastName').valid" formControlName="lastName" id="lastName" type="text" placeholder="" required>
+        <div *ngIf="userProfileForm.get('lastName').touched && userProfileForm.get('lastName').hasError('required')" class="invalid-feedback">
+          First Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Email</label>
+        <input class="form-control" [value]="loggedInUser.email" [disabled]="true" >
+      </div>
+      <div class="form-group">
+        <label class="control-label">Phone Number</label>
+        <input class="form-control" [class.is-invalid]="userProfileForm.get('mobileNo').touched && !userProfileForm.get('mobileNo').valid" formControlName="mobileNo" id="mobileNo" type="text" placeholder="" required>
+        <div *ngIf="userProfileForm.get('mobileNo').touched && userProfileForm.get('mobileNo').hasError('required')" class="invalid-feedback">
+          Mobile Number is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Role</label>
+        <input class="form-control" [value]="loggedInUser.roleName" [disabled]="true" >
+      </div>
+
+      <button *ngIf="isEditing" (click)="cancelEdit()" class="btn btn-secondary btn-md mr-2 text-uppercase waves-effect waves-light">
+        Cancel
+      </button> <!--cancel profile edit-->
+
+
+      <button *ngIf="isEditing" [disabled]="updating" (click)="updateProfile()" class="btn btn-success btn-md text-uppercase waves-effect waves-light">
+        Save <i *ngIf="updating" class="fa fa-spin fa-spinner"></i>
+      </button> <!--update profile-->
+    </form>
+
+  </div>
+</div>

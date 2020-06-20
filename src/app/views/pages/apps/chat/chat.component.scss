@@ -1,0 +1,59 @@
+
+@import 'src/@theme/scss/components/functions';
+@import 'src/@theme/scss/components/mixins';
+@import 'src/@theme/scss/components/variables';
+
+:host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    mat-sidenav-container {
+        flex: 1;
+        mat-sidenav-content {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        & {
+            margin: -30px;
+        }
+    }
+}
+
+.chat-message {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding: .2rem 1rem;
+    padding-left: 68px;
+    > img {
+        position: absolute;
+        top: 0;
+        left: 1rem;
+    }
+    .message-body {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .message-bubble {
+        padding: .6rem 1rem;
+        position: relative;
+        background-color: #dee2e6;
+        border-radius: 120px;
+        margin-bottom: .35rem;
+    }
+
+    &.message-me {
+        flex-direction: row-reverse;
+        .message-body {
+            align-items: flex-end;
+        }
+        .message-bubble {
+            background-color: #2a56c6;
+            color: #fff;
+        }
+    }
+}

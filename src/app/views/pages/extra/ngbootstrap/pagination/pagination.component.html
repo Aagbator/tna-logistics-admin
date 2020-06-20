@@ -1,0 +1,47 @@
+<subheader [title]="'Pagination'" [breadcrumb]="['Ng-Bootstrap', 'Pagination']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Basic pagination'">
+			<p>Default pagination:</p>
+			<ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+			<p>No direction links:</p>
+			<ngb-pagination [collectionSize]="70" [(page)]="page" [directionLinks]="false"></ngb-pagination>
+			<p>With boundary links:</p>
+			<ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+			<hr>
+			<pre>Current page: {{page}}</pre>
+		</card>
+		<card [title]="'Advanced pagination'">
+			<p>Restricted size, no rotation:</p>
+			<ngb-pagination [collectionSize]="120" [(page)]="page2" [maxSize]="5" [boundaryLinks]="true"></ngb-pagination>
+			<p>Restricted size with rotation:</p>
+			<ngb-pagination [collectionSize]="120" [(page)]="page2" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"></ngb-pagination>
+			<p>Restricted size with rotation and no ellipses:</p>
+			<ngb-pagination [collectionSize]="120" [(page)]="page2" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+			<hr>
+			<pre>Current page: {{page2}}</pre>
+		</card>
+		<card [title]="'Pagination size'">
+			<ngb-pagination [collectionSize]="50" [(page)]="currentPage" size="lg"></ngb-pagination>
+			<ngb-pagination [collectionSize]="50" [(page)]="currentPage"></ngb-pagination>
+			<ngb-pagination [collectionSize]="50" [(page)]="currentPage" size="sm"></ngb-pagination>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Pagination alignment'">
+			<p>Change the alignment of pagination components with flexbox utilities.</p>
+			<ngb-pagination class="d-flex justify-content-start" [collectionSize]="70" [(page)]="page3"></ngb-pagination>
+			<ngb-pagination class="d-flex justify-content-center" [collectionSize]="70" [(page)]="page3"></ngb-pagination>
+			<ngb-pagination class="d-flex justify-content-end" [collectionSize]="70" [(page)]="page3"></ngb-pagination>
+		</card>
+		<card [title]="'Disabled pagination'">
+			<p>Pagination control can be disabled:</p>
+			<ngb-pagination [collectionSize]="70" [(page)]="page4" [disabled]='isDisabled'></ngb-pagination>
+			<hr>
+			<button class="btn btn-sm btn-outline-primary" (click)="toggleDisabled()">
+			  Toggle disabled
+			</button>
+		</card>
+	</div>
+</div>

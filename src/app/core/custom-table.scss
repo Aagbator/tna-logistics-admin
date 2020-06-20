@@ -1,0 +1,57 @@
+.custom-table{
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  thead{
+    tr {
+      th{
+        text-align: left;
+        padding: .9rem 0.75rem;
+        color: rgba(0, 0, 0, 0.54);
+        vertical-align: bottom;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+        color: rgba(0, 0, 0, 0.87);
+        transition: width 0.3s ease;
+        font-size: 14px;
+        font-weight: 400;
+        //line-height:40px;
+        vertical-align: middle;
+        .custom-btn, .custom-btn-spinner {
+          //border: none;
+          margin-right:0.1rem;
+          padding: 0.25rem 0.5rem;
+          font-size: 0.765625rem;
+          line-height: 1.5;
+          border-radius: 1px;
+          background-color: transparent;
+          i{
+            margin: auto;
+          }
+        }
+        .custom-btn{
+          border-color: #f8f9fa;
+        }
+      }
+    }
+  }
+}
+
+.custom-table-footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  .page-count{
+    text-align: left;
+
+    color: rgba(0, 0, 0, 0.54);
+    vertical-align: bottom;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}

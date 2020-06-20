@@ -1,0 +1,38 @@
+<subheader [title]="'Progressbar'" [breadcrumb]="['Ng-Bootstrap', 'Progressbar']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Contextual progress bars'">
+			<p><ngb-progressbar type="success" [value]="25"></ngb-progressbar></p>
+			<p><ngb-progressbar type="info" [value]="50"></ngb-progressbar></p>
+			<p><ngb-progressbar type="warning" [value]="75"></ngb-progressbar></p>
+			<p><ngb-progressbar type="danger" [value]="100"></ngb-progressbar></p>
+		</card>
+		<card [title]="'Progress bars with current value labels'">
+			<p><ngb-progressbar showValue="true" type="success" [value]="25"></ngb-progressbar></p>
+			<p><ngb-progressbar [showValue]="true" type="info" [value]="50"></ngb-progressbar></p>
+			<p><ngb-progressbar showValue="true" type="warning" [value]="150" [max]="200"></ngb-progressbar></p>
+			<p><ngb-progressbar [showValue]="true" type="danger" [value]="150" [max]="150"></ngb-progressbar></p>
+		</card>
+		<card [title]="'Striped progress bars'">
+			<p><ngb-progressbar type="success" [value]="25" [striped]="true"></ngb-progressbar></p>
+			<p><ngb-progressbar type="info" [value]="50" [striped]="true"></ngb-progressbar></p>
+			<p><ngb-progressbar type="warning" [value]="75" [striped]="true"></ngb-progressbar></p>
+			<p><ngb-progressbar type="danger" [value]="100" [striped]="true"></ngb-progressbar></p>
+		</card>			
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Progress bars with custom labels'">
+			<p><ngb-progressbar type="success" [value]="25">25</ngb-progressbar></p>
+			<p><ngb-progressbar type="info" [value]="50">Copying file <b>2 of 4</b>...</ngb-progressbar></p>
+			<p><ngb-progressbar type="warning" [value]="75" [striped]="true" [animated]="true"><i>50%</i></ngb-progressbar></p>
+			<p><ngb-progressbar type="danger" [value]="100" [striped]="true">Completed!</ngb-progressbar></p>
+		</card>
+		<card [title]="'Progress bars with height'">
+			<p><ngb-progressbar type="success" [value]="25">default</ngb-progressbar></p>
+			<p><ngb-progressbar type="info" [value]="50" height="10px">10px</ngb-progressbar></p>
+			<p><ngb-progressbar type="warning" [value]="75" height=".5rem">.5rem</ngb-progressbar></p>
+			<p><ngb-progressbar type="danger" [value]="100" [height]="height">{{height}}</ngb-progressbar></p>
+		</card>
+	</div>
+</div>

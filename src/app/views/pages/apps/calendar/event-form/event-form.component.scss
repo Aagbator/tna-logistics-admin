@@ -1,0 +1,25 @@
+
+
+.event-form-modal {
+	width: 480px;
+	.mat-dialog-container {
+		padding: 0;
+		.dialog-content-wrapper {
+		    max-height: 85vh;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.mat-dialog-header {
+			padding: 24px 24px 20px 24px;
+			.mat-dialog-title {margin-bottom: 0}
+		}
+		.mat-dialog-content {
+			margin: 0;
+			padding: 24px;
+		}
+		.mat-dialog-actions {
+		    padding: 8px 24px;
+			margin-bottom: 0;
+		}
+	}
+}

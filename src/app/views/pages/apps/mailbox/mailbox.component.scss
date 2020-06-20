@@ -1,0 +1,102 @@
+@import 'src/@theme/scss/components/functions';
+@import 'src/@theme/scss/components/variables';
+@import 'src/@theme/scss/components/mixins';
+
+
+.mail-sidenav-container {
+    background-color: inherit;
+    mat-sidenav {
+        &:not(.mat-drawer-over) {
+            background-color: inherit;
+        }
+        &.mat-drawer-over {
+            padding: 20px;
+        }
+        border: 0;
+        &.mat-drawer-side ~ mat-sidenav-content {padding-left: 20px}
+    }
+    mat-sidenav-content {}
+}
+.mailbox-nav {
+    .nav-link {
+        border-radius: $border-radius;
+        .mail-nav-icon {
+            color: $text-muted;
+        }
+        &.active {
+            background-color: theme_color('primary');
+            &, .mail-nav-icon {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.mail-empty-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    background-color: theme_color('primary');
+    color: #fff;
+    font-size: 17px;
+}
+
+.mail-card {
+
+    .mail-details {
+        .mail-subject {
+            font-size: 17px;
+            font-weight: 500;
+        }
+        .mail-labels {
+            .badge{ margin-bottom: .5rem; }
+            .badge + .badge {
+                margin-left: .5rem;
+            }
+        }
+
+        .attachments-list {
+            .attachment {
+                position: relative;
+                margin-bottom: 1rem;
+                & + .attachment { margin-left: 1rem; }
+                img {
+                    max-width: 140px;
+                    margin-bottom: .5rem;
+                }
+                .attachment-actions {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    background-color: rgba(0,0,0,.5);
+                    display: none;
+                }
+                &:hover {
+                    .attachment-actions {display: block;}
+                }
+            }
+        }
+        .mail-empty-avatar {
+            height: 40px;
+            width: 40px;
+            font-size: 22px;
+        }
+    }
+
+    @include media-breakpoint-down(md) {
+        .mail-details {
+            display: none;
+        }
+        &.current-mail-selected {
+            .mail-list, .selected-mail-actions {
+                display: none;
+            }
+            .mail-details {
+                display: block;
+            }
+        }
+    }
+}

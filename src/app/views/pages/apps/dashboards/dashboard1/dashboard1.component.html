@@ -1,0 +1,579 @@
+<subheader title="Dashboard" [breadcrumb]="['Dashboards']"></subheader>
+
+<div>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="box-title mb-2">Total Customers</h5>
+                            <div class="h4 mb-0 text-primary">{{dashboardStatistics?.totalCustomerCount | checkNull:'0'}}</div>
+                        </div><i class="ti-user font-30 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="box-title mb-2">Total Products</h5>
+                            <div class="h4 mb-0 text-primary">{{dashboardStatistics?.totalProductCount | checkNull:'0'}}</div>
+                        </div><i class="ti-package font-30 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="box-title font-12 mb-1">Awaiting Order</h5>
+                            <div class="h4 mb-0 text-primary">{{dashboardStatistics?.orderStatistics[0].count  | checkNull:'0'}}</div>
+                        </div><i class="ti-arrow-left font-30 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="box-title font-12 mb-1">Order In Transit </h5>
+                            <div class="h4 mb-0 text-primary">{{dashboardStatistics?.orderStatistics[1].count  | checkNull:'0'}}</div>
+                        </div><i class="ti-arrow-right font-30 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="box-title font-12 mb-1">Orders Delivered</h5>
+                            <div class="h4 mb-0 text-primary">{{dashboardStatistics?.orderStatistics[2].count | checkNull:'...'}}</div>
+                        </div><i class="ti-check-box font-30 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row"  *ngIf="false">
+        <div class="col-lg-12">
+            <card title='Farm Amount Statistics'>
+                <div style="height: 350px" >
+                    <ngx-charts-bar-horizontal
+                            [scheme]="barChart_horizonal?.colorScheme"
+                            [results]="barChart_horizonal?.data"
+                            [gradient]="barChart_horizonal?.gradient"
+                            [xAxis]="barChart_horizonal?.showXAxis"
+                            [yAxis]="barChart_horizonal?.showYAxis"
+                            [legend]="barChart_horizonal?.showLegend"
+                            [showXAxisLabel]="barChart_horizonal?.showXAxisLabel"
+                            [showYAxisLabel]="barChart_horizonal?.showYAxisLabel"
+                            [xScaleMax]="barChart_horizonal?.xScaleMax"
+                            [xAxisLabel]="barChart_horizonal?.xAxisLabel"
+                            [yAxisLabel]="barChart_horizonal?.yAxisLabel">
+                    </ngx-charts-bar-horizontal>
+                </div>
+            </card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <card title='TOP 10 Products'>
+                <div class="table-responsive">
+                    <table class="table">
+                       <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Total Amount Bought</th>
+                            <th scope="col">Total Unit Bought</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stats of dashboardStatistics?.top10Products; let i = index;">
+                                <td scope="row"><strong>{{i + 1}}</strong></td>
+                                <td>{{stats?.name}}</td>
+                                <td>{{stats?.price | currency:'₦'}}</td>
+                                <td>{{stats?.amount | currency:'₦'}}</td>
+                                <td>{{stats?.qty}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </card>
+        </div>
+    </div>
+
+    <div class="row"  *ngIf="false">
+        <div class="col-md-8">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <div>
+                            <h5 class="box-title mb-2">Sales</h5>
+                            <div class="text-muted font-13">Simple Subtitle</div>
+                        </div>
+                        <a class="text-muted" href="javascript:;"><i class="ti-more-alt"></i></a>
+                    </div>
+                    <div>
+                        <canvas baseChart height="280"
+                            [datasets]="lineChart.data"
+                            [labels]="lineChart.labels"
+                            [options]="lineChart.options"
+                            [colors]="lineChart.colors"
+                            [chartType]="lineChart.type">
+                            </canvas>
+                    </div>
+                    <div class="flexbox flex-wrap mt-5">
+                        <div class="d-flex mb-4 mb-sm-0">
+                            <div class="pr-4 pr-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Total Orders</h6>
+                                <div class="h4 mb-0 text-primary">+24.50%</div>
+                            </div>
+                            <div class="pl-0 pl-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Total Income</h6>
+                                <div class="h4 mb-0 text-danger">+$625.50</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Print Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <div>
+                            <h5 class="box-title mb-2">Market info</h5>
+                            <div class="text-muted font-13">Simple Subtitle</div>
+                        </div><a class="text-muted" href="#"><i class="ti-info-alt"></i></a>
+                    </div>
+                    <div class="mb-5">
+                        <canvas baseChart height="220"
+                            [data]="doughnutChart.data"
+                            [labels]="doughnutChart.labels"
+                            [chartType]="doughnutChart.type"
+                            [legend]="doughnutChart.legend"
+                            [colors]="doughnutChart.colors"
+                            [options]="doughnutChart.options"></canvas>
+                    </div>
+                    <div>
+                        <div class="flexbox mb-3">
+                            <div><span class="badge-point badge-warning rounded-0 mr-2"></span><span>All Sales</span></div><span class="h6 mb-0 font-16">+28%</span>
+                        </div>
+                        <div class="flexbox mb-3">
+                            <div><span class="badge-point badge-primary rounded-0 mr-2"></span><span>In-Store Sales</span></div><span class="h6 mb-0 font-16">$9570</span>
+                        </div>
+                        <div class="flexbox mb-2">
+                            <div><span class="badge-point badge-danger rounded-0 mr-2"></span><span>Online Sales</span></div><span class="h6 mb-0 font-16">$3540</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="false">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4 pb-3"><i class="ti-briefcase text-muted font-40"></i></div>
+                    <h5 class="mb-3">Manage Projects</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore neque.</p>
+                    <div><a class="d-inline-flex align-items-center text-danger" href="javascript:;"><span class="mr-2">View More</span><i class="fas fa-angle-right font-16"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4 pb-3"><i class="ti-announcement text-muted font-40"></i></div>
+                    <h5 class="mb-3">Manage Projects</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore neque.</p>
+                    <div><a class="d-inline-flex align-items-center text-danger" href="javascript:;"><span class="mr-2">View More</span><i class="fas fa-angle-right font-16"></i></a></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="mb-4 pb-3"><i class="ti-world text-muted font-40"></i></div>
+                    <h5 class="mb-3">Manage Projects</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore neque.</p>
+                    <div><a class="d-inline-flex align-items-center text-danger" href="javascript:;"><span class="mr-2">View More</span><i class="fas fa-angle-right font-16"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="false">
+        <div class="col-lg-4">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h5 class="box-title mb-2">Social Accounts</h5>
+                            <div class="text-muted font-13">Simple Subtitle</div>
+                        </div><a class="text-muted font-18" href="javascript:;"><i class="ti-plus"></i></a>
+                    </div>
+                    <ul class="list-unstyled media-list-divider">
+                        <li class="media py-3 align-items-center"><a class="btn btn-sm btn-facebook btn-floating mr-3" href="javascript:;"><i class="fab fa-facebook-f"></i></a>
+                            <div class="media-body flexbox">
+                                <div>
+                                    <h6>Facebook</h6>
+                                    <div class="text-muted">Profile John Due</div>
+                                </div><label class="ui-switch switch-solid"><input type="checkbox" checked=""><span></span></label>
+                            </div>
+                        </li>
+                        <li class="media py-3 align-items-center"><a class="btn btn-sm btn-dribbble btn-floating mr-3" href="javascript:;"><i class="fab fa-dribbble"></i></a>
+                            <div class="media-body flexbox">
+                                <div>
+                                    <h6>Dribbble</h6>
+                                    <div class="text-muted">Profile John Due</div>
+                                </div><label class="ui-switch switch-solid"><input type="checkbox" checked=""><span></span></label>
+                            </div>
+                        </li>
+                        <li class="media py-3 align-items-center"><a class="btn btn-sm btn-twitter btn-floating mr-3" href="javascript:;"><i class="fab fa-twitter"></i></a>
+                            <div class="media-body flexbox">
+                                <div>
+                                    <h6>Twitter</h6>
+                                    <div class="text-muted">Profile John Due</div>
+                                </div><label class="ui-switch switch-solid"><input type="checkbox"><span></span></label>
+                            </div>
+                        </li>
+                        <li class="media py-3 align-items-center"><a class="btn btn-sm btn-linkedin btn-floating mr-3" href="javascript:;"><i class="fab fa-linkedin-in"></i></a>
+                            <div class="media-body flexbox">
+                                <div>
+                                    <h6>Linkedin</h6>
+                                    <div class="text-muted">Profile John Due</div>
+                                </div><label class="ui-switch switch-solid"><input type="checkbox" checked=""><span></span></label>
+                            </div>
+                        </li>
+                        <li class="media py-3 align-items-center"><a class="btn btn-sm btn-youtube btn-floating mr-3" href="javascript:;"><i class="fab fa-youtube"></i></a>
+                            <div class="media-body flexbox">
+                                <div>
+                                    <h6>Youtube</h6>
+                                    <div class="text-muted">Profile John Due</div>
+                                </div><label class="ui-switch switch-solid"><input type="checkbox"><span></span></label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h5 class="box-title mb-0">Comments</h5>
+                            <div class="text-muted font-13"></div>
+                        </div><a class="text-muted" href="javascript:;">View All</a>
+                    </div>
+                    <div class="card-fullwidth-block">
+                        <div class="list-group list-group-flush"><a class="list-group-item list-group-item-action px-4 py-3" href="javascript:;">
+                                <div class="media">
+                                    <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u1.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                                    <div class="media-body">
+                                        <div class="flexbox mb-2">
+                                            <h6 class="mb-0">John Due</h6>
+                                            <div class="text-muted font-13">2 days ago</div>
+                                        </div>
+                                        <div class="font-13">Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor sed.</div>
+                                    </div>
+                                </div>
+                            </a><a class="list-group-item list-group-item-action px-4 py-3" href="javascript:;">
+                                <div class="media">
+                                    <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                                    <div class="media-body">
+                                        <div class="flexbox mb-2">
+                                            <h6 class="mb-0">John Due</h6>
+                                            <div class="text-muted font-13">2 days ago</div>
+                                        </div>
+                                        <div class="font-13">Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor sed.</div>
+                                    </div>
+                                </div>
+                            </a><a class="list-group-item list-group-item-action px-4 py-3" href="javascript:;">
+                                <div class="media">
+                                    <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u3.jpg" alt="image" width="40"><span class="badge-point badge-success avatar-badge"></span></div>
+                                    <div class="media-body">
+                                        <div class="flexbox mb-2">
+                                            <h6 class="mb-0">John Due</h6>
+                                            <div class="text-muted font-13">2 days ago</div>
+                                        </div>
+                                        <div class="font-13">Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor sed.</div>
+                                    </div>
+                                </div>
+                            </a><a class="list-group-item list-group-item-action px-4 py-3" href="javascript:;">
+                                <div class="media">
+                                    <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u5.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                                    <div class="media-body">
+                                        <div class="flexbox mb-2">
+                                            <h6 class="mb-0">John Due</h6>
+                                            <div class="text-muted font-13">2 days ago</div>
+                                        </div>
+                                        <div class="font-13">Lorem ipsum dolor sit amet, elit, sed do eiusmod tempor sed.</div>
+                                    </div>
+                                </div>
+                            </a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-5">
+                        <div>
+                            <h5 class="box-title mb-2">Earnings</h5>
+                            <div class="text-muted font-13 mb-4">14.12 - 21.12</div>
+                            <div class="h2 mb-0 text-primary">+$7450.40</div>
+                        </div><i class="ti-arrow-up font-30 text-success"></i>
+                    </div>
+                    <div>
+                        <canvas baseChart height="250"
+                            [datasets]="stackedBarChart.data"
+                            [labels]="stackedBarChart.labels"
+                            [options]="stackedBarChart.options"
+                            [colors]="stackedBarChart.colors"
+                            [legend]="stackedBarChart.legend"
+                            [chartType]="stackedBarChart.type">
+                            </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="false">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h5 class="mb-2">Daily Feeds</h5>
+                            <div class="text-muted font-13">From 14.12 - 21.12</div>
+                        </div><a class="text-muted" href="javascript:;"><i class="ti-more-alt"></i></a>
+                    </div>
+                    <div class="card-fullwidth-block p-4 mb-4 flexbox" style="background-color: #e9ecef;">
+                        <div class="font-18">You have 14 new feeds</div><a class="d-inline-flex align-items-center text-danger" href="javascript:;"><span class="mr-2">View More</span><i class="fas fa-angle-right font-16"></i></a>
+                    </div>
+                    <ul class="list-unstyled media-list-divider">
+                        <li class="media py-3">
+                            <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u1.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between">
+                                    <div><strong>John Due</strong> liked on post <strong>Article Name</strong></div>
+                                    <div class="text-muted font-13 ml-3" style="min-width: 80px;">2 days ago</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media py-3">
+                            <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div><strong>John Due</strong> commented on <strong>Article Name</strong></div>
+                                    <div class="text-muted font-13 ml-3" style="min-width: 80px;">2 days ago</div>
+                                </div>
+                                <div class="p-3 rounded" style="background-color: #e9ecef;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</div>
+                            </div>
+                        </li>
+                        <li class="media py-3">
+                            <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="40"><span class="badge-point badge-success avatar-badge"></span></div>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div><strong>John Due</strong> started following <strong>Eliza Francine</strong></div>
+                                    <div class="text-muted font-13 ml-3" style="min-width: 80px;">2 days ago</div>
+                                </div>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </li>
+                        <li class="media py-3">
+                            <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="40"><span class="badge-point badge-warning avatar-badge"></span></div>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div><strong>John Due</strong> add new review on <strong>Product</strong></div>
+                                    <div class="text-muted font-13 ml-3" style="min-width: 80px;">2 days ago</div>
+                                </div>
+                                <div class="mb-2"><span><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star-half text-warning"></i></span><span class="text-muted ml-2">for </span><strong class="font-weight-bold">design quality</strong></div>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                            </div>
+                        </li>
+                        <li class="media py-3">
+                            <div class="mr-3 position-relative"><img class="rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="40"><span class="badge-point badge-success avatar-badge"></span></div>
+                            <div class="media-body">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div><strong>John Due</strong> started following <strong>Eliza Francine</strong></div>
+                                    <div class="text-muted font-13 ml-3" style="min-width: 80px;">2 days ago</div>
+                                </div>
+                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                                <div><a class="btn btn-primary btn-rounded btn-sm mr-2" href="javascript:;">View</a><a class="btn btn-outline-secondary btn-rounded btn-sm" href="javascript:;">Follow</a></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <h5 class="box-title mb-0">Your Activity</h5><a class="text-muted" href="javascript:;">View All</a>
+                    </div>
+                    <ul class="timeline timeline-default">
+                        <li class="timeline-item">2 Issue fixed<span class="font-13 text-muted ml-2">Just now</span></li>
+                        <li class="timeline-item"><span>15 New orders<span class="badge badge-primary badge-pill ml-2">important</span></span><span class="font-13 text-muted ml-2">5 mins</span></li>
+                        <li class="timeline-item">18 new orders sent<span class="font-13 text-muted ml-2">24 mins</span></li>
+                        <li class="timeline-item">15 New messages<span class="font-13 text-muted ml-2">45 mins</span></li>
+                        <li class="timeline-item">The invoice is ready<span class="font-13 text-muted ml-2">1 hrs</span></li>
+                        <li class="timeline-item"><span>Server Error<span class="badge badge-success badge-pill ml-2">resolved</span></span><span class="font-13 text-muted ml-2">2 hrs</span></li>
+                        <li class="timeline-item"><span>System Warning<a class="text-purple ml-2">Check</a></span><span class="font-13 text-muted ml-2">12:07</span></li>
+                        <li class="timeline-item">24 new users registered<span class="font-13 text-muted ml-2">12:30</span></li>
+                        <li class="timeline-item"><span>5 New Orders<span class="badge badge-warning badge-pill ml-2">important</span></span><span class="font-13 text-muted ml-2">13:45</span></li>
+                        <li class="timeline-item"><span class="flexbox">Production server up<i class="la la-arrow-circle-up font-18 ml-2 text-success"></i></span><span class="font-13 text-muted ml-2">1 days ago</span></li>
+                        <li class="timeline-item">Server overloaded 91%<span class="font-13 text-muted ml-2">2 days ago</span></li>
+                        <li class="timeline-item">Server error<span class="font-13 text-muted ml-2">2 days ago</span></li>
+                        <li class="timeline-item">2 Issue fixed<span class="font-13 text-muted ml-2">Just now</span></li>
+                        <li class="timeline-item"><span>15 New orders<span class="badge badge-primary badge-pill ml-2">important</span></span><span class="font-13 text-muted ml-2">5 mins</span></li>
+                        <li class="timeline-item">18 new orders sent<span class="font-13 text-muted ml-2">24 mins</span></li>
+                        <li class="timeline-item">15 New messages<span class="font-13 text-muted ml-2">45 mins</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="false">
+        <div class="col-lg-6">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h5 class="box-title mb-2">Tasks list</h5>
+                            <div class="text-muted font-13">Total 34 tasks</div>
+                        </div><button class="btn btn-floating btn-sm btn-danger"><i class="ti-plus"></i></button>
+                    </div>
+                    <div class="card-fullwidth-block">
+                        <ul class="list-group list-group-flush tasks-list">
+                            <li class="list-group-item">
+                                <div><label class="checkbox checkbox-danger checkbox-circle"><input type="checkbox"><span>
+                                            <h6>Create Perfect Design</h6>
+                                        </span></label></div>
+                                <div class="task-info mt-2 font-13"><i class="ti-time mr-2"></i>24 Dec 2018</div>
+                                <div class="task-actions"><a class="text-muted" href="javascript:;"><i class="ti-pencil"></i></a><a class="text-danger" href="javascript:;"><i class="ti-close ml-2"></i></a></div>
+                            </li>
+                            <li class="list-group-item" style="background-color: #e9ecef;">
+                                <div><label class="checkbox checkbox-danger checkbox-circle"><input type="checkbox" checked=""><span>
+                                            <h6>Create Perfect Design</h6>
+                                        </span></label></div>
+                                <div class="task-info">
+                                    <div class="text-muted font-13">Lorem ipsum dolor sit amet.</div>
+                                    <div class="font-13 mt-2"><i class="ti-time mr-2"></i>24 Dec 2018</div>
+                                </div>
+                                <div class="task-actions"><a class="text-muted" href="javascript:;"><i class="ti-pencil"></i></a><a class="text-danger" href="javascript:;"><i class="ti-close ml-2"></i></a></div>
+                            </li>
+                            <li class="list-group-item">
+                                <div><label class="checkbox checkbox-danger checkbox-circle"><input type="checkbox"><span>
+                                            <h6>Create Perfect Design</h6>
+                                        </span></label></div>
+                                <div class="task-info mt-2 font-13"><i class="ti-time mr-2"></i>24 Dec 2018</div>
+                                <div class="task-actions"><a class="text-muted" href="javascript:;"><i class="ti-pencil"></i></a><a class="text-danger" href="javascript:;"><i class="ti-close ml-2"></i></a></div>
+                            </li>
+                            <li class="list-group-item">
+                                <div><label class="checkbox checkbox-danger checkbox-circle"><input type="checkbox" checked=""><span>
+                                            <h6>Create Perfect Design</h6>
+                                        </span></label></div>
+                                <div class="task-info mt-2 font-13"><i class="ti-time mr-2"></i>24 Dec 2018</div>
+                                <div class="task-actions"><a class="text-muted" href="javascript:;"><i class="ti-pencil"></i></a><a class="text-danger" href="javascript:;"><i class="ti-close ml-2"></i></a></div>
+                            </li>
+                            <li class="list-group-item">
+                                <div><label class="checkbox checkbox-danger checkbox-circle"><input type="checkbox"><span>
+                                            <h6>Create Perfect Design</h6>
+                                        </span></label></div>
+                                <div class="task-info mt-2 font-13"><i class="ti-time mr-2"></i>24 Dec 2018</div>
+                                <div class="task-actions"><a class="text-muted" href="javascript:;"><i class="ti-pencil"></i></a><a class="text-danger" href="javascript:;"><i class="ti-close ml-2"></i></a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-4">
+                        <div>
+                            <h5 class="box-title mb-2">Latest Transfers</h5>
+                            <div class="text-muted font-13">Simple Subtitle</div>
+                        </div><a class="text-muted" href="javascript:;">View All</a>
+                    </div>
+                    <ul class="list-unstyled media-list-divider">
+                        <li class="media py-3"><img class="mr-3 rounded-circle align-self-center" src="./assets/img/users/u1.jpg" alt="image" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div>
+                                        <h6 class="mb-1 font-16">Transfer to John Due</h6>
+                                        <div class="text-muted">22-11-18 14:0</div>
+                                    </div><span class="h4 mb-0 ml-3 text-danger">-$58</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media py-3"><img class="mr-3 rounded-circle align-self-center" src="./assets/img/users/u2.jpg" alt="image" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div>
+                                        <h6 class="mb-1 font-16">Transfer from John Due</h6>
+                                        <div class="text-muted">22-11-18 14:0</div>
+                                    </div><span class="h4 mb-0 ml-3 text-primary">+$240</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media py-3"><img class="mr-3 rounded-circle align-self-center" src="./assets/img/users/u3.jpg" alt="image" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div>
+                                        <h6 class="mb-1 font-16">Transfer to John Due</h6>
+                                        <div class="text-muted">22-11-18 14:0</div>
+                                    </div><span class="h4 mb-0 ml-3 text-danger">-$150</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media py-3"><img class="mr-3 rounded-circle align-self-center" src="./assets/img/users/u4.jpg" alt="image" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div>
+                                        <h6 class="mb-1 font-16">Transfer from John Due</h6>
+                                        <div class="text-muted">22-11-18 14:0</div>
+                                    </div><span class="h4 mb-0 ml-3 text-primary">+$480</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media py-3"><img class="mr-3 rounded-circle align-self-center" src="./assets/img/users/u5.jpg" alt="image" width="45">
+                            <div class="media-body">
+                                <div class="flexbox">
+                                    <div>
+                                        <h6 class="mb-1 font-16">Transfer from John Due</h6>
+                                        <div class="text-muted">22-11-18 14:0</div>
+                                    </div><span class="h4 mb-0 ml-3 text-primary">+$480</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

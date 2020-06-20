@@ -1,0 +1,139 @@
+<subheader title='Timeline Vertical' [breadcrumb]="['Timelines', 'Timeline Vertical']"></subheader>
+
+<card title='Timeline With Points'>
+    <div class="text-center">
+        <div>
+        	<label class="radio radio-inline radio-primary">
+        		<input type="radio" name="timeline1-option" value="1" [checked]="timeline1_center" (change)="timeline1_center = true"><span>Center</span>
+        	</label>
+        	<label class="radio radio-inline radio-primary">
+        		<input type="radio" name="timeline1-option" value="0" [checked]="!timeline1_center" (change)="timeline1_center = false"><span>Left</span>
+        	</label>
+        </div>
+    </div>
+    <div class="cd-timeline cd-timeline" [ngClass]="{'center-orientation': timeline1_center}" id="timeline-1">
+        <div class="cd-timeline-block"><span class="cd-timeline-point"></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Comment</h5>
+                <div class="media"><img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="54">
+                    <div class="media-body">
+                        <h6 class="mb-1"><a href="#">John Due</a></h6>
+                        <p class="mb-4">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin ...</p>
+                        <div class="text-muted font-13"><a class="hover-link mr-3" href="#"><i class="fas fa-heart mr-2"></i>Like</a><a class="hover-link" href="#"><i class="fas fa-reply mr-2"></i>Reply</a></div>
+                    </div>
+                </div><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-point"></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Article</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p><a class="btn btn-outline-primary btn-rounded btn-sm" href="javascript:;">Read More</a><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-point bg-danger"></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Images</h5>
+                <p class="mb-4"><a class="mr-2" href="#"><img class="mr-2 rounded-circle" src="./assets/img/users/u1.jpg" width="22">Jane Due</a> uploaded 3 new images.</p>
+                <div><img class="mr-3 mb-3" src="./assets/img/blog/06.jpeg" alt="image" width="120"><img class="mb-3 mr-3" src="./assets/img/blog/07.jpeg" alt="image" width="120"><img class="mb-3" src="./assets/img/blog/08.jpeg" alt="image" width="120"></div><span class="cd-date">2 Days ago</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-point"></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">Meetings</h5>
+                <div class="media"><i class="ti-briefcase text-primary align-self-center font-30 mr-4"></i>
+                    <div class="media-body">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </div><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-point bg-success"></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Tasks</h5>
+                <p class="mb-4"><a class="mr-2" href="#"><img class="mr-2 rounded-circle" src="./assets/img/users/u1.jpg" width="30">Jane Due</a> finished 3 tasks.</p>
+                <div class="media mb-3"><i class="material-icons text-success mr-3">check</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div>
+                <div class="media mb-4"><i class="material-icons text-danger mr-3">close</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div>
+                <div class="media mb-3"><i class="material-icons text-success mr-3">check</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div><a class="btn btn-outline-primary btn-rounded btn-sm" href="javascript:;">See More</a><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+    </div>
+</card>
+
+<card title='Timeline With Icons'>
+    <div class="text-center">
+        <div>
+        	<label class="radio radio-inline radio-primary">
+        		<input type="radio" name="timeline2-option" [checked]="timeline2_center" value="1" (change)="timeline2_center = true"><span>Center</span>
+        	</label>
+        	<label class="radio radio-inline radio-primary">
+        		<input type="radio" name="timeline2-option" [checked]="!timeline2_center" value="0" (change)="timeline2_center = false"><span>Left</span>
+        	</label>
+        </div>
+    </div>
+    <div class="cd-timeline cd-timeline-light" [ngClass]="{'center-orientation': timeline2_center}" id="timeline-2">
+        <div class="cd-timeline-block"><span class="cd-timeline-icon bg-primary text-white"><i class="far fa-comment-dots"></i></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Comment</h5>
+                <div class="media"><img class="mr-3 rounded-circle" src="./assets/img/users/u1.jpg" width="54">
+                    <div class="media-body">
+                        <h6 class="mb-1"><a href="#">John Due</a></h6>
+                        <p class="mb-4">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin ...</p>
+                        <div class="text-muted font-13"><a class="hover-link mr-3" href="#"><i class="fas fa-heart mr-2"></i>Like</a><a class="hover-link" href="#"><i class="fas fa-reply mr-2"></i>Reply</a></div>
+                    </div>
+                </div><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-icon bg-primary text-white"><i class="fas fa-pencil-alt"></i></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Article</h5>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, optio, dolorum provident rerum aut hic quasi placeat iure tempora laudantium ipsa ad debitis unde? Iste voluptatibus minus veritatis qui ut.</p><a class="btn btn-outline-primary btn-rounded btn-sm" href="javascript:;">Read More</a><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-icon bg-success text-white"><i class="far fa-images"></i></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Images</h5>
+                <p class="mb-4"><a class="mr-2" href="#"><img class="mr-2 rounded-circle" src="./assets/img/users/u1.jpg" width="22">Jane Due</a> uploaded 3 new images.</p>
+                <div><img class="mr-3 mb-3" src="./assets/img/blog/06.jpeg" alt="image" width="120"><img class="mb-3 mr-3" src="./assets/img/blog/07.jpeg" alt="image" width="120"><img class="mb-3" src="./assets/img/blog/08.jpeg" alt="image" width="120"></div><span class="cd-date">2 Days ago</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-icon bg-primary text-white"><i class="fas fa-briefcase"></i></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">Meetings</h5>
+                <div class="media"><i class="ti-briefcase text-primary align-self-center font-30 mr-4"></i>
+                    <div class="media-body">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque.</div>
+                </div><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+        <div class="cd-timeline-block"><span class="cd-timeline-icon bg-danger text-white"><i class="far fa-flag"></i></span>
+            <div class="cd-timeline-content">
+                <h5 class="mb-4">New Tasks</h5>
+                <p class="mb-4"><a class="mr-2" href="#"><img class="mr-2 rounded-circle" src="./assets/img/users/u1.jpg" width="30">Jane Due</a> finished 3 tasks.</p>
+                <div class="media mb-3"><i class="material-icons text-success mr-3">check</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div>
+                <div class="media mb-4"><i class="material-icons text-danger mr-3">close</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div>
+                <div class="media mb-3"><i class="material-icons text-success mr-3">check</i>
+                    <div class="media-body">
+                        <p class="mb-0">Lorem ipsum dolar set amet.</p><small>Cras sit amet</small>
+                    </div>
+                </div><a class="btn btn-outline-primary btn-rounded btn-sm" href="javascript:;">See More</a><span class="cd-date">Today 14:25</span>
+            </div>
+        </div>
+    </div>
+</card>

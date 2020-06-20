@@ -1,0 +1,78 @@
+<subheader title='Create Role' [breadcrumb]="['Role', 'Create']"></subheader>
+
+<card>
+  <!--<p class="text-muted mb-4">Kindly complete the form below and select a role</p>-->
+  <form class="form-horizontal form-material"  #roleFormRef="ngForm" novalidate (ngSubmit)="roleFormRef.form.valid && onSubmit(roleFormRef.value)">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label class="control-label">Role Name</label>
+          <input type="text" class="form-control" name="roleName" [(ngModel)]="roleName" ngModel #roleNameRef="ngModel" required  minlength="3"
+                  [class.is-invalid] = "roleFormRef.submitted && (roleNameRef?.errors?.required || roleNameRef?.errors?.minlength)">
+          <div *ngIf="roleFormRef.submitted && roleNameRef?.errors?.required" class="invalid-feedback">
+            Role name is Required
+          </div>
+          <div *ngIf="roleFormRef.submitted && roleNameRef?.errors?.minlength" class="invalid-feedback" >
+            You should enter a minimum of 3 characters
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card card-fullheight card-dark">
+          <div class="card-header bg-dark">
+            <h5 class="box-title">All Permissions ({{permissionsList.length ? permissionsList.length : '0'}})</h5>
+          </div>
+          <div class="card-body" style="min-height: 250px;">
+            <p class="text-muted mb-2">Select Permissions for the role above</p>
+            <div *ngIf="isLoadingPermissions">
+              <i class="fa fa-spin fa-spinner"></i>
+              loading Permissions, please wait . . .
+            </div>
+            <button *ngFor="let perm of permissionsList" class="btn btn-sm btn-outline-secondary col-5 mr-1 mb-1"
+                    type="button" (click)="addToActivePermissions(perm)">
+              {{perm.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card card-fullheight card-dark">
+          <div class="card-header bg-success">
+            <h5 class="box-title">Role Permissions ({{activePermissions.length ? ( activePermissions.length ) : '0'}})</h5>
+          </div>
+          <div class="card-body">
+            <!--<p class="text-muted mb-2">Permissions for this role</p>-->
+            <div *ngIf="isLoadingPermissions">
+              <i class="fa fa-spin fa-spinner"></i>
+              loading Permissions, please wait . . .
+            </div>
+            <div *ngIf="activePermissions.length > 0">
+              <button *ngFor="let perm of activePermissions" (click)="removeFromActivePermissions(perm)" class="btn btn-sm bt btn-outline-success col-5 mr-1 mb-1" type="button">
+                <span class="btn-icon">{{perm.name}}</span>
+              </button>
+            </div>
+            <div class="text-center empty-list" *ngIf="activePermissions.length == 0 && !isLoadingPermissions">
+              <h1><i style="color:#ededed;" class="fa fa-3x fa-folder-open"></i></h1>
+              <h4 class="card-title text-muted ">No Active Permission(s)</h4>
+              <p class="text-muted">You haven't selected any permission from the list</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button *ngIf="!roleId" [disabled]="isCreatingRole" type="submit" class="btn btn-info btn-md text-uppercase waves-effect waves-light">
+          Create Role <i *ngIf="isCreatingRole" class="fa fa-spin fa-spinner"></i>
+        </button>
+
+        <button *ngIf="roleId" [disabled]="(roleFormRef.invalid || activePermissions.length==0) || isUpdatingRole" (click)="updateRole()" class="btn btn-success btn-md text-uppercase waves-effect waves-light">
+          Update Role <i *ngIf="isUpdatingRole" class="fa fa-spin fa-spinner"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</card>
+
+

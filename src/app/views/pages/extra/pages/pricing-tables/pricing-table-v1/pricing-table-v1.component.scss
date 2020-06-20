@@ -1,0 +1,38 @@
+.pricing-plan {
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.pricing-plan:not(.active) {
+    border-top: 3px solid #d3d6d8;
+}
+
+.pricing-price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.pricing-price sup {
+    font-size: 60%;
+    margin-right: 2px;
+}
+
+.pricing-features .not-available {
+    color: #b4bcc8;
+    text-decoration: line-through;
+}
+
+.pricing-plan.active {
+    box-shadow: 0 5px 20px #d6dee4;
+    z-index: 2;
+    transform: scale(1.05);
+}
+
+sup {
+    font-size: 60%;
+    margin-right: 2px;
+}

@@ -1,0 +1,28 @@
+<div class="bg-white pt-4 px-5" style="margin: -30px -30px 40px">
+    <div class="flexbox mb-4 mt-3">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="h4 mt-4">{{customer?.firstName}} {{customer?.lastName}}</h2>
+                <div class="text-muted">{{customer?.email}}</div>
+                <div class="text-muted">{{customer?.mobileNo}}</div>
+                <div class="text-muted">{{customer?.createdDate | date}}</div>
+                <div class="text-muted">
+                    <span class="badge badge-success" *ngIf="customer?.active">Active</span>
+                    <span *ngIf="!customer?.active" class="badge badge-danger">Blocked</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ul class="nav line-tabs m-0">
+        <li class="nav-item"><a class="nav-link" [routerLinkActiveOptions]="{exact:
+true}" routerLinkActive="active" [routerLink]="'/customer/manage/' + customer.id"><i class="ti-ink-pen nav-tabs-icon"></i>Customer Details</a></li>
+<!--        <li class="nav-item"><a class="nav-link" [routerLinkActiveOptions]="{exact:-->
+<!--true}" routerLinkActive="active" [routerLink]="'/customer/manage/' + customer.id +'/orders'"><i class="ti-truck nav-tabs-icon"></i>Orders</a></li>-->
+    </ul>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>

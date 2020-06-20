@@ -1,0 +1,48 @@
+<div class="dialog-content-wrapper">
+    <div class="mat-dialog-header border-bottom flexbox">
+        <h1 mat-dialog-title>New Question</h1>
+        <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="position-relative" mat-dialog-content perfectScrollbar>
+        <div>
+            <form name="composeForm" [formGroup]="composeForm">
+
+                <mat-form-field class='d-block' appearance="outline">
+                    <mat-select placeholder="Category" formControlName="category" required>
+                        <mat-option *ngFor="let category of categories" [value]="category.id">
+                            {{category.title}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class='d-block'>
+                    <mat-label>Question</mat-label>
+                    <input matInput name="question"
+                        formControlName="question"
+                        type="text" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class='d-block'>
+                    <mat-label>Answer</mat-label>
+                    <textarea matInput name="answer"
+                        formControlName="answer"
+                        rows="6" required>
+                    </textarea>
+                </mat-form-field>
+
+            </form>
+        </div>
+    </div>
+    <div class='flexboxx' mat-dialog-actions>
+        <button mat-raised-button
+            color="accent"
+            (click)="matDialogRef.close(['send',composeForm])"
+            class="save-button"
+            [disabled]="composeForm.invalid"
+            aria-label="SAVE">
+            SEND
+        </button>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<subheader title='NGX Dropzone' [breadcrumb]="['UI INTERFACE', 'NGX Dropzone']"></subheader>
+
+<card title='Single File Upload'>
+	<dropzone class='custom-style' 
+		[config]="config" 
+		message="<div class='font-20'>Click or drag images here to upload</div>" 
+		(error)="onUploadError($event)" 
+		(success)="onUploadSuccess($event)"></dropzone>
+</card>
+
+<card title='Custom message & style'>
+	<dropzone class='custom-style ex-dropzone-1' 
+		[config]="config" 
+		message='<i class="ti-import text-primary font-40"></i><div class="mt-3 font-20">Drop files here or click to upload.</div>' 
+		(error)="onUploadError($event)" 
+		(success)="onUploadSuccess($event)"></dropzone>
+</card>
+
+<card title='Multiple File Upload'>
+	<dropzone class='custom-style ex-dropzone-2' 
+		[config]="config2" 
+		message='<i class="ti-cloud-up text-info font-40"></i><div class="mt-3 font-20">Drop files here or click to upload.</div>' 
+		(error)="onUploadError($event)" 
+		(success)="onUploadSuccess($event)"></dropzone>
+</card>
+
+<card title='More Examples'>
+	<p class="mb-4">You can add any content to the block and customize it to your taste. Edit texts, styles, sizes, file templates, etc.</p>
+
+    <div class="mb-3" style="max-width: 300px">
+		<dropzone class='custom-style' 
+			[config]="config" 
+			message='<i class="ti-import text-muted font-40"></i><div class="mt-3">Drop files here or click to upload.</div>' 
+			(error)="onUploadError($event)" 
+			(success)="onUploadSuccess($event)"></dropzone>
+	</div>   
+	    <br>
+    <div class="mb-3" style="max-width: 200px">
+		<dropzone class='custom-style ex-dropzone-1' 
+			[config]="config" 
+			message='<i class="ti-cloud-up text-primary font-40"></i><div class="mt-3 font-18">Upload Here</div>' 
+			(error)="onUploadError($event)" 
+			(success)="onUploadSuccess($event)"></dropzone>
+		<br>
+	</div>
+    <div class="mb-3 d-inline-block">
+		<dropzone class='custom-style ex-dropzone-3' 
+			[config]="config" 
+			message='<i class="la la-plus-circle text-primary font-26"></i>' 
+			(error)="onUploadError($event)" 
+			(success)="onUploadSuccess($event)"></dropzone>
+    </div>
+</card>

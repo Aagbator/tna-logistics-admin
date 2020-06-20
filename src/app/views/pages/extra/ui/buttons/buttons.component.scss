@@ -1,0 +1,14 @@
+.demo-btn-list *:not(.btn-group):not(.btn-group-justified):not(.btn-group-vertical)>.btn,
+.demo-btn-list>.btn {
+    margin-bottom: 15px;
+    margin-right: 5px;
+}
+
+.dropdown-demo .dropdown {
+    display: inline-block
+}
+
+.btn-fix {
+    min-width: 120px;
+    text-align: center;
+}

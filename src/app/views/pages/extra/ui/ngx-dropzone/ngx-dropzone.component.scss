@@ -1,0 +1,14 @@
+@import 'src/@theme/scss/components/functions';
+@import 'src/@theme/scss/components/mixins';
+@import 'src/@theme/scss/components/variables';
+
+
+dropzone.ex-dropzone-1 > .dropzone.dz-wrapper .dz-message {border-color: theme_color('primary')}
+dropzone.ex-dropzone-2 > .dropzone.dz-wrapper .dz-message {border-color: theme_color('info')}
+dropzone.ex-dropzone-3 > .dropzone.dz-wrapper .dz-message {
+	border-color: theme_color('primary');
+	background: #e9ecef;
+	.dz-text {
+		padding: 0;
+	}
+}

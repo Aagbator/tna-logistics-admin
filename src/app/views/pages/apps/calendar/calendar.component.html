@@ -1,0 +1,91 @@
+
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="box-title">Calendar</h5>
+        <button class="my-3" color="accent" mat-raised-button (click)="addEvent()">New Event</button>
+    </div>
+
+    <div class="card-body">
+        <div class="mb-4 flexbox flex-wrap">
+            <div class="order-0">
+                <button mat-icon-button class="arrow"
+                        mwlCalendarPreviousView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="selectedDay = {date:$event}"
+                        aria-label="Previous">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+                <button mat-icon-button class="arrow"
+                        mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="selectedDay = {date:$event}"
+                        aria-label="Next">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+                <button mat-button
+                        mwlCalendarToday
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="selectedDay = {date:$event}"
+                        aria-label="Today" matTooltip="Today">
+                    Today
+                </button>
+            </div>
+
+            <div class="order-2">
+                <div class="btn-group">
+                    <button class="btn btn-outline-primary" (click)="view = CalendarView.Month" [class.active]="view === CalendarView.Month">
+                        Month
+                    </button>
+                    <button class="btn btn-outline-primary" (click)="view = CalendarView.Week" [class.active]="view === CalendarView.Week">
+                        Week
+                    </button>
+                    <button class="btn btn-outline-primary" (click)="view = CalendarView.Day" [class.active]="view === CalendarView.Day">
+                        Day
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center order-3 order-md-1 col-12 col-md py-3">
+                <h5 class="mb-0">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+            </div>
+
+        </div>
+
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view
+                *ngSwitchCase="CalendarView.Month"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                [activeDayIsOpen]="activeDayIsOpen"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="editEvent('edit', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+                (beforeViewRender)="beforeMonthViewRender($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view
+                *ngSwitchCase="CalendarView.Week"
+                [viewDate]="viewDate"
+                (viewDateChange)="selectedDay = {date:$event}"
+                [events]="events"
+                [refresh]="refresh"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="editEvent('edit', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view
+                *ngSwitchCase="CalendarView.Day"
+                [viewDate]="viewDate"
+                (viewDateChange)="selectedDay = {date:$event}"
+                [events]="events"
+                [refresh]="refresh"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="editEvent('edit', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-day-view>
+        </div>
+    </div>
+</div>

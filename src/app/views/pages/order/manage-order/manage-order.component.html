@@ -1,0 +1,120 @@
+<subheader title='Order' [breadcrumb]="['Order', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="input-group mb-3 w-100">
+        <input class="form-control" name="search" [(ngModel)]="filterText" (keyup)="filterData(filterText)" type="text" placeholder="Type to filter">
+        <div class="input-group-append">
+            <button  (click)="openFilterModal(filterModal)" class="btn btn-dark" type="button"><i class="fa fa-filter"></i> Custom Filter</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table custom-table">
+          <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Tx Ref</th>
+            <th>Recipient Name</th>
+            <th>LGA</th>
+            <th>Discount</th>
+            <th>Total Amount</th>
+            <th>Order By</th>
+            <th>Delivery Status</th>
+            <th>Tx Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+            <td scope="row"><strong>{{(itemsPerView * (page - 1 )) + (i + 1)}}</strong></td>
+            <td>{{order?.transactionRef}}</td>
+            <td>{{order?.deliveryFirstName}} {{order?.deliveryLastName}}</td>
+            <td>{{order?.deliveryLga?.name}}</td>
+            <td>{{order?.discountAmount | currency:'₦'}}</td>
+            <td>{{order?.totalAmount | currency:'₦'}}</td>
+            <td><a [routerLink]="'/customer/manage/'+ order?.user?.id">{{order?.user?.firstName}} {{order?.user?.lastName}}</a></td>
+            <td>
+              <span class="badge badge-light" *ngIf="order?.deliveryStatus === 'AWAITING'">{{order?.deliveryStatus}}</span>
+              <span class="badge badge-dark text-white" *ngIf="order?.deliveryStatus === 'TRANSIT'">{{order?.deliveryStatus}}</span>
+              <span class="badge badge-success text-white" *ngIf="order?.deliveryStatus === 'DELIVERED'">{{order?.deliveryStatus}}</span>
+              <span class="badge badge-danger text-white" *ngIf="order?.deliveryStatus === 'CANCELLED'">{{order?.deliveryStatus}}</span>
+            </td>
+            <td>
+              <span class="badge badge-success text-white" *ngIf="order?.status === 'SUCCESSFUL'">SUCCESSFUL</span>
+              <span class="badge badge-warning text-white" *ngIf="order?.status === 'PENDING'">PENDING</span>
+              <span class="badge badge-danger text-white" *ngIf="order?.status === 'FAILED'">FAILED</span>
+            </td>
+            <td>
+              <button (click)="gotoOrder(order?.id)" class="btn btn-info btn-floating btn-sm m-r-10" type="button"><i class="ti-eye"></i></button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+          <div class="custom-table-footer">
+            <div class="page-count">
+              {{totalRecords}} total
+            </div>
+            <div class="page-control">
+              <pagination-controls (pageChange)="getPaginatedData($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- row -->
+
+  <ng-template #filterModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Filter by </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal" #filterForm="ngForm"  novalidate>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Transaction Status</label>
+                <select [(ngModel)]="filterObj.transactionStatus" ngModel #transactionStatusRef="ngModel" name="transactionStatus" class="custom-select form-control">
+                  <option [value]="transactionStatus.ALL">{{transactionStatus.ALL}}</option>
+                  <option [value]="transactionStatus.SUCCESSFUL">{{transactionStatus.SUCCESSFUL}}</option>
+                  <option [value]="transactionStatus.FAILED">{{transactionStatus.FAILED}}</option>
+                  <option [value]="transactionStatus.SUCCESSFUL">{{transactionStatus.SUCCESSFUL}}</option>
+                </select>
+              </div>
+            </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">Delivery Status</label>
+              <select [(ngModel)]="filterObj.deliveryStatus" ngModel #deliveryStatusRef="ngModel" name="deliveryStatus" class="custom-select form-control">
+                <option [value]="deliveryStatus.ALL">{{deliveryStatus.ALL}}</option>
+                <option [value]="deliveryStatus.AWAITING">{{deliveryStatus.AWAITING}}</option>
+                <option [value]="deliveryStatus.TRANSIT">{{deliveryStatus.TRANSIT}}</option>
+                <option [value]="deliveryStatus.DELIVERED">{{deliveryStatus.DELIVERED}}</option>
+                <option [value]="deliveryStatus.CANCELLED">{{deliveryStatus.CANCELLED}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button [disabled]="isFiltering" (click)="clearFilter(filterForm)"  class="btn btn-outline-primary btn-md text-uppercase waves-effect waves-light">
+              Clear
+            </button>
+            <button [disabled]="!filterForm.valid || isFiltering" (click)="onFilter()" class="btn btn-primary ml-2 btn-md text-uppercase waves-effect waves-light">
+              Filter <i *ngIf="isFiltering" class="fa fa-spin fa-spinner"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+</card>
+
+

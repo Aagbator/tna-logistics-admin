@@ -1,0 +1,19 @@
+
+<div class="media">
+    <mat-checkbox class='mt-2' color='primary' [(ngModel)]="selected" (ngModelChange)="onSelectedChange()"
+        (click)="$event.stopPropagation();"></mat-checkbox>
+    <div class="media-body ml-3">
+        <div class="flexbox mb-2 mail-item-info">
+            <span class="d-flex align-items-center">
+                <img class="rounded-circle mr-2" *ngIf="mail.from?.avatar" alt="{{mail.from?.name}}" src="{{mail.from?.avatar}}" width='32'/>
+                <span class="mail-empty-avatar mr-2" *ngIf="!mail.from?.avatar">{{mail.from?.name[0]}}</span>
+                <span *ngIf="mail?.from">{{mail.from?.name}}</span>
+            </span>
+            <span class="font-13">{{mail.time}}</span>
+        </div>
+        <div class="mail-item-subject">{{mail.subject}}</div>
+        <div *ngIf="mail.labels.length" class="d-flex flex-wrap mail-labels mt-3">
+            <span *ngFor="let labelId of mail.labels" class="mail-badge badge badge-pill badge-{{getLabel(labelId).state_color}}">{{getLabel(labelId).title}}</span>
+        </div>
+    </div>
+</div>

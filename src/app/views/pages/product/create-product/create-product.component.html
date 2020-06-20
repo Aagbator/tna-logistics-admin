@@ -1,0 +1,178 @@
+<subheader title="{{productId ? 'Edit' : 'Create'}} product" [breadcrumb]="['product', '']"></subheader>
+
+<card>
+  <form class="form-horizontal form-material"  #productFormRef="ngForm" novalidate (ngSubmit)="productFormRef.form.valid && onSubmitForm()">
+   <div class="row">
+     <div class="col-md-5">
+       <div class="row">
+         <div class="col-lg-12">
+           <div class="form-group">
+             <label class="control-label">Product Name</label>
+             <input type="text" class="form-control" name="name" [(ngModel)]="productObj.name" ngModel #nameRef="ngModel" required
+                    [class.is-invalid] = "productFormRef.submitted && nameRef?.errors?.required">
+             <div *ngIf="productFormRef.submitted && nameRef?.errors?.required" class="invalid-feedback">
+               Product name is Required
+             </div>
+           </div>
+         </div>
+         <div class="col-lg-6">
+           <div class="form-group">
+             <label for="categoryId">Category</label>
+             <select [style.display]="!isLoadingCategories ? 'block' : 'none'" class="custom-select col-12" [class.is-invalid] = "productFormRef.submitted && categoriesRef?.errors?.required"
+                     id="categoryId" name="categoryId" [(ngModel)]="productObj.categoryId" ngModel #categoriesRef="ngModel" required>
+               <!--<option selected>- Select -</option>-->
+               <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+             </select>
+             <div *ngIf="isLoadingCategories"><i class="fa fa-spin fa-spinner"></i> Loading categories, please wait . . .</div>
+             <div *ngIf="productFormRef.submitted && categoriesRef?.errors?.required" class="invalid-feedback" >
+               Country is Required
+             </div>
+           </div>
+         </div>
+         <div class="col-lg-6">
+           <div class="form-group">
+             <label class="control-label">Price(₦)</label>
+             <input type="tel" currencyMask [options]="{ prefix: '₦ ', precision: '1', min: '0', max: '1000000'  }" class="form-control" name="price" [(ngModel)]="productObj.price" ngModel #priceRef="ngModel" required
+                    [class.is-invalid] = "productFormRef.submitted && (priceRef?.errors?.required || priceRef?.errors?.minlength)">
+             <div *ngIf="productFormRef.submitted && priceRef?.errors?.required" class="invalid-feedback">
+               Price is Required
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="col-lg-12">
+           <div class="form-group">
+             <label class="control-label">Slug</label>
+             <input type="text" class="form-control" name="slug" [(ngModel)]="productObj.slug" ngModel #slugRef="ngModel" required
+                    [class.is-invalid] = "productFormRef.submitted && slugRef?.errors?.required" placeholder="e.g special-cocktail-drink">
+             <div *ngIf="productFormRef.submitted && slugRef?.errors?.required" class="invalid-feedback">
+               Slug is Required
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+         <div  [ngClass]="hasQtyRef.value == 1 ? 'col-lg-6' : 'col-lg-12'">
+           <div class="form-group">
+             <label for="hasQty">Product has stock ?</label>
+             <select  class="custom-select col-12" [class.is-invalid] = "productFormRef.submitted && hasQtyRef?.errors?.required"
+                      id="hasQty" name="hasQty" [(ngModel)]="productObj.hasQty" ngModel #hasQtyRef="ngModel" required>
+               <option value="0">No</option>
+               <option value="1">Yes</option>
+             </select>
+             <div *ngIf="productFormRef.submitted && hasQtyRef?.errors?.required" class="invalid-feedback" >
+               field is required
+             </div>
+           </div>
+         </div>
+
+         <div class="col-lg-6">
+           <div class="form-group" [style.display]="hasQtyRef.value == 1 ? 'block' : 'none'">
+             <label class="control-label">Available Stock</label>
+             <input type="number" class="form-control" name="qty" [(ngModel)]="productObj.qty" min="1" max="10000" ngModel #qtyRef="ngModel"
+                    [class.is-invalid] = "productFormRef.submitted && qtyRef?.errors?.required" placeholder="e.g 500" [required]="hasQtyRef.value == 1">
+             <div *ngIf="productFormRef.submitted && qtyRef?.errors?.required" class="invalid-feedback">
+               quantity is required
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+         <div [ngClass]="hasDiscountRef.value == 1 ? 'col-lg-6' : 'col-lg-12'">
+           <div class="form-group">
+             <label for="hasDiscount">Product has discount?</label>
+             <select  class="custom-select col-12" [class.is-invalid] = "productFormRef.submitted && hasDiscountRef?.errors?.required"
+                      id="hasDiscount" name="hasDiscount" [(ngModel)]="productObj.hasDiscount" ngModel #hasDiscountRef="ngModel" required>
+               <option value="0">No</option>
+               <option value="1">Yes</option>
+             </select>
+             <div *ngIf="productFormRef.submitted && hasDiscountRef?.errors?.required" class="invalid-feedback" >
+               field is required
+             </div>
+           </div>
+         </div>
+
+         <div [ngClass]="hasDiscountRef.value == 1 ? 'col-lg-6' : 'col-lg-12'">
+           <div class="form-group" [style.display]="hasDiscountRef.value == 1 ? 'block' : 'none'">
+             <label class="control-label">Discount (%)</label>
+             <input type="tel" currencyMask [options]="{ prefix: '', suffix: ' %', precision: '1', min: '0', max: '100'}" class="form-control" name="discount" [(ngModel)]="productObj.discount" ngModel #discountRef="ngModel"
+                    [class.is-invalid] = "productFormRef.submitted && discountRef?.errors?.required" placeholder="e.g 5%" [required]="hasDiscountRef.value == 1">
+             <div *ngIf="productFormRef.submitted && discountRef?.errors?.required" class="invalid-feedback">
+               discount is required
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+         <div [ngClass]="hasVatRef.value == 1 ? 'col-lg-6' : 'col-lg-12'">
+           <div class="form-group">
+             <label>Has VAT?</label>
+             <select  class="custom-select col-12" [class.is-invalid] = "productFormRef.submitted && hasVatRef?.errors?.required"
+                       name="hasVat" [(ngModel)]="productObj.hasVat" ngModel #hasVatRef="ngModel" required>
+               <option [ngValue]="0">No</option>
+               <option [ngValue]="1">Yes</option>
+             </select>
+             <div *ngIf="productFormRef.submitted && hasVatRef?.errors?.required" class="invalid-feedback" >
+               field is required
+             </div>
+           </div>
+         </div>
+
+         <div [ngClass]="hasVatRef.value == 1 ? 'col-lg-6' : 'col-lg-12'">
+           <div class="form-group" [style.display]="hasVatRef.value == 1 ? 'block' : 'none'">
+             <label class="control-label">VAT (%)</label>
+             <input type="tel" currencyMask [options]="{ prefix: '', surfix:' %', precision: '1', min: '0', max: '100'}" class="form-control" name="vat" [(ngModel)]="productObj.vat" ngModel #vatRef="ngModel"
+                    [class.is-invalid] = "productFormRef.submitted && hasVatRef?.errors?.required" placeholder="e.g 5"  [required]="hasVatRef.value == 1">
+             <div *ngIf="productFormRef.submitted && hasVatRef?.errors?.required" class="invalid-feedback">
+               vat is required
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="col-lg-12">
+           <div class="form-group">
+             <label>Is this Product Featured?</label>
+             <select  class="custom-select col-12" [class.is-invalid] = "productFormRef.submitted && isFeaturedProductRef?.errors?.required"
+                      name="isFeaturedProduct" [(ngModel)]="productObj.isFeaturedProduct" ngModel #isFeaturedProductRef="ngModel" required>
+               <option [ngValue]="0">No</option>
+               <option [ngValue]="1">Yes</option>
+             </select>
+             <div *ngIf="productFormRef.submitted && isFeaturedProductRef?.errors?.required" class="invalid-feedback" >
+               field is required
+             </div>
+           </div>
+         </div>
+       </div>
+
+     </div>
+     <div class="col-md-7">
+       <div class="form-group">
+         <label class="control-label">Description</label>
+
+         <quill-editor name="description" [ngModelOptions]="{standalone: true}" [modules]="quillConfig"  [(ngModel)]="description"></quill-editor>
+
+       </div>
+     </div>
+   </div>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button *ngIf="!product" [disabled]="isCreatingProduct" type="submit" class="btn btn-success btn-md text-uppercase waves-effect waves-light">
+          Create product <i *ngIf="isCreatingProduct" class="fa fa-spin fa-spinner"></i>
+        </button>
+
+        <button *ngIf="product" [disabled]="productFormRef.invalid  || isUpdatingProduct" (click)="updateProduct()" class="btn btn-success btn-md text-uppercase waves-effect waves-light">
+          Update product <i *ngIf="isUpdatingProduct" class="fa fa-spin fa-spinner"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+ </card>
+

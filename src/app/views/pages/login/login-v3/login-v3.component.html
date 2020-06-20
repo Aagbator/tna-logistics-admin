@@ -1,0 +1,59 @@
+<div class="login-page-wrapper" style="background-image: url('./assets/img/auth-bg2.jpeg');">
+    <div class="auth-welcome-box text-white pl-lg-5 d-none d-lg-flex">
+        <div> </div>
+        <div class="pl-lg-5">
+            <h4 class="font-40 mb-4">{{vendor}} Admin</h4>
+            <p class="mb-0">{{vendor}} is a registered business<br> with banquet resources and solutions in the Food chain<br></p>
+        </div>
+        <div class="pl-lg-5 font-13"><span class="text-white-50">©{{year}} {{vendor}}. All rights reserved</span></div>
+    </div>
+    <div class="login-content">
+        <div class="card">
+            <div class="card-body bg-white p-5 mt-5">
+                <h3 class="mb-4 text-black-100 text-center"><img width="200" [src]="'./assets/img/logo.svg'"/></h3>
+                <div *ngIf="isLoginMode">
+                  <div class="font-18 text-center mb-5">Login to Your accaunt</div>
+                  <form class="form-horizontal form-material" #loginForm ="ngForm"  (ngSubmit)="loginForm.form.valid && onSubmit(loginForm)"  novalidate>
+                    <div class="form-group mb-4">
+                      <label for="email">Email</label>
+                        <input class="form-control" placeholder="Email" name="username" [class.is-invalid]="email.invalid && loginForm.submitted" ngModel #email="ngModel"  id="email" type="email" placeholder="" required>
+                        <div *ngIf="email?.invalid && loginForm.submitted" class="invalid-feedback">
+                          Email is required
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                      <label for="password">Password</label>
+                        <input autocomplete="new-password" class="form-control" value="" name="password" [class.is-invalid]="password.invalid && loginForm.submitted"  ngModel #password="ngModel" id="password" type="password" placeholder="" required>
+                          <div *ngIf="password?.invalid && loginForm.submitted" class="invalid-feedback">
+                          Password is required
+                        </div>
+                    </div>
+                    <div class="flexbox mb-5">
+                      <a href="javascript:;" (click)="toggleForm()" class="mt-2 ml-0 mb-4 text-muted">Forgot  password?</a>
+                      <button type="submit" [disabled]="isLoading" class="btn btn-dark" style="min-width: 100px">Login <i *ngIf="isLoading" class="fa fa-spin fa-spinner"></i></button>
+                    </div>
+                  </form>
+                </div>
+                <div *ngIf="!isLoginMode">
+                <div class="font-18 text-center mb-2">Reset your passsword</div>
+                <div class="font-12 text-center mb-5">A password reset link would be sent to your registered email account</div>
+                  <form class="form-horizontal form-material" #resetForm ="ngForm"  (ngSubmit)="resetForm.form.valid && onReset(resetForm)"  novalidate>
+                  <div class="form-group mb-4">
+                    <label for="email">Email</label>
+                    <input class="form-control" placeholder="Email" name="email" [class.is-invalid]="email.invalid && resetForm.submitted" ngModel #email="ngModel"   id="email" type="email" placeholder="" required>
+                    <div *ngIf="email?.invalid && resetForm.submitted" class="invalid-feedback">
+                      Email is required
+                    </div>
+                  </div>
+                  <div class="flexbox mb-5">
+                    <a href="javascript:;" (click)="toggleForm()" class="mt-2 ml-0 mb-4 text-muted"><i class="ti-arrow-left"></i> Back to Login</a>
+                    <button type="submit" [disabled]="isResetting" class="btn btn-dark" style="min-width: 100px">Reset <i *ngIf="isResetting" class="fa fa-spin fa-spinner"></i></button></div>
+                </form>
+              </div>
+
+                <!--<div class="text-center">Don't have an account?<a class="ml-2" routerLink='/auth/sign-up' style="border-bottom: 1px solid">Create account</a></div>-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<subheader title='Manage Payouts' [breadcrumb]="['payouts', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label for="product">Select A Product</label>
+        <select (change)="onSelectProduct()" [style.display]="!isLoadingProducts ? 'block' : 'none'" class="custom-select col-12"
+                id="product" name="categoryId" [(ngModel)]="selectedProductId" ngModel #productId="ngModel">
+          <option selected value="null">Select Product</option>
+          <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+        </select>
+        <h6 *ngIf="isLoadingProducts"><i class="fa fa-spinner fa-spin"></i> Loading products, please wait ...</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+        <!--<h4 class="card-title">Manage Role</h4>-->
+        <!--<p class="text-muted mb-2">Edit, Delete</p>-->
+
+      <!--<div class="input-group mb-3 w-100">-->
+        <!--<input class="form-control" name="search" [(ngModel)]="filterText" (keyup)="filterData(filterText)" type="text" placeholder="Type to filter">-->
+        <!--<div class="input-group-append">-->
+          <!--<button  (click)="openFilterModal(filterModal)" class="btn btn-block btn-primary" type="button"><i class="fa fa-filter"></i> Filter</button>-->
+        <!--</div>-->
+      <!--</div>-->
+
+<!--      <div class="mb-3">-->
+<!--        <button  (click)="openFilterModal(filterModal)" class="btn btn-primary" type="button"><i class="fa fa-filter"></i> Custom Filter</button>-->
+<!--      </div>-->
+      <h5 *ngIf="isLoadingPayouts"><i class="fa fa-spin fa-spinner"></i> Loading Payouts...</h5>
+
+      <div class="table-responsive" *ngIf="selectedProductId && !isLoadingPayouts">
+        <table class="table custom-table">
+          <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Sponsor Name</th>
+            <th>Mobile No</th>
+            <th>Units</th>
+            <th>Amount</th>
+            <th>Total Payout</th>
+            <th>Subscription Date</th>
+            <th>Maturity Date</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let payout of payouts | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+            <td scope="row"><strong>{{(itemsPerView * (page - 1 )) + (i + 1)}}</strong></td>
+            <td>{{payout?.firstName + ' ' + payout?.lastName}}</td>
+            <td>{{payout?.mobileNo}}</td>
+            <td>{{payout?.units}}</td>
+            <td>{{(payout?.amount) | currency:'₦'}}</td>
+            <td>{{(payout?.amount + payout?.profit) | currency:'₦'}}</td>
+            <td>{{payout?.createdDate}}</td>
+            <td>{{payout?.investmentMaturityDate}}</td>
+            <td>
+              <button  (click)="openPayoutModal(payoutModal, payout)" class="custom-btn text-primary m-r-1">VIEW DETAILS</button>
+              <button (click)="markPayoutAsPaid(payout)" class="custom-btn text-success">Mark as Paid <i class="ti-check text-danger m-r-10"></i></button>
+
+            </td>
+<!--                          <td>-->
+            <!--                <div *ngIf="subscription.id !== actionId">-->
+            <!--                  <button (click)="gotoProduct(subscription?.id)" class="custom-btn"><i class="ti-eye text-info m-r-10"></i></button>-->
+
+            <!--                  <button *ngIf="subscription?.status"  class="custom-btn" (click)="deactivateProduct(subscription?.id)" ><i class="fa fa-ban text-warning"></i></button>-->
+            <!--                  <button *ngIf="!subscription?.status" class="custom-btn" (click)="activateProduct(subscription?.id)" ><i class="fa fa-check text-info"></i></button>-->
+
+
+
+            <!--                </div>-->
+            <!--                <span  *ngIf="isLoadingAction && (subscription.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>-->
+<!--                          </td>-->
+          </tr>
+          </tbody>
+        </table>
+
+          <div class="custom-table-footer">
+            <div class="page-count">
+              {{totalRecords}} total
+            </div>
+            <div class="page-control">
+              <pagination-controls (pageChange)="getPaginatedData($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- row -->
+
+  <ng-template #filterModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Filter by </h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal" #filterForm="ngForm"  novalidate>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="productId">Product</label>
+              <select [style.display]="!isLoadingProducts ? 'block' : 'none'" class="custom-select col-12"
+                      id="productId" name="categoryId" [(ngModel)]="selectedProductId" ngModel #productId="ngModel">
+                <option value="null">All</option>
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+              </select>
+            </div>
+          </div>
+<!--          <div class="col-lg-12">-->
+<!--            <div class="form-group">-->
+<!--              <label>Product Name</label>-->
+<!--              <input type="text" class="form-control" name="productName" [(ngModel)]="filterObj.productName" ngModel #productnameRef="ngModel" required  minlength="3">-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-md-12">-->
+<!--            <div class="form-group">-->
+<!--              <label class="control-label">Status</label>-->
+<!--              <select [(ngModel)]="filterObj.status" ngModel #statusRef="ngModel" name="status" class="custom-select form-control">-->
+<!--                <option value="null">All</option>-->
+<!--                <option value="OPEN">Open</option>-->
+<!--                <option value="CLOSED">Closed</option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button [disabled]="isFiltering" (click)="clearFilter(filterForm)"  class="btn btn-outline-primary btn-md text-uppercase waves-effect waves-light">
+              Clear
+            </button>
+            <button [disabled]="!filterForm.valid || isFiltering" (click)="onFilter()" class="btn btn-primary ml-2 btn-md text-uppercase waves-effect waves-light">
+              Filter <i *ngIf="isFiltering" class="fa fa-spin fa-spinner"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-template>
+
+  <ng-template #payoutModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title"><strong>Sponsorship Details</strong></h4>
+      <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-md-12">
+          <table style="width: 80%;">
+            <tbody>
+            <tr><td colSpan="2"><h5>Product Information</h5></td></tr>
+            <tr><td>Product Name</td><td>{{activePayout?.productName}}</td></tr>
+            <tr><td>Unit(s)</td><td>{{activePayout?.units}}</td></tr>
+            <tr><td>Amount</td><td>{{activePayout?.amount}}</td></tr>
+            <tr><td>Profit</td><td>{{activePayout?.profit}}</td></tr>
+            <tr><td>Investment Date</td><td>{{activePayout?.createdDate}}</td></tr>
+            <tr><td>Maturity Date</td><td>{{activePayout?.investmentMaturityDate}}</td></tr>
+            <tr>
+              <td>Payment Status</td>
+              <td>
+                <span class="badge badge-success" *ngIf="activePayout?.paidOut">PAID</span>
+                <span class="badge badge-warning" *ngIf="!activePayout?.paidOut">AWAITING</span>
+              </td>
+            </tr>
+            <tr><td colSpan="2"><h5 style="margin-top:10px;">Customer Details</h5></td></tr>
+            <tr><td>Fullname</td><td>{{activePayout?.firstName}} {{activePayout?.lastName}}</td></tr>
+            <tr><td>Mobile Number</td><td>{{activePayout?.mobileNo}}</td></tr>
+            <tr><td>Email</td><td>{{activePayout?.email}}</td></tr>
+
+            <tr><td colSpan="2"><h5 style="margin-top:10px;">Bank Information</h5></td></tr>
+            <tr><td>Account Name</td><td>{{activePayout?.payOutAccountName}}</td></tr>
+            <tr><td>Bank Name</td><td>{{activePayout?.payOutBankName}}</td></tr>
+            <tr><td>Account Number</td><td>{{activePayout?.payOutAccountNo}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</card>

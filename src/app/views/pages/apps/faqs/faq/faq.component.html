@@ -1,0 +1,51 @@
+<subheader title='FAQ v1' [breadcrumb]="['FAQS', 'FAQ v1']"></subheader>
+
+<mat-sidenav-container class='mat-sidenav-container'>
+
+    <mat-sidenav mode="side" style='width:240px' opened #leftSidebar>
+        <perfect-scrollbar>
+            <button class="btn btn-primary btn-rounded btn-block mb-4" (click)="newFaqModal()">
+                <span class="btn-icon"><i class="ti-plus"></i>New Question</span>
+            </button>
+            <div class="nav flex-column faq-categories-nav">
+                <a *ngFor="let category of categories" [ngClass]="{'active': activeCategory && category.title == activeCategory.title}" class="nav-link d-flex align-items-center p-2 hover-link" (click)="getFaqsByCategory(category.id)" href="javascript:;">
+                    <i class="badge-point badge-{{category.state_color}} mr-3"></i>{{category.title}}
+                </a>
+            </div>
+        </perfect-scrollbar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="card">
+            <div class="card-header">
+                <button class="mr-3 text-muted" mat-icon-button fxHide.gt-sm (click)="leftSidebar.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <h5 class="box-title">Frequently Asked Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="input-group-icon input-group-icon-left input-group-lg mb-5">
+                    <span class="input-icon input-icon-left">
+                        <i class="material-icons">search</i>
+                    </span>
+                    <input [(ngModel)]="searchText" class="form-control border-0" type="text" placeholder="Search ..." style="box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)">
+                </div>
+                <h5 class="mb-4 font-16 text-muted">{{ activeCategory ? activeCategory.title : 'All' }} questions — {{(faqs | filter: searchText : ALLOWED_SEARCH_TARGETS).length}}</h5>
+
+                <div class="faq-list">
+                    <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                        <ngb-panel *ngFor="let faq of faqs | filter: searchText : ALLOWED_SEARCH_TARGETS">
+                            <ng-template ngbPanelTitle>
+                                {{faq.question}}
+                                <mat-icon>keyboard_arrow_down</mat-icon>
+                            </ng-template>
+                            <ng-template ngbPanelContent>{{faq.answer}}</ng-template>
+                        </ngb-panel>
+                    </ngb-accordion>
+                </div>
+                
+            </div>
+        </div>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>

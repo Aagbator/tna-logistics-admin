@@ -1,0 +1,165 @@
+
+<mat-sidenav-container class='contacts-sidenav-container'>
+    <mat-sidenav mode="side" style='width:240px' opened #leftSidebar>
+        <button class="btn btn-primary btn-rounded btn-block mb-5" (click)="newContact()">
+            <span class="btn-icon"><i class="ti-plus"></i>New Question</span>
+        </button>
+        <div class="nav flex-column contacts-filter-nav">
+            <a class="nav-link d-flex align-items-center" 
+                (click)="changeFilter('all')" 
+                [ngClass]="{'active': filterBy ==='all'}" href="javascript:;">
+                <mat-icon class='mr-3'>account_circle</mat-icon>All Contacts
+            </a>
+            <a class="nav-link d-flex align-items-center" 
+                (click)="changeFilter('frequent')" 
+                [ngClass]="{'active': filterBy ==='frequent'}" href="javascript:;">
+                <mat-icon class='mr-3'>supervisor_account</mat-icon>Frequently Contacted
+            </a>
+            <a class="nav-link d-flex align-items-center" 
+                (click)="changeFilter('starred')" 
+                [ngClass]="{'active': filterBy ==='starred'}" href="javascript:;">
+                <mat-icon class='mr-3'>star</mat-icon>Starred Contacts
+            </a>
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <card>
+            <div *ngIf="!selectedContact">
+                <div class="flexbox pb-3" style="height: 40px">
+                    <div class="d-flex align-items-center">
+                        <button class="mr-3 text-muted" mat-icon-button fxHide.gt-sm (click)="leftSidebar.toggle()">
+                            <mat-icon>menu</mat-icon>
+                        </button>
+                        <h5 class="mb-0">
+                            {{ hasSelectedContacts 
+                                ? 'Selected — '+selectedContacts.length 
+                                : (filterBy && filterBy != 'all') ? filterBy+' contacts — '+contacts.length 
+                                : 'All Contacts — '+contacts.length }}
+                        </h5>
+                    </div>
+                    <button mat-icon-button (click)="deleteSelectedContacts()" *ngIf="hasSelectedContacts">
+                        <mat-icon class='text-muted'>delete</mat-icon>
+                    </button>
+                </div>
+                <div class="input-group-icon input-group-icon-left input-group-lg mb-4">
+                    <span class="input-icon input-icon-left"><i class="material-icons">search</i></span>
+                    <input [formControl]="searchInput" class="form-control border-0" placeholder="Search contacts" style="box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)" type="text">
+                </div>
+                <div *ngIf="contacts.length; else noContactBox" class="card-fullwidth-block">
+                    <perfect-scrollbar style="max-height: 450px">
+                        <div class="table-responsive">
+                            <table class="table table-hover cols-align-middle contacts-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th></th>
+                                        <th>Name</th>
+                                        <th class="d-none d-xl-table-cell">Email</th>
+                                        <th>Phone</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contact of contacts" (click)="selectContact(contact)">
+                                        <td>
+                                            <mat-checkbox color='primary' [(ngModel)]="checkboxes[contact.id]" (ngModelChange)="onSelectedChange(contact.id)" (click)="$event.stopPropagation()"></mat-checkbox>
+                                        </td>
+                                        <td>
+                                            <span class="d-flex align-items-center">
+                                                <img class="contact-avatar rounded-circle mr-3" [src]="contact.avatar" width="40" alt="">
+                                                <span>{{contact.name}} {{contact.lastName}}</span>
+                                            </span>
+                                        </td>
+                                        <td class="d-none d-xl-table-cell">{{contact.email}}</td>
+                                        <td>{{contact.phone}}</td>
+                                        <td>
+                                            <button mat-icon-button (click)="$event.stopPropagation();toggleStar(contact.id)" aria-label="Toggle star">
+                                                <mat-icon class="text-warning" *ngIf="user.starred.includes(contact.id)">star</mat-icon>
+                                                <mat-icon class="text-muted" *ngIf="!user.starred.includes(contact.id)">star_border</mat-icon>
+                                            </button>
+                                            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                                                    (click)="$event.stopPropagation();">
+                                                <mat-icon class="secondary-text">more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button mat-menu-item aria-label="edit" (click)="editContact(contact)">
+                                                    <mat-icon>edit</mat-icon>
+                                                    <span>Edit</span>
+                                                </button>
+                                                <button mat-menu-item aria-label="remove" (click)="deleteContact(contact)">
+                                                    <mat-icon>delete</mat-icon>
+                                                    <span>Remove</span>
+                                                </button>
+                                            </mat-menu>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </perfect-scrollbar>
+                </div>
+                <ng-template #noContactBox>
+                    <div class="p-4 text-muted font-16">No contact found</div>
+                </ng-template>
+            </div>
+            <div *ngIf="selectedContact">
+                <div class="flexbox">
+                    <button class="d-flex align-items-center px-2" mat-button (click)="deselectCurrentContact()">
+                        <mat-icon class="mr-2 text-muted">arrow_back</mat-icon>
+                        <span class="text-muted">BACK</span>
+                    </button>
+                    <span>
+                        <button mat-icon-button (click)="editContact(selectedContact)">
+                            <mat-icon class='text-muted'>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteContact(selectedContact)">
+                            <mat-icon class='text-muted'>delete</mat-icon>
+                        </button>
+                    </span>
+                </div>
+                <div class="row mt-4">
+                    <div class="text-center" style="width: 200px;">
+                        <div>
+                            <img class="rounded-circle" [src]="selectedContact.avatar" [alt]="selectedContact.name" width="120">
+                        </div>
+                        <div class="h5 mt-4 font-20">{{selectedContact.name}} {{selectedContact.lastName}}</div>
+                        <div class="text-muted">{{selectedContact.jobTitle}}</div>
+                    </div>
+                    <div class="col">
+                        <div class="contact-details">
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Name:</span>
+                                <span>{{selectedContact.name}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">LastName:</span>
+                                <span>{{selectedContact.lastName}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Nickname:</span>
+                                <span>{{selectedContact.nickname}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Email:</span>
+                                <span>{{selectedContact.email}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Phone:</span>
+                                <span>{{selectedContact.phone}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Address:</span>
+                                <span>{{selectedContact.address}}</span>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <span class="contact-detail-title">Company:</span>
+                                <span>{{selectedContact.company}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </card>
+    </mat-sidenav-content>
+</mat-sidenav-container>

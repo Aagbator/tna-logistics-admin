@@ -1,0 +1,30 @@
+<div class="row auth-content mx-0">
+    <div class="col-md-6 bg-white p-5">
+        <div>
+            <div class="text-center mb-5">
+                <h4 class="mb-3">Login to Your accaunt</h4>
+                <div class="text-muted">Still no account?<a class="ml-2" routerLink='/snippets/auth/sign-up' style="border-bottom: 1px solid">Create account</a></div>
+            </div>
+            <form id="login-form" action="javascript:;">
+                <div class="form-group mb-4"><input class="form-control" type="email" name="email" placeholder="Enter email"></div>
+                <div class="form-group mb-4"><input class="form-control" type="password" name="password" placeholder="Enter Password"></div>
+                <div class="flexbox my-5"><label class="checkbox checkbox-primary"><input type="checkbox" checked=""><span>Remember Me</span></label><a  routerLink='/snippets/auth/forgot-password'>Forgot password?</a></div>
+                <div class="text-center"><button class="btn btn-primary btn-rounded" style="min-width: 200px">LOGIN</button></div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6 bg-danger text-white p-5 d-flex flex-column justify-content-between">
+        <h3 class="mb-0">Reidius</h3>
+        <div>
+            <h4 class="font-40 mb-4">Join our group</h4>
+            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
+        </div>
+        <div class="flexbox font-13 text-white-50">
+        	<span>© All rights reserved</span>
+        	<span><a class="text-white-50" href="javascript:;" style="border-bottom: 1px solid;">About</a><a class="ml-3 text-white-50" href="javascript:;" style="border-bottom: 1px solid;">Policy</a></span>
+        </div>
+    </div>
+</div>
+<a class="btn btn-link home-link" routerLink='/index'>
+	<span class="btn-icon"><i class="ti-arrow-left font-20"></i>Go Home</span>
+</a>

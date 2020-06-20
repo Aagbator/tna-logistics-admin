@@ -1,0 +1,48 @@
+
+<div class="mb-5 p-5 kbase-heading content-top-heading" style="background-image: url('./assets/img/blog/19.jpeg');">
+    <div class="position-relative">
+        <h2 class="mb-5 text-center text-white">How can we help you?</h2>
+        <div class="input-group-icon input-group-icon-left input-group-lg"><span class="input-icon input-icon-left"><i class="ti-search"></i></span><input class="form-control font-weight-left border-0" type="text" placeholder="Search ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);"></div>
+    </div>
+</div>
+<div class="row" *ngIf="!selectedCategory">
+    <div class="col-md-6" *ngFor="let category of knowledgeBase">
+        <card>
+            <h5 class="mb-4 articles-list-title">{{category.title}}</h5>
+            <div class="nav flex-column articles-list mb-3">
+                <a class="nav-link d-flex align-items-center" *ngFor="let article of category.articles | slice:0:5; let i = index" (click)="readCategory(article)" href="javascript:;">
+                    <i class="ti-angle-right font-12 mr-3"></i>
+                    {{ article.title }}
+                </a>
+            </div>
+            <a class="btn btn-link" (click)="$event.stopPropagation(); readCategory(category.articles[0])" href="javascript:;">See all articles — {{category.articles.length}}</a>
+        </card>
+    </div>
+</div>
+
+<mat-sidenav-container *ngIf="selectedCategory" class='mat-sidenav-container'>
+    <mat-sidenav mode="side" style='width:240px' opened #leftSidebar>
+        <perfect-scrollbar>
+            <h5 class="articles-list-title mt-3">Related articles</h5>
+            <div class="nav flex-column related-articles-nav">
+                <a class="nav-link" *ngFor="let article of selectedCategory.articles" href="javascript:;" (click)="readArticle(article)" [ngClass]="{'selected': article.title == activeArticle.title}">{{article.title}}</a>
+            </div>
+        </perfect-scrollbar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <card>
+            <div class="d-flex align-items-center">
+                <button class="mr-3 text-muted" mat-icon-button fxHide.gt-sm (click)="leftSidebar.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <button class="d-flex align-items-center px-2" mat-button (click)="deselectCategory()">
+                    <mat-icon class="mr-2 text-muted">arrow_back</mat-icon>
+                    <span class="text-muted">BACK</span>
+                </button>
+            </div>
+            <h1 class="mb-5 mt-3">{{activeArticle.title}}</h1>
+            <div [innerHTML]="activeArticle.content"></div>
+        </card>
+    </mat-sidenav-content>
+</mat-sidenav-container>

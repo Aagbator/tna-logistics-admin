@@ -1,0 +1,355 @@
+<subheader title='Form Layouts' [breadcrumb]="['UI Kit', 'Forms', 'Form Layouts']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Basic Form'" [fullheight]="true">
+			<form action="javascript:;">
+			    <div class="row">
+			        <div class="col-sm-6 form-group mb-4">
+			            <label>First Name</label>
+			            <input class="form-control" type="text" placeholder="First Name">
+			        </div>
+			        <div class="col-sm-6 form-group mb-4">
+			            <label>Last Name</label>
+			            <input class="form-control" type="text" placeholder="Last Name">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4">
+			        <label>Email</label>
+			        <input class="form-control" type="text" placeholder="Email address">
+			    </div>
+			    <div class="form-group mb-4">
+			        <label>Password</label>
+			        <input class="form-control" type="password" placeholder="Password">
+			    </div>
+			    <div class="form-group mb-5">
+			        <label>Gender</label>
+			        <div>
+			            <label class="radio radio-inline radio-primary">
+			                <input type="radio" name="a" checked="">
+			                <span>Male</span>
+			            </label>
+			            <label class="radio radio-inline radio-primary">
+			                <input type="radio" name="a">
+			                <span>Female</span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group">
+			        <button class="btn btn-primary mr-2" type="submit">Submit</button>
+			        <button class="btn btn-light" type="reset">Clear</button>
+			    </div>
+			</form>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Horizonal Form'" [fullheight]="true">
+			<form class="form-horizontal" action="javascript:;">
+			    <div class="form-group mb-4 row">
+			        <label class="col-sm-2 col-form-label">Email</label>
+			        <div class="col-sm-10">
+			            <input class="form-control" type="text" placeholder="Email address">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4 row">
+			        <label class="col-sm-2 col-form-label">Username</label>
+			        <div class="col-sm-10">
+			            <input class="form-control" type="text" placeholder="Username">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4 row">
+			        <label class="col-sm-2 col-form-label">Password</label>
+			        <div class="col-sm-10">
+			            <input class="form-control" type="password" placeholder="Password">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4 row">
+			        <label class="col-sm-2 col-form-label">Gender</label>
+			        <div class="col-sm-10 d-flex align-items-center">
+			            <label class="radio radio-inline radio-grey radio-primary">
+			                <input type="radio" name="b" checked="">
+			                <span>Male</span>
+			            </label>
+			            <label class="radio radio-inline radio-grey radio-primary">
+			                <input type="radio" name="b">
+			                <span>Female</span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group mb-5 row">
+			        <label class="col-sm-2 col-form-label">Verify</label>
+			        <div class="col-sm-10">
+			            <div class="check-list">
+			                <label class="checkbox checkbox-grey checkbox-primary">
+			                    <input type="checkbox">
+			                    <span>Email</span>
+			                </label>
+			                <label class="checkbox checkbox-grey checkbox-primary">
+			                    <input type="checkbox">
+			                    <span>SMS</span>
+			                </label>
+			                <label class="checkbox checkbox-grey checkbox-primary">
+			                    <input type="checkbox">
+			                    <span>Phone</span>
+			                </label>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="form-group row">
+			        <div class="col-sm-10 ml-sm-auto">
+			            <button class="btn btn-primary mr-2" type="submit">Submit</button>
+			            <button class="btn btn-light" type="reset">Clear</button>
+			        </div>
+			    </div>
+			</form>
+		</card>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'With Icons'" [fullheight]="true">
+			<form action="javascript:;">
+			    <div class="form-group mb-4">
+			        <div class="input-group-icon input-group-icon-left">
+			            <span class="input-icon input-icon-left"><i class="ti-user"></i></span>
+			            <input class="form-control" type="text" placeholder="Username">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4">
+			        <div class="input-group-icon input-group-icon-left">
+			            <span class="input-icon input-icon-left"><i class="ti-email"></i></span>
+			            <input class="form-control" type="text" placeholder="Email">
+			        </div>
+			    </div>
+			    <div class="form-group mb-4">
+			        <div class="input-group-icon input-group-icon-left">
+			            <span class="input-icon input-icon-left"><i class="ti-lock"></i></span>
+			            <input class="form-control" type="text" placeholder="Password">
+			        </div>
+			    </div>
+			    <div class="form-group my-5">
+			        <label class="checkbox checkbox-outline-primary">
+			            <input type="checkbox" checked="">
+			            <span>Remamber me</span>
+			        </label>
+			    </div>
+			    <div class="form-group">
+			        <button class="btn btn-primary mr-2" type="submit">Submit</button>
+			        <button class="btn btn-outline-secondary" type="reset">Clear</button>
+			    </div>
+			</form>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Big Inputs'" [fullheight]="true">
+			<form action="javascript:;">
+			    <div class="form-group mb-4 mt-4">
+			        <div class="input-group-icon input-group-icon-left input-group-lg">
+			            <div class="input-icon input-icon-left"><i class="ti-user"></i></div>
+			            <input class="form-control" type="text" placeholder="Username">
+			        </div>
+			    </div>
+			    <div class="form-group mb-5">
+			        <div class="input-group-icon input-group-icon-left input-group-lg">
+			            <div class="input-icon input-icon-left"><i class="ti-lock"></i></div>
+			            <input class="form-control" type="password" placeholder="Password">
+			        </div>
+			    </div>
+			    <div class="text-center mb-4">
+			        <button class="btn btn-lg btn-primary" type="submit" style="min-width:200px;">Sign up</button>
+			    </div>
+			</form>
+		</card>
+	</div>
+</div>
+
+<card [title]="'Multi Column Form'" [fullheight]="true">
+	<form action="javascript:;">
+	    <div class="row">
+	        <div class="col-md-6">
+	            <div class="form-group mb-4">
+	                <label>Full Name</label>
+	                <input class="form-control" type="text" placeholder="Enter Full Name">
+	            </div>
+	            <div class="form-group mb-4">
+	                <label>Email</label>
+	                <input class="form-control" type="text" placeholder="Enter Email">
+	            </div>
+	            <div class="form-group mb-4">
+	                <label>Date of Birth</label>
+	                <input class="form-control" type="text" placeholder="Enter Date of Birth"><small class="form-text text-muted">Please Enter your date of birth.</small></div>
+	        </div>
+	        <div class="col-md-6">
+	            <div class="form-group mb-4">
+	                <label>Location</label>
+	                <div class="input-group-icon input-group-icon-left">
+	                    <span class="input-icon input-icon-left"><i class="ti-location-pin font-16"></i></span>
+	                    <input class="form-control" type="text" placeholder="Enter Location">
+	                </div>
+	            </div>
+	            <div class="form-group mb-4">
+	                <label>Password</label>
+	                <div class="input-group-icon input-group-icon-left">
+	                    <span class="input-icon input-icon-left"><i class="ti-lock"></i></span>
+	                    <input class="form-control" type="password" placeholder="Enter Password">
+	                </div>
+	            </div>
+	            <div class="form-group mb-4">
+	                <label>Phone number</label>
+	                <div class="input-group">
+	                    <div class="input-group-prepend" ngbDropdown>
+	                        <button class="btn btn-light dropdown-toggle no-arrow" ngbDropdownToggle>+61<i class="fa fa-angle-down ml-1"></i></button>
+	                        <div class="dropdown-menu" ngbDropdownMenu>
+	                            <a class="dropdown-item" href="javascript:;">+61</a>
+	                            <a class="dropdown-item" href="javascript:;">+1</a>
+	                            <a class="dropdown-item" href="javascript:;">+7</a>
+	                        </div>
+	                    </div>
+	                    <input class="form-control" type="text" placeholder="Enter Phone">
+	                </div><small class="form-text text-muted">It will be required to verify your account.</small></div>
+	        </div>
+	    </div>
+	    <div class="form-group mb-5">
+	        <label>Account Type</label>
+	        <div class="mt-1">
+	            <label class="radio radio-inline radio-grey radio-primary">
+	                <input type="radio" name="d" checked="">
+	                <span>Personal</span>
+	            </label>
+	            <label class="radio radio-inline radio-grey radio-primary">
+	                <input type="radio" name="d">
+	                <span>Corporate</span>
+	            </label>
+	        </div><small class="form-text text-muted">Select one of 2 types of accounts.</small></div>
+	    <div class="form-group">
+	        <button class="btn btn-primary mr-2" type="submit">Submit</button>
+	        <button class="btn btn-light" type="reset">Clear</button>
+	    </div>
+	</form>
+</card>
+
+<card [title]="'Inline Form'" [fullheight]="true">
+	<p class="text-muted mb-4">Use the <code>.form-inline</code> class to display a series of labels, form controls, and buttons on a single horizontal row.</p>
+	<form class="form-inline form-success mb-4" action="javascript:;">
+	    <label class="sr-only" for="ex-email">Email</label>
+	    <input class="form-control mb-2 mr-sm-2 mb-sm-0x" id="ex-email" type="text" placeholder="Email address">
+	    <label class="sr-only" for="ex-pass">Email</label>
+	    <input class="form-control mb-2 mr-sm-2 mb-sm-0x" id="ex-pass" type="password" placeholder="Password">
+	    <div class="form-check mb-2 mr-sm-2 mb-sm-0x">
+	        <label class="checkbox checkbox-inline checkbox-primary">
+	            <input type="checkbox">
+	            <span>Remamber me</span>
+	        </label>
+	    </div>
+	    <button class="btn btn-primary mb-2" type="submit">Login</button>
+	</form>
+	<hr class="my-4">
+	<form class="form-inline form-success mb-4" action="javascript:;">
+	    <label class="sr-only" for="ex-email-2">Email</label>
+	    <input class="form-control mb-2 mr-sm-2 mb-sm-0x" id="ex-email-2" type="text" placeholder="Email address">
+	    <label class="sr-only" for="inlineFormInputGroupUsername2">Email</label>
+	    <div class="input-group mb-2 mr-sm-2">
+	        <div class="input-group-prepend">
+	            <div class="input-group-text">@</div>
+	        </div>
+	        <input class="form-control" id="inlineFormInputGroupUsername2" type="text" placeholder="Username">
+	    </div>
+	    <div class="form-check mb-2 mr-sm-2 mb-sm-0x">
+	        <label class="checkbox checkbox-inline checkbox-success">
+	            <input type="checkbox" checked="">
+	            <span>Remamber me</span>
+	        </label>
+	    </div>
+	    <button class="btn btn-success mb-2" type="submit">Login</button>
+	</form>
+</card>
+
+<card [title]="'Form Layouts'" [fullheight]="true">
+	<h5>Form groups</h5>
+	<p class="text-muted mb-4">The <code>.form-group</code> class is the easiest way to add some structure to forms. It provides a flexible class that encourages proper grouping of labels, controls, optional help text, and form validation messaging.
+	    By default it only applies <code>margin-bottom</code>, but it picks up additional styles in <code>.form-inline</code> as needed. Use it with <code>&lt;fieldset&gt;</code>s, <code>&lt;div&gt;</code>s, or nearly any other
+	    element.</p>
+	<form>
+	    <div class="form-group">
+	        <label for="formGroupExampleInput">Example label</label>
+	        <input class="form-control" id="formGroupExampleInput" type="text" placeholder="Example input">
+	    </div>
+	    <div class="form-group">
+	        <label for="formGroupExampleInput2">Another label</label>
+	        <input class="form-control" id="formGroupExampleInput2" type="text" placeholder="Another input">
+	    </div>
+	</form>
+	<hr class="my-4 mt-5">
+	<h5>Form grid</h5>
+	<p class="text-muted mb-4">More complex forms can be built using our grid classes. Use these for form layouts that require multiple columns, varied widths, and additional alignment options.</p>
+	<form>
+	    <div class="row">
+	        <div class="col">
+	            <input class="form-control" type="text" placeholder="First name">
+	        </div>
+	        <div class="col">
+	            <input class="form-control" type="text" placeholder="Last name">
+	        </div>
+	    </div>
+	</form>
+	<hr class="my-4 mt-5">
+	<h5>Form row</h5>
+	<p class="text-muted mb-4">You may also swap <code>.row</code> for <code>.form-row</code>, a variation of our standard grid row that overrides the default column gutters for tighter and more compact layouts.</p>
+	<form>
+	    <div class="form-row">
+	        <div class="col">
+	            <input class="form-control" type="text" placeholder="First name">
+	        </div>
+	        <div class="col">
+	            <input class="form-control" type="text" placeholder="Last name">
+	        </div>
+	    </div>
+	</form>
+	<hr class="my-4 mt-5">
+	<p class="text-muted my-4">More complex layouts can also be created with the grid system.</p>
+	<form>
+	    <div class="form-row">
+	        <div class="form-group col-md-6">
+	            <label for="inputEmail4">Email</label>
+	            <input class="form-control" id="inputEmail4" type="email" placeholder="Email">
+	        </div>
+	        <div class="form-group col-md-6">
+	            <label for="inputPassword4">Password</label>
+	            <input class="form-control" id="inputPassword4" type="password" placeholder="Password">
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <label for="inputAddress">Address</label>
+	        <input class="form-control" id="inputAddress" type="text" placeholder="1234 Main St">
+	    </div>
+	    <div class="form-group">
+	        <label for="inputAddress2">Address 2</label>
+	        <input class="form-control" id="inputAddress2" type="text" placeholder="Apartment, studio, or floor">
+	    </div>
+	    <div class="form-row">
+	        <div class="form-group col-md-6">
+	            <label for="inputCity">City</label>
+	            <input class="form-control" id="inputCity" type="text">
+	        </div>
+	        <div class="form-group col-md-4">
+	            <label for="inputState">State</label>
+	            <select class="form-control" id="inputState">
+	                <option selected="">Choose...</option>
+	                <option>...</option>
+	            </select>
+	        </div>
+	        <div class="form-group col-md-2">
+	            <label for="inputZip">Zip</label>
+	            <input class="form-control" id="inputZip" type="text">
+	        </div>
+	    </div>
+	    <div class="form-group mb-4">
+	        <label class="checkbox checkbox-primary">
+	            <input type="checkbox" checked="">
+	            <span>Remamber me</span>
+	        </label>
+	    </div>
+	    <button class="btn btn-primary" type="submit">Sign in</button>
+	</form>
+</card>

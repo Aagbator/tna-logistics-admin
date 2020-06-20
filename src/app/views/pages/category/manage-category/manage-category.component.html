@@ -1,0 +1,194 @@
+<subheader title='Category' [breadcrumb]="['Category', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button type="button" (click)="openCategoryModal(categoryModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="fa fa-plus-circle"></i> Add New Category
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+       <div class="table-responsive">
+        <table class="table custom-table">
+          <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Category Name</th>
+            <th>Slug</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let category of categories | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+            <td scope="row"><strong>{{i + 1}}</strong></td>
+            <td>
+              <img *ngIf="!category.imageUrl" (click)="openImageModal(imageModal, category)" class="img-thumbnail" src="./assets/img/upload-image.png" alt="image" height="50" width="50">
+              <img *ngIf="category.imageUrl" (click)="openImageModal(viewImageModal, category)" class="img-thumbnail" src="{{category?.imageUrl}}" alt="image" height="50" width="50">
+            </td>
+
+            <td>{{category?.name}}</td>
+            <td class="text-muted">{{category?.slug}}</td>
+            <td>
+              <span class="badge badge-success" *ngIf="category?.status">Active</span>
+              <span *ngIf="!category?.status" class="badge badge-danger">Blocked</span>
+            </td>
+            <td>{{category?.createdDate | date}}</td>
+            <td>
+              <div *ngIf="category.id !== actionId">
+                <button  (click)="openImageModal(imageModal, category)" class="btn btn-light btn-floating btn-sm m-r-10"><i class="ti-image"></i></button>
+                <button  (click)="openCategoryModal(categoryModal, category)" class="btn btn-info btn-floating btn-sm m-r-10"><i class="ti-pencil"></i></button>
+
+                <button *ngIf="category?.status"  class="btn btn-light btn-floating btn-sm m-r-5" (click)="deactivateCategory(category?.id)" ><i class="fa fa-ban text-warning"></i></button>
+                <button *ngIf="!category?.status" class="btn btn-light btn-floating btn-sm m-r-5" (click)="activateCategory(category?.id)" ><i class="fa fa-check text-info"></i></button>
+
+                <button (click)="deleteCategory(category)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>
+
+              </div>
+              <span  *ngIf="isLoadingAction && (category.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="custom-table-footer">
+          <div class="page-count">
+            {{totalRecords}} total
+          </div>
+          <div class="page-control">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <ng-template #categoryModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>{{isEditingCategory? 'Update' : 'Create'}} Category</strong></h4>
+          <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-4" *ngIf="isEditingCategory">
+                <img *ngIf="!activeCategory?.imageUrl" (click)="openImageModal(viewImageModal, category)" class="img-thumbnail" src="./assets/img/upload-image.png" alt="image" height="200" width="200">
+                <img *ngIf="activeCategory?.imageUrl" (click)="openImageModal(imageModal, category)" class="img-thumbnail" src="{{activeCategory?.imageUrl}}" alt="image" height="200" width="200">
+              </div>
+              <div [ngClass]="isEditingCategory ? 'col-md-8' : 'col-md-12'">
+                <form class="form-horizontal form-material" #categoryFormRef="ngForm" novalidate>
+                  <!--/row-->
+
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Category Name</label>
+                        <input class="form-control" [(ngModel)]="categoryObj.name" name="name" [class.is-invalid]="nameRef.touched && nameRef?.errors?.required" ngModel #nameRef="ngModel" type="text" placeholder="category name" required>
+                        <div *ngIf="nameRef?.touched && nameRef?.errors?.required" class="invalid-feedback">
+                          category name is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Slug</label>
+                        <input class="form-control" [(ngModel)]="categoryObj.slug" name="slug" [class.is-invalid]="slugRef.touched && slugRef?.errors?.required" ngModel #slugRef="ngModel" type="text" placeholder="slug e.g cocktail-drink" required>
+                        <div *ngIf="slugRef?.touched && slugRef?.errors?.required" class="invalid-feedback">
+                          slug is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Category Description</label>
+                        <textarea row="3" class="form-control" [(ngModel)]="categoryObj.description" name="description" [class.is-invalid]="descriptionRef.touched && descriptionRef?.errors?.required" ngModel #descriptionRef="ngModel" type="text" placeholder="description" required></textarea>
+                        <div *ngIf="descriptionRef?.touched && descriptionRef?.errors?.required" class="invalid-feedback">
+                          description is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12 mt-3">
+                      <button *ngIf="!isEditingCategory" (click)="categoryFormRef.form.valid && createCategory()" type="submit" class="btn btn-dark ml-2 waves-effect waves-light">Create <i *ngIf="isCreatingCategory" class="fa fa-spin fa-spinner"></i></button>
+                      <button *ngIf="isEditingCategory" (click)="categoryFormRef.form.valid && updateCategory()" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingCategory" class="fa fa-spin fa-spinner"></i></button>
+                    </div>
+                  </div>
+                  <!--/row-->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #imageModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Select Photo</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+              <div class="col-md-12">
+                  <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="1 / 1"
+                    [resizeToWidth]="300"
+                    format="png"
+                    outputType="file"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                  ></image-cropper>
+                  <input type="file" class="btn col-12 btn-sm d-block btn-outline-dark" accept=".jpg, .jpeg, .png" (change)="onFileSelected($event)">
+                  <div class="p-1" [style.visibility]="(fileUploading ) ? 'visible' : 'hidden'">
+                    <p><ngb-progressbar type="success"  height="5px" [value]="uploadedPercentage"  [max]="100" [striped]="true" [animated]="true"></ngb-progressbar></p>
+                  </div>
+                  <button [disabled]="selectedFile == null || fileUploading"  (click)="onUpload()" class="btn btn-dark d-block btn-sm mr-2 text-uppercase waves-effect waves-light">Crop & Upload</button>
+                </div>
+              <div class="col-md-12">
+
+              </div>
+            </div>
+        </div>
+      </ng-template>
+
+
+
+      <ng-template #viewImageModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">View Image</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <img *ngIf="!activeCategory?.imageUrl" class="img-thumbnail" src="./assets/img/upload-image.png" alt="image" width="300px">
+              <img *ngIf="activeCategory?.imageUrl"  class="img-thumbnail" src="{{activeCategory?.imageUrl}}" alt="image"  width="300px">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <!-- row -->
+
+</card>
+
+

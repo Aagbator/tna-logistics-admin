@@ -1,0 +1,94 @@
+<div class="dialog-content-wrapper">
+    <div class="mat-dialog-header border-bottom flexbox">
+        <h1 mat-dialog-title>New Message</h1>
+        <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="position-relative" mat-dialog-content perfectScrollbar>
+        <div>
+            <div class="media mb-4">
+                <img class="rounded-circle mr-3" src="assets/img/users/avatar-h.jpg" alt="image" width="40">
+                <div class="media-body">
+                    <div class="text-muted">From:</div>
+                    <div>johndue@example.com</div>
+                </div>
+            </div>
+            <form name="composeForm" [formGroup]="composeForm">
+                <mat-form-field appearance="outline" class='d-block'>
+                    <mat-label>To</mat-label>
+                    <input matInput name="to"
+                           formControlName="to"
+                           type="email" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class='d-block'>
+                    <mat-label>Subject</mat-label>
+                    <input matInput name="subject"
+                           formControlName="subject">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class='d-block'>
+                    <mat-label>Message</mat-label>
+                    <textarea matInput name="message"
+                              formControlName="message"
+                              rows="6">
+                    </textarea>
+                </mat-form-field>
+
+                <div class="attachment-list">
+                    <div class="attachment flexbox mb-1">
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons font-18">attach_file</i>
+                            <span class="filename mx-3">attachment-1.pdf</span>
+                            <span class="size">(540 Kb)</span>
+                        </div>
+
+                        <button mat-icon-button aria-label="Delete attachment">
+                            <mat-icon class="font-16">close</mat-icon>
+                        </button>
+                    </div>
+
+                    <div class="attachment flexbox">
+                        <div class="d-flex align-items-center">
+                            <i class="material-icons font-18">attach_file</i>
+                            <span class="filename mx-3">attachment-2.zip</span>
+                            <span class="size">(1.2 mb)</span>
+                        </div>
+
+                        <button mat-icon-button aria-label="Delete attachment">
+                            <mat-icon class="font-16">close</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class='flexbox' mat-dialog-actions>
+        <div>
+            <button mat-raised-button
+                color="accent"
+                (click)="matDialogRef.close(['send',composeForm])"
+                [disabled]="composeForm.invalid"
+                aria-label="SAVE">
+                SEND
+            </button>
+            <button mat-icon-button matTooltip="Attach a file">
+                <mat-icon class='text-muted'>attach_file</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Insert Photo">
+                <mat-icon class='text-muted'>image</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Insert Link">
+                <mat-icon class='text-muted'>link</mat-icon>
+            </button>
+        </div>
+
+        <button mat-icon-button (click)="matDialogRef.close(['delete',composeForm])"
+            aria-label="Delete"
+            matTooltip="Delete">
+            <mat-icon class='text-muted'>delete</mat-icon>
+        </button>
+    </div>
+</div>

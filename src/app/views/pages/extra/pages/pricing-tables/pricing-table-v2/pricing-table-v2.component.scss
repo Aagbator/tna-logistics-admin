@@ -1,0 +1,26 @@
+.pricing-table td,
+.pricing-table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pricing-table tbody td:first-child,
+.pricing-table thead th:first-child {
+    text-align: left;
+    font-weight: 500;
+    padding-left: 1.5rem;
+}
+
+.pricing-table tbody td:last-child,
+.pricing-table thead th:last-child {
+    padding-right: 1.5rem;
+}
+
+.pricing-table thead th {
+    border-bottom-width: 1px;
+}
+
+sup {
+    font-size: 60%;
+    margin-right: 2px;
+}

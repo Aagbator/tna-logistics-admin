@@ -1,0 +1,59 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <h5 class="box-title mb-0">Customer Information</h5><a *ngIf="false"  [routerLink]="['/customer/edit/', customer.id]" href="#"><i class="ti-pencil"></i> Edit</a>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">First Name</div>
+      <div class="col-md-10 col-sm-12">{{customer?.firstName}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Last Name</div>
+      <div class="col-md-10 col-sm-12">{{customer?.lastName}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Gender</div>
+      <div class="col-md-10 col-sm-12">{{customer?.gender ? 'Male' : 'Female'}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Mobile No</div>
+      <div class="col-md-10 col-sm-12">{{customer?.mobileNo}}</div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-md-12">
+        <h6  class="mt-3">Address</h6>
+        <div *ngIf="customer?.customerAddresses.length == 0">
+          <p>No key feature(s) added for this product</p>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered" *ngIf="customer?.customerAddresses.length > 0">
+            <thead>
+            <tr>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">LGA</th>
+              <th scope="col">Address</th>
+              <th scope="col">Mobile No</th>
+              <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let address of customer?.customerAddresses">
+              <td>{{address?.firstName}}</td>
+              <td>{{address?.lastName}}</td>
+              <td>{{address?.lga?.name}}</td>
+              <td>{{address?.address}}</td>
+              <td>{{address?.mobileNo}}</td>
+              <td>
+                <span class="badge badge-success" *ngIf="address?.isDefaultAddress">Default</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

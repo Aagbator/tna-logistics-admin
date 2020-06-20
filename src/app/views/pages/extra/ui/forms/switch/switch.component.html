@@ -1,0 +1,571 @@
+<subheader title='Switches' [breadcrumb]="['UI Kit', 'Forms', 'Switches']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Switches'" [fullheight]="true">
+            <div>
+                <div class="form-group row">
+                    <div class="col-3">Default Switch</div>
+                    <div class="col-3">
+                        <label class="ui-switch">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-3">Default Checked</div>
+                    <div class="col-3">
+                        <label class="ui-switch">
+                            <input type="checkbox" checked="">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">Large</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-lg">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-3">Large Checked</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-lg">
+                            <input type="checkbox" checked="">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">Outline</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-outline">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-3">Outline Checked</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-outline">
+                            <input type="checkbox" checked="">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">Solid</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-solid">
+                            <input type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="col-3">Solid Checked</div>
+                    <div class="col-3">
+                        <label class="ui-switch switch-solid">
+                            <input type="checkbox" checked="">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <h5 class="mb-4">With Labels</h5>
+            <div>
+                <div class="form-group">
+                    <label class="ui-switch">Off
+                        <input type="checkbox">
+                        <span></span>On</label>
+                </div>
+                <div class="form-group">
+                    <label class="ui-switch">Off
+                        <input type="checkbox" checked="">
+                        <span></span>On</label>
+                </div>
+                <div class="form-group">
+                    <label class="ui-switch switch-info">Off
+                        <input type="checkbox" checked="">
+                        <span></span>On</label>
+                </div>
+            </div>
+            <hr class="my-4">
+            <h5 class="mb-4">With labels</h5>
+            <div>
+                <div class="form-group mb-4">
+                    <label class="ui-switch switch-solid">Left label
+                        <input type="checkbox" checked="">
+                        <span></span>
+                    </label>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="ui-switch switch-solid switch-danger">
+                        <input type="checkbox" checked="">
+                        <span class="ml-0"></span> Right label</label>
+                </div>
+                <p class="text text-primary my-4">Both labels</p>
+                <div class="form-group">
+                    <label class="ui-switch switch-solid">Off
+                        <input type="checkbox" checked="">
+                        <span></span> On</label>
+                </div>
+            </div>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'State Colors'" [fullheight]="true">
+			<p class="text-muted mb-4">Add <code>.switch-*</code> for to change the appearance of a switches: <code>.switch-success</code>, <code>.switch-pink</code>...</p>
+			<div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-success">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-secondary">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Info</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-info">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Warning</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-warning">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-danger">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Purple</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-purple">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Dark</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-icon switch-dark">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <hr class="my-4">
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-info">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-secondary">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			</div>
+		</card>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Solid Style'" [fullheight]="true">
+			<p class="text-muted mb-4">Add <code>.switch-solid</code> for solid switches: </p>
+			<div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-success">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-secondary">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Info</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-info">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Warning</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-warning">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-danger">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Purple</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-purple">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Dark</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-solid switch-dark">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			</div>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Large Style'" [fullheight]="true">
+			<p class="text-muted mb-4">Add <code>.switch-lg</code> for large switches. For outline and square switches, this class does not need to be added.</p>
+			<div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-success switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-secondary switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Info</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-info switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Warning</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-warning switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-danger switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Purple</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-purple switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Dark</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-dark switch-lg">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			</div>
+		</card>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Outline Style'" [fullheight]="true">
+			<p class="text-muted mb-4">Add <code>.switch-outline</code> for outline switches.</p>
+			<div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-success switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-secondary switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Info</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-info switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Warning</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-warning switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-danger switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Purple</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-purple switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Dark</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-dark switch-outline">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			</div>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Square Style'" [fullheight]="true">
+			<p class="text-muted mb-4">Add <code>.switch-square</code> for square switches.</p>
+			<div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-success switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Secondary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-secondary switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Info</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-info switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Warning</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-warning switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-danger switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Purple</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-purple switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Dark</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-dark switch-square switch-solid">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <hr class="my-4">
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Primary</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-square">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Success</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-success switch-square">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			    <div class="form-group row mb-4">
+			        <div class="col-6">Danger</div>
+			        <div class="col-6">
+			            <label class="ui-switch switch-danger switch-square">
+			                <input type="checkbox" checked="">
+			                <span></span>
+			            </label>
+			        </div>
+			    </div>
+			</div>
+		</card>
+	</div>
+</div>

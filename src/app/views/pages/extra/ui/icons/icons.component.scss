@@ -1,0 +1,21 @@
+.icons-demo-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-wrap: wrap;
+    border: 4px solid #eee;
+    padding: 1.5rem;
+    max-width: 300px;
+}
+
+.icons-demo-box>div {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 30px;
+    width: 33%;
+}
+
+.icons-demo-box>div .material-icons {
+    font-size: 30px;
+}

@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <button type="button" (click)="openImageModal(imageModal)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="ti-image"></i> Upload Image
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-8" *ngIf="productImages.length == 0">
+        <p>No Image(s) added for this product</p>
+      </div>
+      <div class="col-lg-3" *ngFor="let productImage of productImages" >
+        <div class="card border-0 shadow-sm mb-4">
+          <div class="card-body text-center">
+            <img class="rounded-lg mb-4" src="{{productImage?.imageUrl}}" width="200" height="200">
+            <button (click)="deleteProductImage(productImage?.id)" class="btn btn-sm btn-block btn-outline-danger" [disabled]="isLoadingAction">
+              <span *ngIf="productImage?.id !== actionId">Delete</span>
+              <i *ngIf="isLoadingAction && (productImage?.id == actionId)" class="fa fa-spinner fa-spin"></i>
+            </button>
+          </div>
+          </div>
+      </div>
+
+<!--        <table class="table table-bordered custom-table">-->
+<!--          <thead>-->
+<!--          <tr>-->
+<!--            <th scope="col">Title</th>-->
+<!--            <th scope="col">Value</th>-->
+<!--            <th width="20%" scope="col">Action</th>-->
+<!--          </tr>-->
+<!--          </thead>-->
+<!--          <tbody>-->
+<!--          <tr *ngFor="let productImage of productImages" >-->
+<!--            <td>{{productImage?.imageUrl}}</td>-->
+<!--            <td>-->
+<!--              <div *ngIf="productImage.id !== actionId">-->
+<!--                <button (click)="deleteSpecification(productImage?.id)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>-->
+<!--              </div>-->
+<!--              <i *ngIf="isLoadingAction && (productImage?.id == actionId)" class="fa fa-spinner fa-spin"></i>-->
+<!--            </td>-->
+<!--          </tr>-->
+<!--          </tbody>-->
+<!--        </table>-->
+        <div class="col-md-12">
+        <ng-template #imageModal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title">Select Photo</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]="2 / 2"
+                        [resizeToWidth]="300"
+                        format="jpeg"
+                        outputType="file"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady()"
+                        (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+                <input type="file" class="btn col-12 btn-sm d-block btn-outline-dark" accept=".jpg, .jpeg, .png" (change)="onFileSelected($event)">
+                <div class="p-1" [style.visibility]="(fileUploading ) ? 'visible' : 'hidden'">
+                  <p><ngb-progressbar type="success"  height="5px" [value]="uploadedPercentage"  [max]="100" [striped]="true" [animated]="true"></ngb-progressbar></p>
+                </div>
+                <button [disabled]="selectedFile == null || fileUploading"  (click)="onUpload()" class="btn btn-dark d-block btn-sm mr-2 text-uppercase waves-effect waves-light">Crop & Upload</button>
+              </div>
+              <div class="col-md-12">
+
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+      </div>
+    </div>
+</div>
+
+

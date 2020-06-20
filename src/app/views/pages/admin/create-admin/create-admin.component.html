@@ -1,0 +1,87 @@
+<subheader title="{{adminId ? 'Edit' : 'Create'}} Admin" [breadcrumb]="['Admin', '']"></subheader>
+
+<card>
+  <!--<p class="text-muted mb-4">Kindly complete the form below and select a admin</p>-->
+  <form class="form-horizontal form-material"  #adminFormRef="ngForm" novalidate (ngSubmit)="adminFormRef.form.valid && onSubmit(adminFormRef.value)">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="control-label">First name</label>
+          <input type="text" class="form-control" name="firstName" [(ngModel)]="adminObj.firstName" ngModel #firstNameRef="ngModel" required  minlength="3"
+                  [class.is-invalid] = "adminFormRef.submitted && (firstNameRef?.errors?.required || firstNameRef?.errors?.minlength)">
+          <div *ngIf="adminFormRef.submitted && firstNameRef?.errors?.required" class="invalid-feedback">
+            First name is Required
+          </div>
+          <div *ngIf="adminFormRef.submitted && firstNameRef?.errors?.minlength" class="invalid-feedback" >
+            You should enter a minimum of 3 characters
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="control-label">Last name</label>
+          <input type="text" class="form-control" name="lastName" [(ngModel)]="adminObj.lastName" ngModel #lastNameRef="ngModel" required  minlength="3"
+                 [class.is-invalid] = "adminFormRef.submitted && (lastNameRef?.errors?.required || lastNameRef?.errors?.minlength)">
+          <div *ngIf="adminFormRef.submitted && lastNameRef?.errors?.required" class="invalid-feedback">
+            Last name is Required
+          </div>
+          <div *ngIf="adminFormRef.submitted && lastNameRef?.errors?.minlength" class="invalid-feedback" >
+            You should enter a minimum of 3 characters
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="control-label">Email</label>
+          <input type="email" class="form-control" name="email" [(ngModel)]="adminObj.email" ngModel #emailRef="ngModel" required email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                 [class.is-invalid] = "adminFormRef.submitted && emailRef?.errors?.required">
+          <div *ngIf="adminFormRef.submitted && emailRef?.errors?.required" class="invalid-feedback">
+            email is Required
+          </div>
+          <small class="form-text text-danger" *ngIf="adminFormRef.submitted && emailRef.errors?.pattern">Email must be a valid email address</small>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label class="control-label">Mobile number</label>
+          <input type="text" class="form-control" name="mobileNo" [(ngModel)]="adminObj.mobileNo" ngModel #mobileNoRef="ngModel" required  minlength="7"
+                 [class.is-invalid] = "adminFormRef.submitted && (mobileNoRef?.errors?.required || mobileNoRef?.errors?.minlength)">
+          <div *ngIf="adminFormRef.submitted && mobileNoRef?.errors?.required" class="invalid-feedback">
+            Mobile number is Required
+          </div>
+          <div *ngIf="adminFormRef.submitted && mobileNoRef?.errors?.minlength" class="invalid-feedback" >
+            You should enter a minimum of 7 characters
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <label>Select Role</label>
+          <select [style.display]="!isLoadingRoles ? 'block' : 'none'" class="custom-select col-12" [class.is-invalid] = "adminFormRef.submitted && roleRef?.errors?.required"
+                  id="role" name="roleId" [(ngModel)]="adminObj.roleId" ngModel #roleRef="ngModel" required>
+            <!--<option selected>- Select -</option>-->
+            <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+          </select>
+          <div *ngIf="isLoadingRoles"><i class="fa fa-spin fa-spinner"></i> Loading roles, please wait . . .</div>
+          <div *ngIf="adminFormRef.submitted && roleRef?.errors?.required" class="invalid-feedback" >
+            Role is Required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button *ngIf="!adminId" [disabled]="isCreatingAdmin" type="submit" class="btn btn-dark btn-md text-uppercase waves-effect waves-light">
+          Create Admin <i *ngIf="isCreatingAdmin" class="fa fa-spin fa-spinner"></i>
+        </button>
+
+        <button *ngIf="adminId" [disabled]="adminFormRef.invalid  || isUpdatingAdmin" (click)="updateAdmin()" class="btn btn-success btn-md text-uppercase waves-effect waves-light">
+          Update Admin <i *ngIf="isUpdatingAdmin" class="fa fa-spin fa-spinner"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</card>
+

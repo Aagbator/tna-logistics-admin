@@ -1,0 +1,41 @@
+
+<subheader [title]="'Alert'" [breadcrumb]="['Ng-Bootstrap', 'Alert']"></subheader>
+
+<div class="row">
+	<div class="col-lg-6">
+		<card [title]="'Basic Alert'">
+			<ngb-alert [dismissible]="false">
+				<strong>Warning!</strong> Better check yourself, you're not looking too good.
+			</ngb-alert>
+		</card>
+		<card [title]="'Closeable Alert'">
+			<div *ngFor="let alert of alerts">
+				<ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+			</div>
+		</card>
+	</div>
+	<div class="col-lg-6">
+		<card [title]="'Self closing alert'">
+			<p>
+				Static self-closing alert that disappears after 20 seconds (refresh the page if it has already disappeared)
+			</p>
+			<ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">Check out our awesome new features!</ngb-alert>
+			<hr/>
+			<p>Show a self-closing success message that disappears after 5 seconds.</p>
+			<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+			<p>
+				<button class="btn btn-primary" (click)="changeSuccessMessage()">Change message</button>
+			</p>
+		</card>
+		<card [title]="'Custom alert'">
+			<p>
+				<ngb-alert type="custom" [dismissible]="false"><strong>Whoa!</strong> This is a custom alert.</ngb-alert>
+			</p>
+		</card>
+		<card [title]="'Custom alert'">
+			<ngb-alert [dismissible]="false" type="success">
+				This alert's type is success and it's not dismissible because the config has been customized
+			</ngb-alert>
+		</card>
+	</div>
+</div>

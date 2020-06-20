@@ -1,0 +1,154 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <button type="button" (click)="openSponsorshipModal(createSponsorModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+          <i class="fa fa-plus-circle"></i> Add New Sponsorship
+        </button>
+      </div>
+    </div>
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-12">
+
+
+      <div class="table-responsive">
+          <table class="table custom-table">
+            <thead class="thead-light">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Unit Cost</th>
+              <th>Profit</th>
+              <th>Subscription Date</th>
+              <th>Maturity Date</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let subscription of subscriptions | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+              <td scope="row"><strong>{{(itemsPerView * (page - 1 )) + (i + 1)}}</strong></td>
+              <td>{{subscription?.productName}}</td>
+              <td>{{subscription?.amount | currency:'₦'}}</td>
+              <td>{{subscription?.units}}</td>
+              <td>{{subscription?.profit | currency:'₦'}}</td>
+              <td>{{subscription?.createdDate}}</td>
+              <td>{{subscription?.investmentMaturityDate}}</td>
+              <td>
+                <span class="badge badge-success" *ngIf="subscription?.status == 'SUCCESSFUL'">SUCCESSFUL</span>
+                <span class="badge badge-warning" *ngIf="subscription?.status == 'PENDING'">PENDING</span>
+                <span class="badge badge-danger" *ngIf="subscription?.status == 'FAILED'">FAILED</span>
+              </td>
+              <td *ngIf="subscription?.status !== 'PENDING'">
+                <div *ngIf="subscription.id !== actionId">
+                  <button (click)="deleteSubscription(subscription)" class="custom-btn"><i class="ti-trash text-danger m-r-10"></i></button>
+
+                </div>
+                <span  *ngIf="isLoadingAction && (subscription.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div class="custom-table-footer">
+            <div class="page-count">
+              {{totalRecords}} total
+            </div>
+            <div class="page-control">
+              <pagination-controls (pageChange)="getPaginatedData($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <!-- row -->
+
+    <ng-template #createSponsorModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>{{isEditingSponsor? 'Update' : 'Create'}} Sponsorship</strong></h4>
+        <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <form class="form-horizontal form-material" #createSponsorFormRef="ngForm" novalidate (ngSubmit)="createSponsorFormRef.form.valid && createSponsorship()">
+
+
+            <div class="row">
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <label for="productId">Select Farm</label>
+                  <select [style.display]="!isLoadingProducts ? 'block' : 'none'" class="custom-select col-12"
+                          id="productId" name="productId" [(ngModel)]="sponsorObj.productId" ngModel #productRef="ngModel" required
+                          [class.is-invalid] = "createSponsorFormRef.submitted && productRef?.errors?.required">
+                    <option value="null">- Select -</option>
+                    <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+                  </select>
+                  <div *ngIf="createSponsorFormRef.submitted && productRef?.errors?.required" class="invalid-feedback">
+                    Product is Required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Quantity</label>
+                  <input type="text" class="form-control" name="firstName" [(ngModel)]="sponsorObj.quantity" ngModel #quantityRef="ngModel" required
+                         [class.is-invalid] = "createSponsorFormRef.submitted && quantityRef?.errors?.required">
+                  <div *ngIf="createSponsorFormRef.submitted && quantityRef?.errors?.required" class="invalid-feedback">
+                    Quantity is Required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Date</label>
+                  <input type="date" class="form-control" [(ngModel)]="sponsorObj.subscriptionDate" name="subscriptionDate"  ngModel #subscriptionDateRef="ngModel" required
+                         [class.is-invalid]="createSponsorFormRef.submitted && subscriptionDateRef?.errors?.required">
+                  <div *ngIf="createSponsorFormRef.submitted && subscriptionDateRef?.errors?.required" class="invalid-feedback">
+                    date is Required
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+
+                <div class="form-group">
+                  <label for="paymentType">Select Payment Types</label>
+                  <select [style.display]="!isLoadingPaymentTypes ? 'block' : 'none'" class="custom-select col-12"
+                          id="paymentType" name="paymentType" [(ngModel)]="sponsorObj.paymentType" ngModel #paymentTypeRef="ngModel" required
+                          [class.is-invalid] = "createSponsorFormRef.submitted && paymentTypeRef?.errors?.required">
+                    <option value="null">- Select -</option>
+                    <option *ngFor="let paymentType of paymentTypes" [value]="paymentType">{{paymentType.replace('_', ' ')}}</option>
+                  </select>
+                  <div *ngIf="createSponsorFormRef.submitted && paymentTypeRef?.errors?.required" class="invalid-feedback">
+                    payment type is required
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row text-center">
+              <div class="col-md-12 mt-3">
+                <button *ngIf="!isEditingSponsor" [disabled]="isCreatingSponsor" type="submit" class="btn btn-dark btn-md text-uppercase waves-effect waves-light">
+                  Create Sponsorship <i *ngIf="isCreatingSponsor" class="fa fa-spin fa-spinner"></i>
+                </button>
+<!--                <button *ngIf="isEditingSponsor" (click)="createSponsorFormRef.form.valid && createSponsorship()" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingSponsor" class="fa fa-spin fa-spinner"></i></button>-->
+              </div>
+            </div>
+            <!--/row-->
+          </form>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
+
+

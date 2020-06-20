@@ -1,0 +1,24 @@
+
+
+<div class="bg-white pt-4 px-5" style="margin: -30px -30px 40px">
+  <div class="flexbox mb-4 mt-3">
+    <div class="media"><span class="position-relative d-inline-block mr-4"><img class="rounded-circle" src="./assets/img/users/admin-image.png" alt="image" width="100"><span class="badge-point badge-success avatar-badge" style="bottom: 5px;right: 14px;height: 14px;width: 14px;"></span></span>
+      <div class="media-body">
+        <div class="h4 mt-4">{{loggedInUser?.firstName}} {{loggedInUser?.lastName}}</div>
+        <div class="text-muted">{{loggedInUser?.roleName}}</div>
+      </div>
+    </div>
+  </div>
+  <ul class="nav line-tabs m-0">
+    <li class="nav-item"><a class="nav-link" [routerLinkActiveOptions]="{exact:
+true}" routerLinkActive="active" routerLink="/account"><i class="ti-user nav-tabs-icon"></i>Profile</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLinkActiveOptions]="{exact:
+true}" routerLinkActive="active" routerLink="/account/change-password"><i class="ti-lock nav-tabs-icon"></i>Change Password</a></li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <router-outlet></router-outlet>
+  </div>
+</div>

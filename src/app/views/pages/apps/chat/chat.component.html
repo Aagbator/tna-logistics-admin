@@ -1,0 +1,111 @@
+
+<div class="chat-content d-flex flex-column col p-0">
+    
+    <mat-sidenav-container>
+        <mat-sidenav mode="side" style='width:340px' opened #leftSidebar>
+            <div class="d-flex flex-column h-100">
+                <div class="chat-list-header p-3 py-4 border-bottom">
+                    <div class="input-group-icon input-group-icon-left">
+                        <span class="input-icon input-icon-left"><i class="material-icons">search</i></span>
+                        <input [(ngModel)]="searchText" class="form-control border-0" type="text" placeholder="Search ..." style="box-shadow:0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)">
+                    </div>
+                </div>
+                <perfect-scrollbar *ngIf="(users | filter: searchText : ALLOWED_SEARCH_TARGETS).length > 0; else noChatBox">
+                    <div class="list-group list-group-flush chat-list">
+                        <a *ngFor="let user of users | filter: searchText : ALLOWED_SEARCH_TARGETS" (click)="getChat(user)" class="list-group-item list-group-item-action chat-list-item py-3" href="javascript:;">
+                            <div class="media align-items-center">
+                                <div class="mr-3 position-relative">
+                                    <img class="rounded-circle" src="{{user.avatar}}" alt="{{user.name}}" width="40">
+                                    <span class="badge-point badge-success avatar-badge" *ngIf="user.status == 'online'"></span>
+                                </div>
+                                <div class="media-body">
+                                    <div class="flexbox mb-1">
+                                        <span class="font-weight-strong">{{user.name}}</span>
+                                        <span class="text-muted font-13">{{user.lastMessageTime}}</span>
+                                    </div>
+                                    <div class="font-13 text-muted">{{user.lastMessage}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </perfect-scrollbar>
+                <ng-template #noChatBox>
+                    <div class="p-4 text-muted font-16">No chats.</div>
+                </ng-template>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <perfect-scrollbar *ngIf="!selectedChat">
+                <div class="text-center px-4" style="padding-top: 80px;padding-bottom: 50px;">
+                    <div class="mb-4">
+                        <i class="ti-comment-alt" style="font-size:60px;color: #aaa"></i>
+                    </div>
+                    <div fxHide fxShow.gt-sm class="font-20" style="color: #aaa">Select a contact to start a chat!</div>
+                    <button fxHide.gt-sm (click)="leftSidebar.toggle()" mat-raised-button>Start chat</button>
+                </div>
+            </perfect-scrollbar>
+
+            <div *ngIf="selectedChat" class="d-flex flex-column col p-0">
+                <div class="px-4 py-3 flexbox border-bottom">
+                    <div class="d-flex align-items-center">
+                        <button class="mr-3 text-muted" mat-icon-button fxHide.gt-sm (click)="leftSidebar.toggle()">
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <div class="mr-3 position-relative">
+                            <img class="rounded-circle" src="{{contact.avatar}}" alt="{{contact.name}}" width="40">
+                            <span class="badge-point badge-warning avatar-badge" [ngClass]="{'badge-success': contact.status == 'online' ,'badge-warning': contact.status == 'offline'}"></span>
+                        </div>
+                        <span class="h5 m-0">{{contact.name}}</span>
+                    </div>
+                    <span>
+                        <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation()">
+                            <mat-icon class='text-muted'>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #moreMenu="matMenu">
+                            <button mat-menu-item aria-label="Reply">
+                                <mat-icon>account_circle</mat-icon>
+                                <span>View Propile</span>
+                            </button>
+
+                            <button mat-menu-item aria-label="Forward">
+                                <mat-icon>delete</mat-icon>
+                                <span>Delete Chat</span>
+                            </button>
+
+                            <button mat-menu-item aria-label="Print">
+                                <mat-icon>print</mat-icon>
+                                <span>Print</span>
+                            </button>
+                        </mat-menu>
+                    </span>
+                </div>
+                <perfect-scrollbar class='col' #chatPS>
+                    <div class="py-4">
+                        <div *ngFor="let message of dialog; let i = index" class="chat-message"
+                        [ngClass]="{'message-me': message.who == me.id}">
+                            <img *ngIf="shouldShowContactAvatar(message, i)" class="rounded-circle mr-3" src="{{contact.avatar}}" alt="{{contact.name}}" width="40">
+                            <div class="message-body">
+                                <div class="message-bubble">{{message.message}}</div>
+                                <div *ngIf="isLastMessageOfGroup(message, i)" class="text-muted font-12">{{message.time | date:'short'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </perfect-scrollbar>
+                <div class="p-3 px-4 border-top">
+                    <form class="position-relative" #replyForm="ngForm"
+                          (ngSubmit)="sendMessage($event)"
+                          (keydown.enter)="sendMessage($event)">
+
+
+                        <textarea class="form-control border-0" #replyInput ngModel name="message" rows="1" placeholder="Type your message" style="resize: none;box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);padding: 1.3rem;padding-right: 4.5rem;"></textarea>
+                        <button class="btn btn-primary btn-floating waves-effect waves-light mr-3" type="submit" style="position: absolute;right: 0;top: 0;top: 50%;transform: translateY(-50%);"><i class="material-icons">send</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+
+</div>
+

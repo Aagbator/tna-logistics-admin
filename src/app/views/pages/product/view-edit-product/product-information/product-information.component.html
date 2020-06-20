@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between mb-4">
+      <h5 class="box-title mb-0">Product Information</h5><a [routerLink]="['/product/edit/', product.id]" href="#"><i class="ti-pencil"></i> Edit</a>
+    </div>
+
+<!--    createdDate: "2020-06-04"-->
+<!--    description: "<p>test</p>"-->
+<!--    discount: 3.5-->
+<!--    hasDiscount: 1-->
+<!--    hasQty: 1-->
+<!--    hasVat: 1-->
+<!--    id: 5-->
+<!--    imageUrl: null-->
+<!--    images: []-->
+<!--    isEnabled: 1-->
+<!--    isFeaturedProduct: 1-->
+<!--    keyFeatures: []-->
+<!--    name: "Berry Blast"-->
+<!--    price: 420-->
+<!--    qty: 100-->
+<!--    slug: "berry-blast"-->
+<!--    specifications: []-->
+<!--    tags: []-->
+<!--    updatedDate: "2020-06-04"-->
+<!--    vat: 0.2-->
+
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Slug</div>
+      <div class="col-md-10 col-sm-12">{{product?.slug}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Category</div>
+      <div class="col-md-10 col-sm-12">{{product?.category?.name}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">In Stock</div>
+      <div class="col-md-10 col-sm-12">{{product?.hasQty == 1 ? product.qty : '∞'}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Price</div>
+      <div class="col-md-10 col-sm-12">{{product?.price | currency:'₦'}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Discount</div>
+      <div class="col-md-10 col-sm-12">{{product?.hasDiscount == 1 ? product.discount+'%' : '-'}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">VAT</div>
+      <div class="col-md-10 col-sm-12">{{product?.hasVat == 1 ? product.vat+'%' : '-'}}</div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Is product Featured?</div>
+      <div class="col-md-10 col-sm-12">
+        <span *ngIf="product?.isFeaturedProduct" class="badge badge-success">YES</span>
+        <span *ngIf="!product?.isFeaturedProduct" class="badge badge-light">NO</span>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-md-2 col-sm-12 text-muted">Description</div>
+      <div class="col-md-10 col-sm-12 text-muted" [innerHTML]="product?.description"></div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="card mb-5">-->
+<!--  <div class="card-body">-->
+<!--    <h2 class="h4 mt-4">{{product?.name}}</h2>-->
+<!--    <div class="text-muted">{{product?.description}}</div>-->
+<!--    <div class="text-muted">{{product?.createdDate | date}}</div>-->
+<!--    <div class="text-muted">-->
+<!--      <span class="badge badge-success" *ngIf="product?.status">Open</span>-->
+<!--      <span *ngIf="!product?.status" class="badge badge-danger">Closed</span>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

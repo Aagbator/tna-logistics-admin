@@ -1,0 +1,201 @@
+<subheader title='Banner' [breadcrumb]="['Banner', 'Manage']"></subheader>
+
+<card>
+  <!-- row -->
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button type="button" (click)="openBannerModal(bannerModal, null)" class="btn-dark btn btn-md text-uppercase waves-effect waves-light">
+        <i class="fa fa-plus-circle"></i> Add New Banner
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+       <div class="table-responsive">
+        <table class="table custom-table">
+          <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Image</th>
+            <th>Banner Title</th>
+            <th>Url</th>
+            <th>Status</th>
+<!--            <th>Date Created</th>-->
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let banner of banners | paginate: { itemsPerPage: itemsPerView, currentPage: page, totalItems: totalRecords }; let i = index;">
+            <td scope="row"><strong>{{i + 1}}</strong></td>
+            <td>
+              <img *ngIf="!banner.imageUrl" (click)="openImageModal(imageModal, banner)" class="img-thumbnail" src="./assets/img/upload-image.png" alt="image" height="50" width="50">
+              <img *ngIf="banner.imageUrl" (click)="openImageModal(viewImageModal, banner)" class="img-thumbnail" src="{{banner?.imageUrl}}" alt="image" height="50" width="50">
+            </td>
+            <td>{{banner?.title}}</td>
+            <td class="text-muted">{{banner?.url}}</td>
+            <td>
+              <span class="badge badge-success" *ngIf="banner?.isActive">Active</span>
+              <span *ngIf="!banner?.isActive" class="badge badge-danger">Blocked</span>
+            </td>
+<!--            <td>{{banner?.createdDate | date}}</td>-->
+            <td>
+              <div *ngIf="banner.id !== actionId">
+                <button  (click)="openImageModal(imageModal, banner)" class="btn btn-light btn-floating btn-sm m-r-10"><i class="ti-image"></i></button>
+                <button  (click)="openBannerModal(bannerModal, banner)" class="btn btn-info btn-floating btn-sm m-r-10"><i class="ti-pencil"></i></button>
+
+                <button *ngIf="banner?.isActive"  class="btn btn-light btn-floating btn-sm m-r-5" (click)="deactivateBanner(banner?.id)" ><i class="fa fa-ban text-warning"></i></button>
+                <button *ngIf="!banner?.isActive" class="btn btn-light btn-floating btn-sm m-r-5" (click)="activateBanner(banner?.id)" ><i class="fa fa-check text-info"></i></button>
+
+                <button (click)="deleteBanner(banner)" class="btn btn-danger btn-floating btn-sm m-r-5"><i class="ti-trash"></i></button>
+
+              </div>
+              <span  *ngIf="isLoadingAction && (banner.id == actionId)" class="custom-btn-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div class="custom-table-footer">
+          <div class="page-count">
+            {{totalRecords}} total
+          </div>
+          <div class="page-control">
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <ng-template #bannerModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>{{isEditingBanner? 'Update' : 'Create'}} Banner</strong></h4>
+          <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <form class="form-horizontal form-material" #bannerFormRef="ngForm" novalidate>
+                  <!--/row-->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Banner Title</label>
+                        <input class="form-control" [(ngModel)]="bannerObj.title" name="title" [class.is-invalid]="titleRef.touched && titleRef?.errors?.required" ngModel #titleRef="ngModel" type="text" placeholder="banner title" required>
+                        <div *ngIf="titleRef?.touched && titleRef?.errors?.required" class="invalid-feedback">
+                          banner title is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Url</label>
+                        <input class="form-control" [(ngModel)]="bannerObj.url" name="url" [class.is-invalid]="bannerUrlRef.touched && bannerUrlRef?.errors?.required" ngModel #bannerUrlRef="ngModel" type="text" placeholder="e.g /products/4" required>
+                        <div *ngIf="bannerUrlRef?.touched && bannerUrlRef?.errors?.required" class="invalid-feedback">
+                          banner title is required
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label class="control-label">Order</label>
+                        <select [(ngModel)]="bannerObj.orderIndex" ngModel #orderIndexRef="ngModel" name="orderIndex" class="custom-select form-control">
+                          <option *ngFor="let idx of [1,2,3,4,5]" [value]="">{{idx}}</option>
+                        </select>
+                        <div *ngIf="bannerFormRef.submitted && orderIndexRef?.errors?.required" class="invalid-feedback">
+                          order is required
+                        </div>
+                      </div>
+                    </div>
+
+<!--                    <div class="col-md-12">-->
+<!--                      <div class="form-group">-->
+<!--                        <label class="control-label">Description</label>-->
+<!--                        <textarea row="2" class="form-control" [(ngModel)]="bannerObj.description" name="description" [class.is-invalid]="descriptionRef.touched && descriptionRef?.errors?.required" ngModel #descriptionRef="ngModel" type="text" placeholder="description" required></textarea>-->
+<!--                        <div *ngIf="descriptionRef?.touched && descriptionRef?.errors?.required" class="invalid-feedback">-->
+<!--                          description is required-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+
+                    <div class="col-md-12 mt-3">
+                      <button *ngIf="!isEditingBanner" (click)="bannerFormRef.form.valid && createBanner()" type="submit" class="btn btn-dark ml-2 waves-effect waves-light">Create <i *ngIf="isCreatingBanner" class="fa fa-spin fa-spinner"></i></button>
+                      <button *ngIf="isEditingBanner" (click)="bannerFormRef.form.valid && updateBanner()" class="btn btn-success ml-2 waves-effect waves-light">Update <i *ngIf="isCreatingBanner" class="fa fa-spin fa-spinner"></i></button>
+                    </div>
+                  </div>
+                  <!--/row-->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #imageModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Select Photo</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+              <div class="col-md-12">
+                  <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [aspectRatio]="3 / 1"
+                    [resizeToWidth]="1920"
+                    [resizeToHeight]="358"
+                    format="jpeg"
+                    outputType="file"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()"
+                    (loadImageFailed)="loadImageFailed()"
+                  ></image-cropper>
+                  <input type="file" class="btn col-12 btn-sm d-block btn-outline-dark" accept=".jpg, .jpeg, .png" (change)="onFileSelected($event)">
+                  <div class="p-1" [style.visibility]="(fileUploading ) ? 'visible' : 'hidden'">
+                    <p><ngb-progressbar type="success"  height="5px" [value]="uploadedPercentage"  [max]="100" [striped]="true" [animated]="true"></ngb-progressbar></p>
+                  </div>
+                  <button [disabled]="selectedFile == null || fileUploading"  (click)="onUpload()" class="btn btn-dark d-block btn-sm mr-2 text-uppercase waves-effect waves-light">Crop & Upload</button>
+                </div>
+              <div class="col-md-12">
+
+              </div>
+            </div>
+        </div>
+      </ng-template>
+
+
+
+      <ng-template #viewImageModal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">View Image</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <img *ngIf="!activeBanner?.imageUrl" class="img-thumbnail" src="./assets/img/upload-image.png" alt="image" width="100%">
+              <img *ngIf="activeBanner?.imageUrl"  class="img-thumbnail" src="{{activeBanner?.imageUrl}}" alt="image"  width="100%">
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <!-- row -->
+
+</card>
+
+

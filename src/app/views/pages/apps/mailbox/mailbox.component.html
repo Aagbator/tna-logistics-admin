@@ -1,0 +1,200 @@
+
+<mat-sidenav-container class='mail-sidenav-container'>
+    <mat-sidenav mode="side" style='width:240px' opened #leftSidebar>
+        <perfect-scrollbar class='pr-3'>
+            <button class="btn btn-primary btn-block font-weight-strong" (click)="composeModal()">
+                <span class="btn-icon"><i class="material-icons">add</i>COMPOSE</span>
+            </button>
+            <div class="nav flex-column mt-5 mb-3 mailbox-nav">
+                <ng-container *ngFor="let folder of folders">
+                    <a class="flexbox p-2 nav-link hover-link mb-1" [routerLink]="'/apps/mail/' + folder.handle" routerLinkActive="active">
+                        <span class="d-flex align-items-center"><i class="material-icons mr-3 mail-nav-icon font-20">{{folder.icon}}</i>{{folder.title}}</span>
+                    </a>
+                </ng-container>
+            </div>
+            <hr class="my-3">
+            <div class="nav flex-column mb-3 mailbox-nav">
+                <ng-container *ngFor="let filter of filters">
+                    <a class="nav-link d-flex align-items-center p-2 hover-link" [routerLink]="'/apps/mail/filter/' + filter.handle" routerLinkActive="active">
+                        <i class="material-icons mr-3 text-{{filter.icon_color}} font-20">{{filter.icon}}</i>{{filter.title}}
+                    </a>
+                </ng-container>
+            </div>
+            <hr class="my-3">
+            <div class="nav flex-column mailbox-nav">
+                <ng-container *ngFor="let label of labels">
+                    <a class="nav-link d-flex align-items-center p-2 hover-link" [routerLink]="'/apps/mail/label/' + label.handle" routerLinkActive="active">
+                        <i class="badge-point badge-{{label.state_color}} mr-3"></i>{{label.title}}
+                    </a>
+                </ng-container>
+            </div>
+        </perfect-scrollbar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class='card mail-card' [ngClass]="{'current-mail-selected':currentMail}">
+            <div class="px-4 py-3 flexbox border-bottom">
+                <div class="d-flex align-items-center">
+                    <button class="mr-3 text-muted" mat-icon-button fxHide.gt-sm (click)="leftSidebar.toggle()">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+
+                    <div class="selected-mail-actions">
+                        <mat-checkbox (click)="toggleSelectAll()" [checked]="hasSelectedMails" [indeterminate]="isIndeterminate" color='primary'></mat-checkbox>
+                        <button mat-icon-button [matMenuTriggerFor]="selectMenu">
+                            <mat-icon class='text-muted'>arrow_drop_down</mat-icon>
+                        </button>
+                        <mat-menu #selectMenu="matMenu">
+                            <button mat-menu-item (click)="selectMails()">All</button>
+                            <button mat-menu-item (click)="deselectMails()">None</button>
+                            <button mat-menu-item (click)="selectMails('read', true)">Read</button>
+                            <button mat-menu-item (click)="selectMails('read', false)">Unread</button>
+                            <button mat-menu-item (click)="selectMails('starred', true)">Starred</button>
+                            <button mat-menu-item (click)="selectMails('starred', false)">Unstarred</button>
+                            <button mat-menu-item (click)="selectMails('important', true)">Important</button>
+                            <button mat-menu-item (click)="selectMails('important', false)">Unimportant</button>
+                        </mat-menu>
+                        
+                        <button mat-icon-button (click)="deleteMails()" *ngIf="hasSelectedMails">
+                            <mat-icon class='text-muted'>delete</mat-icon>
+                        </button>
+
+                        <button mat-icon-button [matMenuTriggerFor]="folderMenu" *ngIf="hasSelectedMails">
+                            <mat-icon class='text-muted'>folder</mat-icon>
+                        </button>
+                        <mat-menu #folderMenu="matMenu">
+                            <button mat-menu-item *ngFor="let folder of folders"
+                                    (click)="setFolderOnSelectedMails(folder.id)">{{folder.title}}
+                            </button>
+                        </mat-menu>
+
+                        <button mat-icon-button [matMenuTriggerFor]="labelMenu" *ngIf="hasSelectedMails">
+                            <mat-icon class='text-muted'>label</mat-icon>
+                        </button>
+                        <mat-menu #labelMenu="matMenu">
+                            <button mat-menu-item *ngFor="let label of labels"
+                                    (click)="toggleLabelOnSelectedMails(label.id)">{{label.title}}
+                            </button>
+                        </mat-menu>
+                    </div>
+
+                    <div *ngIf="currentMail" class="d-lg-none">
+                        <button mat-icon-button (click)="deselectCurrentMail()">
+                            <mat-icon class="text-muted">arrow_back</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <div class="input-group-icon input-group-icon-left mail-search-wrapper">
+                        <span class="input-icon input-icon-left"><mat-icon class="text-muted">search</mat-icon></span>
+                        <input class="form-control" [formControl]="searchInput" placeholder="Search mail">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div *ngIf="mails.length; else noEmailBox" class='row m-0'>
+                    <div class="col-lg p-0 pb-4 pt-3 border-right mail-list">
+                        <perfect-scrollbar style="max-height: 450px;">
+                            <div *ngIf="mails.length" class="border-0">
+                                <mail-item *ngFor="let mail of mails" [mail]="mail" (click)="readMail(mail.id)" [ngClass]="{'selected-mail':mail?.id == currentMail?.id, 'unread-mail':mail.read == false}"></mail-item>
+                            </div>
+                        </perfect-scrollbar>
+                    </div>
+                    <div class="col-lg mail-details">
+                        <div *ngIf="!currentMail" class="text-center px-4" style="padding-top: 100px;padding-bottom: 100px;min-height: 400px">
+                            <i class="ti-email mb-4" style="font-size:60px;color: #aaa"></i>
+                            <div class="font-20 mt-4" style="color: #aaa">No message selected.</div>
+                        </div>
+                        <div class="py-4" *ngIf="currentMail">
+                            <perfect-scrollbar class='px-4' style="max-height: 450px;">
+                                <div style="overflow: hidden;">
+                                    <div class="flexbox">
+                                        <div class="d-flex align-items-center">
+                                            <button mat-icon-button (click)="toggleStar($event)" aria-label="Toggle star">
+                                                <mat-icon class="text-warning" *ngIf="currentMail.starred">star</mat-icon>
+                                                <mat-icon class="text-muted" *ngIf="!currentMail.starred">star_border</mat-icon>
+                                            </button>
+                                            <button mat-icon-button (click)="toggleImportant($event)" aria-label="Toggle important">
+                                                <mat-icon class="text-danger" *ngIf="currentMail.important">label</mat-icon>
+                                                <mat-icon class="text-muted" *ngIf="!currentMail.important">label_outline</mat-icon>
+                                            </button>
+                                            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More" (click)="$event.stopPropagation()">
+                                                <mat-icon class='text-muted'>more_vert</mat-icon>
+                                            </button>
+                                            <mat-menu #moreMenu="matMenu">
+                                                <button mat-menu-item aria-label="Reply">
+                                                    <mat-icon>reply</mat-icon>
+                                                    <span>Reply</span>
+                                                </button>
+
+                                                <button mat-menu-item aria-label="Forward">
+                                                    <mat-icon>forward</mat-icon>
+                                                    <span>Forward</span>
+                                                </button>
+
+                                                <button mat-menu-item aria-label="Print">
+                                                    <mat-icon>print</mat-icon>
+                                                    <span>Print</span>
+                                                </button>
+                                            </mat-menu>
+                                        </div>
+                                        <button mat-icon-button (click)="deleteCurrentMail($event)">
+                                            <mat-icon class="text-muted">delete_outline</mat-icon>
+                                        </button>
+                                    </div>
+                                    <hr class="my-4">
+
+                                    <div class="mail-subject">{{currentMail.subject}}</div>
+                                    <div *ngIf="currentMail.labels.length" class="d-flex flex-wrap mail-labels mt-3">
+                                        <span *ngFor="let labelId of currentMail.labels" class="badge badge-pill badge-{{getLabel(labelId).state_color}}">{{getLabel(labelId).title}}</span>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div class="media">
+                                        <img *ngIf="currentMail.from.avatar" alt="{{currentMail.from.name}}" src="{{currentMail.from.avatar}}" class="rounded-circle mr-3" width="40" />
+                                        <span *ngIf="!currentMail.from?.avatar" class="mail-empty-avatar mr-3">{{currentMail.from?.name[0]}}</span>
+                                        <div class="media-body d-flex justify-content-between">
+                                            <div>
+                                                <div class="font-weight-strong">{{currentMail.from.name}}</div>
+                                                <div class="text-muted">
+                                                    <span class="mr-2">to</span>
+                                                    <span>{{currentMail.to[0].name}}</span>
+                                                </div>
+                                            </div>
+                                            <span class="font-13">{{currentMail.time}}</span>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4">
+                                    <div [innerHTML]="currentMail.message"></div>
+                                    <div *ngIf="currentMail.attachments" class="mail-attachments">
+                                         <hr class="my-4">
+                                         <div class="font-weight-strong mb-4"><span>Attachments </span>({{currentMail.attachments.length}})</div>
+                                         <div class="d-flex flex-wrap attachments-list">
+                                             <div class="attachment" *ngFor="let attachment of currentMail.attachments">
+                                                 <img src="{{attachment.preview}}">
+                                                 <div class="text-muted">{{attachment.size}}</div>
+                                                 <div class="attachment-actions">
+                                                    <button mat-icon-button>
+                                                        <mat-icon class="text-white">remove_red_eye</mat-icon>
+                                                    </button>
+                                                    <button mat-icon-button>
+                                                        <mat-icon class="text-white">get_app</mat-icon>
+                                                    </button>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                    </div>
+                                </div>
+                            </perfect-scrollbar>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #noEmailBox>
+                    <div class="flex-center py-5 px-4" style="min-height: 300px">
+                        <div class="font-20" style="color: #aaa">No email in this folder.</div>
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

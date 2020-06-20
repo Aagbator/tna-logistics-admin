@@ -1,0 +1,52 @@
+<subheader title='FAQ v2' [breadcrumb]="['FAQS', 'FAQ v2']"></subheader>
+
+<card>
+    <div class="flexbox mb-4">
+        <h4 class="mb-0">Frequently Asked Questions</h4>
+        <button class="btn btn-danger btn-floating" (click)="newFaqModal()"><i class="ti-plus"></i></button>
+    </div>
+    <div class="input-group-icon input-group-icon-left input-group-lg mb-5">
+    	<span class="input-icon input-icon-left"><i class="ti-search"></i></span>
+    	<input class="form-control font-weight-left border-0" [(ngModel)]="searchText" type="text" placeholder="Search ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);">
+    </div>
+    <ul class="row nav category-tabs mb-5">
+        <li *ngFor="let category of categories" class="col-lg-3">
+        	<a class="category-link" href="javascript:;" [ngClass]="{'active': activeCategory && category.title == activeCategory.title}" (click)="getFaqsByCategory(category.id)">
+        		<i class="{{category.icon}} text-muted font-36"></i>
+        		<h5 class="mb-3 mt-4">{{category.title}}</h5>
+        		<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+        	</a>
+        </li>
+    </ul>
+</card>
+
+<div class="row">
+    <div class="col-lg-7">
+    	<card>
+    		<h5 class="mb-4 font-16 text-muted">{{ activeCategory ? activeCategory.title : 'All' }} questions — {{(faqs | filter: searchText : ALLOWED_SEARCH_TARGETS).length}}</h5>
+            <div class="faq-list">
+                <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+                    <ngb-panel *ngFor="let faq of faqs | filter: searchText : ALLOWED_SEARCH_TARGETS">
+                        <ng-template ngbPanelTitle>
+                            {{faq.question}}
+                            <mat-icon>keyboard_arrow_down</mat-icon>
+                        </ng-template>
+                        <ng-template ngbPanelContent>{{faq.answer}}</ng-template>
+                    </ngb-panel>
+                </ngb-accordion>
+            </div>
+    	</card>
+    </div>
+    <div class="col-lg-5">
+    	<card>
+            <div class="font-18 text-center mb-4">Not found answer of your question?</div>
+            <h3 class="mb-4 text-center">Contact to us</h3>
+            <form action="javascript:;">
+                <div class="md-form mb-4"><input class="md-form-control validate" type="text" required=""><label>Username</label></div>
+                <div class="md-form mb-4"><input class="md-form-control validate" type="email" required=""><label>Email</label></div>
+                <div class="md-form mb-4"><textarea class="md-form-control auto-resize validate" required=""></textarea><label>Your Message</label></div>
+                <div class="text-center"><button class="btn btn-primary btn-rounded mr-3" style="min-width: 200px" type="submit">Submit</button></div>
+            </form>
+    	</card>
+    </div>
+</div>
